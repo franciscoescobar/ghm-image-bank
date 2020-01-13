@@ -12,10 +12,10 @@ const Header = () => (
     <LoginWrapper>
         <WebLogin>
             <button>Ingresar</button>
-            <button className="reversed">Registrate</button>
+            <button>Registrate</button>
         </WebLogin>
         <MobileLogin>
-            <button><i class="fas fa-bars"></i></button>
+            <button><i className="fas fa-bars"></i></button>
         </MobileLogin>
     </LoginWrapper>
   </Wrapper>  

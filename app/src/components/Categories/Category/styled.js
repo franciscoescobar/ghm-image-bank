@@ -4,6 +4,7 @@ export const Wrapper = styled.div`
     border-radius: 12px;
     margin: 4px;
     padding: 4px 12px;
+    cursor: pointer;
     @media only screen and (max-width: 740px) {
         font-size: 14px;
     }

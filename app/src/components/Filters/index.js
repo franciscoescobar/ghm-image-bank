@@ -4,8 +4,8 @@ import { Wrapper } from './styled';
 
 const Filters = ({filters}) => (
     <Wrapper>
-        {filters.map(filter => {
-            return <Filter text={filter}/>
+        {filters.map((filter, i) => {
+            return <Filter key={i} text={filter}/>
         })}
     </Wrapper>    
 );
