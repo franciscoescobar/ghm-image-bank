@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 const Image = styled.img`
-    width:calc(100%/6);
+    flex: 1 1 300px;
     object-fit: cover;
 `;
 const GridImage = ({data}) => (

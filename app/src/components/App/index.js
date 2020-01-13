@@ -10,7 +10,20 @@ function App() {
     <div>
       <Header />
       <Hero />
-      <Categories categories={["Terreno", "Ciudades"]} />
+      <Categories categories={
+          [
+            {selected: false,text:"Terreno"},
+            {selected: true,text:"Azul"},
+            {selected: false,text:"Tecnología"},
+            {selected: false,text:"Estrellas"},
+            {selected: false,text:"Campo"},
+            {selected: false,text:"Valle"},
+            {selected: false,text:"Ropa"},
+            {selected: false,text:"Gente"},
+            {selected: false,text:"Gente"},
+            {selected: false,text:"Gente"},
+            {selected: true, text:"Ciudades"}
+          ]} />
       <Filters filters={["Recientes", "Populares", "Precio"]}/>
       <Images images={
           [

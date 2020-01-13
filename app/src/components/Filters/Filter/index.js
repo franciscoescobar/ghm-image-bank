@@ -1,5 +1,5 @@
 import React from 'react'
-import {Wrapper} from '../../Categories/Category/styled.js';
+import {Wrapper} from './styled.js';
 const Filter = ({text}) => (
     <Wrapper>{text}</Wrapper>
 );
