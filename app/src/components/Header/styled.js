@@ -1,23 +1,25 @@
 import styled from 'styled-components';
 export const Wrapper = styled.div`
+    padding: 0;
+    margin: 0;
     height: 58px;
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 `;
-export const TextLogo = styled.p`
-    cursor: pointer;
-    margin-left: 5%;
-    flex: 7;
+export const TextLogo = styled.div`
     font-size: 16px;
+    text-align: center;
+    > p {
+        cursor: pointer;
+    }
     @media only screen and (max-width: 675px) {
         font-size: 12px;
     }
 `;
 export const LanguageWrapper = styled.div`
-    flex: 2;
     height: 24px;
     
     > img { 
@@ -25,13 +27,14 @@ export const LanguageWrapper = styled.div`
         margin-left:8px;
         width: 36px;
         height: 24px;
+        -webkit-user-select: none;  /* Chrome all / Safari all */
+        -moz-user-select: none;     /* Firefox all */
+        -ms-user-select: none;      /* IE 10+ */
+        user-select: none; 
         @media only screen and (max-width: 675px) {
             width: 24px;
             height: 18px;
         }
-    }
-    @media only screen and (max-width: 1200px) {
-        flex: 3;
     }
     @media only screen and (max-width: 675px) {
         height: 18px;
@@ -39,17 +42,7 @@ export const LanguageWrapper = styled.div`
     
 `;
 export const LoginWrapper = styled.div`
-    flex: 2;
-    @media only screen and (max-width: 1200px) {
-        flex: 3;
-    }
-    @media only screen and (max-width: 800px) {
-        flex: 4;
-    }
-    @media only screen and (max-width: 675px) {
-        flex: 1;
-    }     
-    
+
 `;
 export const WebLogin = styled.div`
     @media only screen and (max-width: 675px) {

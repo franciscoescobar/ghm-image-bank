@@ -4,7 +4,9 @@ import arg from '../../assets/argentina-flag-icon-64.png'
 import uk from '../../assets/united-kingdom-flag-icon-64.png'
 const Header = () => (
   <Wrapper>
-    <TextLogo>ghmcontenidos - banco de imagenes</TextLogo>
+    <TextLogo>
+      <p>ghmcontenidos - banco de imagenes</p>
+    </TextLogo>
     <LanguageWrapper>
         <img src={arg} alt="ARG"/>
         <img src={uk} alt="UK"/>
