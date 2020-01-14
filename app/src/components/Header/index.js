@@ -11,11 +11,11 @@ const Header = () => (
     </LanguageWrapper>
     <LoginWrapper>
         <WebLogin>
-            <button>Ingresar</button>
-            <button>Registrate</button>
+            <button name="signin">Ingresar</button>
+            <button name="signup">Registrate</button>
         </WebLogin>
         <MobileLogin>
-            <button><i className="fas fa-bars"></i></button>
+            <button name="side-menu"><i className="fas fa-bars"></i></button>
         </MobileLogin>
     </LoginWrapper>
   </Wrapper>  
