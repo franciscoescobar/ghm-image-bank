@@ -11,7 +11,7 @@ export const Wrapper = styled.div`
       max-height: 400px;
       border-radius: 5px;
       @media only screen and (max-width: 650px) {
-         margin: 4px;
+         margin: 0;
       }
    }
 `;
@@ -36,5 +36,6 @@ export const Data = styled.div`
       color: white;
       margin: 8px;
       background: #43dd4d;
+      margin-bottom: 12px;
    }
 `; 

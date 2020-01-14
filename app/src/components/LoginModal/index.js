@@ -1,6 +1,6 @@
 import React from 'react'
-import { Header, Actions, Form} from './styled';
-import Modal from '../Modal';
+import { Actions, Form } from './styled';
+import Modal from '../../containers/Modal';
 const LoginModal = ({show, login, onClose, onSignUp, title}) => (
     <>
     {show ? (

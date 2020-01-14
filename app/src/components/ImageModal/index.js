@@ -1,5 +1,5 @@
 import React from 'react'
-import Modal from '../Modal';
+import Modal from '../../containers/Modal';
 import { Wrapper, Data } from './styled';
 
 const ImageModal = ({show, onClose, title, imageUrl}) => (

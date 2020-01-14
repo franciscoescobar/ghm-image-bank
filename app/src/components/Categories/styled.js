@@ -21,6 +21,6 @@ export const Title = styled.h2`
   font-size: 24px;
   @media only screen and (max-width: 740px) {
     margin: 16px 5%;
-    font-size: 20px;
+    font-size: 16px;
   }
 `

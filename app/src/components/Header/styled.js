@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 `;
 export const TextLogo = styled.div`
-    font-size: 16px;
+    font-size: 18px;
     text-align: center;
     > p {
         cursor: pointer;
@@ -53,6 +53,7 @@ export const WebLogin = styled.div`
         display: none;
     }
     > button {
+        font-size: 16px;
         cursor: pointer;
         background: white;
         border: 1px solid #1565c0;

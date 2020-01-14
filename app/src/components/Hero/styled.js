@@ -22,7 +22,8 @@ export const Wrapper = styled.div`
             font-size: 36px;
         }
         @media only screen and (max-width: 420px) {
-            font-size: 26px;
+            font-size: 24px;
+            margin: 0 10%;
         }
     }
 `;

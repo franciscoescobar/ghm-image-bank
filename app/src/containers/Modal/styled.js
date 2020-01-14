@@ -49,6 +49,6 @@ export const Header = styled.div`
         width: 24px;
     }
     @media only screen and (max-width: 550px) {
-        margin-bottom: 24px;
+        margin-bottom: 8px;
     }
 `
