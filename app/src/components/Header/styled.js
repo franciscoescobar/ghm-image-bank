@@ -40,14 +40,15 @@ export const LanguageWrapper = styled.div`
 `;
 export const LoginWrapper = styled.div`
     flex: 2;
-    margin-right: 5%;
     @media only screen and (max-width: 1200px) {
-        flex: 5;
+        flex: 3;
+    }
+    @media only screen and (max-width: 800px) {
+        flex: 4;
     }
     @media only screen and (max-width: 675px) {
         flex: 1;
-        margin-right: 5%;
-    }      
+    }     
     
 `;
 export const WebLogin = styled.div`

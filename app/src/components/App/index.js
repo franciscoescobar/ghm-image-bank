@@ -28,7 +28,7 @@ function App() {
             {selected: false,text:"Gente"},
             {selected: true, text:"Ciudades"}
           ]} />
-      <Filters filters={["Recientes", "Populares", "Precio"]}/>
+      <Filters filters={[{selected: false, text:"Recientes"}, {selected: true,text: "Populares"}, {selected: false, text:"Precio"}]}/>
       <Images images={
           [
             {src: "https://images.pexels.com/photos/3429761/pexels-photo-3429761.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940", alt: "anyImage"},
