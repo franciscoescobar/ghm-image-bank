@@ -1,15 +1,10 @@
 import React from 'react'
-import {Container, Wrapper, Header, Actions, Form} from './styled';
- 
-const LoginModal = ({show, login, onClose, onSignUp}) => (
+import { Header, Actions, Form} from './styled';
+import Modal from '../Modal';
+const LoginModal = ({show, login, onClose, onSignUp, title}) => (
     <>
     {show ? (
-        <Container>
-            <Wrapper>
-            <Header>
-                <h1>{login ? "Ingresar" : "Registrate"}</h1>
-                <button onClick={onClose} name="close"><i className="fas fa-times"></i></button>
-            </Header>
+        <Modal title={title} onClose={onClose}>
             <Actions>
                 <button name="google" className="google"><i class="fab fa-google"></i></button>
                 <button name="facebook" className="facebook"><i class="fab fa-facebook-f"></i></button>
@@ -21,8 +16,7 @@ const LoginModal = ({show, login, onClose, onSignUp}) => (
                 <button name="submit" type="submit">{login ? "Ingresar" : "Aceptar"}</button>
                 {login ? <p>¿No tienes cuenta? <button name="signup" onClick={onSignUp}>Registrate</button></p> : <p></p>}
             </Form>
-            </Wrapper>
-        </Container>
+        </Modal>
         )
     : ""}
     </>

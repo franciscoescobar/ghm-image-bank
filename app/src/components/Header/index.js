@@ -35,7 +35,7 @@ const Header = () => {
             <button name="side-menu" onClick={onLoginClick}><i className="fas fa-bars"></i></button>
         </MobileLogin>
     </LoginWrapper>
-    <LoginModal onSignUp={onSignUpClick} onClose={handleCloseModal} show={showModal} login={isLogin} />
+    <LoginModal title={isLogin ? "Ingresar" : "Registrate"} onSignUp={onSignUpClick} onClose={handleCloseModal} show={showModal} login={isLogin} />
   </Wrapper>  
 )};
 

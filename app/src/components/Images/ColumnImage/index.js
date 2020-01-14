@@ -5,8 +5,8 @@ const Image = styled.img`
     object-fit: contain;
     margin-bottom: 1.45rem;
 `;
-const GridImage = ({data}) => (
-    <Image loading="lazy" src={data.src} alt={data.alt} />
+const ColumnImage = ({data, onImageClick}) => (
+    <Image onClick={onImageClick} loading="lazy" src={data.src} alt={data.alt} />
 );
 
-export default GridImage;
+export default ColumnImage;
