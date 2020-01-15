@@ -2,7 +2,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
     display: flex;
     flex-flow: column wrap;
-    margin: 16px 10% 16px 10%;
+    margin: 16px 1.45rem 16px 1.45rem;
     
     .my-masonry-grid {
         display: -webkit-box; /* Not needed if autoprefixing */
