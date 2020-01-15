@@ -28,7 +28,6 @@ export const Form = styled.form`
     display: flex;
     flex-direction: column;
     > input, > button {
-        height: 32px;
         margin: 8px 60px;
         border-radius: 5px;
         @media only screen and (max-width: 550px) {
@@ -36,11 +35,15 @@ export const Form = styled.form`
         }
     }
     > input {
+        font-size: 14px;
+        height: 32px;
         background: #cbcbcb;
         border: none;
         padding-left: 5px;
     }
     > button {
+        height: 38px;
+        font-size: 16px;
         background: #44dfe7;
         color: white;
         font-weight: bold;
