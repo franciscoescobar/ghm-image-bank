@@ -21,7 +21,4 @@ export const Container = styled.div`
         background: grey;
         margin-bottom: 30px;
     }
-    @media only screen and (max-width: 740px) {
-        margin: 16px calc(5% - 1.45rem) 16px 5%;
-    }
 `;

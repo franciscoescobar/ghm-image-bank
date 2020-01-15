@@ -5,7 +5,11 @@ import Masonry from 'react-masonry-css';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import {Container} from './styled';
 const Images = ({images}) => {
-
+    const breakpointColumnsObj = {
+        default: 3,
+        800: 2,
+        500: 1
+      };
     const [showModal, setShowModal] = useState(false);
     const [partialImages, setPartialImages] = useState(images.slice(0,5));
     const [hasMoreImages, setHasMoreImages] = useState(true);
@@ -33,7 +37,7 @@ const Images = ({images}) => {
             }
             >
             <Masonry
-                breakpointCols={3}
+                breakpointCols={breakpointColumnsObj}
                 className="my-masonry-grid"
                 columnClassName="my-masonry-grid_column">
                     {
