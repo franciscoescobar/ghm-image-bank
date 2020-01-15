@@ -20,7 +20,7 @@ const Header = () => {
   return(
   <Wrapper>
     <TextLogo>
-      <p>ghmcontenidos - banco de imagenes</p>
+      <p>ghmcontenidos - gallery</p>
     </TextLogo>
     <LanguageWrapper>
         <img src={arg} alt="ARG"/>
@@ -28,14 +28,14 @@ const Header = () => {
     </LanguageWrapper>
     <LoginWrapper>
         <WebLogin>
-            <button onClick={onLoginClick} name="signin">Ingresar</button>
-            <button onClick={onSignUpClick} name="signup">Registrate</button>
+            <button onClick={onLoginClick} name="signin">Sign In</button>
+            <button onClick={onSignUpClick} name="signup">Sign Up</button>
         </WebLogin>
         <MobileLogin>
-            <button name="side-menu" onClick={onLoginClick}><i className="fas fa-bars"></i></button>
+            <button aria-label="login-side-menu" name="login-side-menu" onClick={onLoginClick}><i className="fas fa-bars"></i></button>
         </MobileLogin>
     </LoginWrapper>
-    <LoginModal title={isLogin ? "Ingresar" : "Registrate"} onSignUp={onSignUpClick} onClose={handleCloseModal} show={showModal} login={isLogin} />
+    <LoginModal title={isLogin ? "Sign In" : "Sign Up"} onSignUp={onSignUpClick} onClose={handleCloseModal} show={showModal} login={isLogin} />
   </Wrapper>  
 )};
 

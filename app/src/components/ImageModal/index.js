@@ -11,12 +11,12 @@ const ImageModal = ({show, onClose, title, imageUrl}) => (
                     <Data>
                         <input name="image-name" type="text" disabled value={"gsc0020"}/>
                         <input name="image-size" type="text" disabled value={"3 MB"}/>
-                        <input name="image-tags" type="text" disabled value={"Paisajes, Campo"}/>
+                        <input name="image-tags" type="text" disabled value={"Cities, Argentina"}/>
                         <select>
                             <option>1024x720</option>
                             <option>1920x1080</option>
                         </select>
-                        <button>Descargar</button>
+                        <button>Download</button>
                     </Data>
                 </Wrapper>
             </Modal>)

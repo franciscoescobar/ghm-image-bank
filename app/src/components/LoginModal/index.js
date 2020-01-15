@@ -11,10 +11,10 @@ const LoginModal = ({show, login, onClose, onSignUp, title}) => (
             </Actions>
             <Form>
                 <input type="email" name="email" placeholder="E-mail" />
-                <input type="password" name="password" placeholder="Contraseña" />
-                {!login ? <input type="password" name="repeat-password" placeholder="Repetir contraseña" /> : ""}
+                <input type="password" name="password" placeholder="Password" />
+                {!login ? <input type="password" name="repeat-password" placeholder="Repeat password" /> : ""}
                 <button name="submit" type="submit">{login ? "Ingresar" : "Aceptar"}</button>
-                {login ? <p>¿No tienes cuenta? <button name="signup" onClick={onSignUp}>Registrate</button></p> : <p></p>}
+                {login ? <p>You don't have an account? <button name="signup" onClick={onSignUp}>Sign Up</button></p> : <p></p>}
             </Form>
         </Modal>
         )
