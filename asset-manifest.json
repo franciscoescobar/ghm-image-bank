@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/ghm-image-bank/app/static/css/main.ea118d16.chunk.css",
-    "main.js": "/ghm-image-bank/app/static/js/main.23a000c1.chunk.js",
-    "main.js.map": "/ghm-image-bank/app/static/js/main.23a000c1.chunk.js.map",
-    "runtime-main.js": "/ghm-image-bank/app/static/js/runtime-main.a93e6f49.js",
-    "runtime-main.js.map": "/ghm-image-bank/app/static/js/runtime-main.a93e6f49.js.map",
-    "static/js/2.3399e457.chunk.js": "/ghm-image-bank/app/static/js/2.3399e457.chunk.js",
-    "static/js/2.3399e457.chunk.js.map": "/ghm-image-bank/app/static/js/2.3399e457.chunk.js.map",
-    "index.html": "/ghm-image-bank/app/index.html",
-    "precache-manifest.f1928d67ef31d8de5b40823a8b8915e7.js": "/ghm-image-bank/app/precache-manifest.f1928d67ef31d8de5b40823a8b8915e7.js",
-    "service-worker.js": "/ghm-image-bank/app/service-worker.js",
-    "static/css/main.ea118d16.chunk.css.map": "/ghm-image-bank/app/static/css/main.ea118d16.chunk.css.map",
-    "static/js/2.3399e457.chunk.js.LICENSE": "/ghm-image-bank/app/static/js/2.3399e457.chunk.js.LICENSE"
+    "main.css": "/ghm-image-bank/static/css/main.ea118d16.chunk.css",
+    "main.js": "/ghm-image-bank/static/js/main.21fac9b8.chunk.js",
+    "main.js.map": "/ghm-image-bank/static/js/main.21fac9b8.chunk.js.map",
+    "runtime-main.js": "/ghm-image-bank/static/js/runtime-main.68aec1b1.js",
+    "runtime-main.js.map": "/ghm-image-bank/static/js/runtime-main.68aec1b1.js.map",
+    "static/js/2.b4b0c6e4.chunk.js": "/ghm-image-bank/static/js/2.b4b0c6e4.chunk.js",
+    "static/js/2.b4b0c6e4.chunk.js.map": "/ghm-image-bank/static/js/2.b4b0c6e4.chunk.js.map",
+    "index.html": "/ghm-image-bank/index.html",
+    "precache-manifest.f4107ff47410c85acdff5736f2ecc004.js": "/ghm-image-bank/precache-manifest.f4107ff47410c85acdff5736f2ecc004.js",
+    "service-worker.js": "/ghm-image-bank/service-worker.js",
+    "static/css/main.ea118d16.chunk.css.map": "/ghm-image-bank/static/css/main.ea118d16.chunk.css.map",
+    "static/js/2.b4b0c6e4.chunk.js.LICENSE": "/ghm-image-bank/static/js/2.b4b0c6e4.chunk.js.LICENSE"
   },
   "entrypoints": [
-    "static/js/runtime-main.a93e6f49.js",
-    "static/js/2.3399e457.chunk.js",
+    "static/js/runtime-main.68aec1b1.js",
+    "static/js/2.b4b0c6e4.chunk.js",
     "static/css/main.ea118d16.chunk.css",
-    "static/js/main.23a000c1.chunk.js"
+    "static/js/main.21fac9b8.chunk.js"
   ]
 }
