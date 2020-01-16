@@ -33,8 +33,8 @@ const Header = () => {
     </LanguageWrapper>
     <LoginWrapper>
         <WebLogin>
-            <button onClick={onLoginClick} name="signin">Sign In</button>
-            <button onClick={onSignUpClick} name="signup">Sign Up</button>
+            <button onClick={onLoginClick} className="login" name="login">Login</button>
+            <button onClick={onSignUpClick} className="signup" name="signup">Sign Up</button>
         </WebLogin>
         <MobileLogin>
             <button aria-label="login-side-menu" name="login-side-menu" onClick={toggleMenu}><i className={ showMenu ? "fas fa-times" : "fas fa-bars"}></i></button>

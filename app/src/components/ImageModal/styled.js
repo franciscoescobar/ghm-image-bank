@@ -7,11 +7,14 @@ export const Wrapper = styled.div`
       overflow: scroll;
    }
    > img {
+      object-fit: contain;
       margin: 8px 12px 32px 14px;
       max-height: 400px;
       border-radius: 5px;
       @media only screen and (max-width: 650px) {
          margin: 0;
+         max-height: 400px;
+         width: 100%;
       }
    }
 `;

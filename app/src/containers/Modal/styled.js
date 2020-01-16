@@ -14,9 +14,6 @@ export const Container = styled.div`
         @media only screen and (max-width: 650px) {
             width: 350px;
         }
-        @media only screen and (max-width: 550px) {
-            width: 250px;
-        }
     }
 `;
 export const Wrapper = styled.div`
@@ -34,7 +31,7 @@ export const Wrapper = styled.div`
     }
     @media only screen and (max-width: 550px) {
         margin: 25% auto; 
-        width: 250px; 
+        width: 350px; 
     }
 `;
 export const Header = styled.div`

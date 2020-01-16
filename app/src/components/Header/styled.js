@@ -56,16 +56,14 @@ export const WebLogin = styled.div`
         font-size: 16px;
         cursor: pointer;
         background: white;
-        border: 1px solid #1565c0;
         color: #1565c0;
         border-radius: 5px;
         padding: 5px;
-        margin: 4px;
+        margin: 8px;
     }
     > button:hover, 
     > button:active {
         background: #1565c0;
-        border: 1px solid #1565c0;
         color: white;
     }
 `;
