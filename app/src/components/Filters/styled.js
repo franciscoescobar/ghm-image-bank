@@ -2,14 +2,25 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   display: flex;
-  margin: 16px 10%;
-  padding: 8px;
+  margin: 1.45rem;
+  height: 2rem;
+  padding: 0.5rem;
   border-bottom: 1px solid black;
-  @media only screen and (max-width: 740px) {
-    margin: 16px 5%;
+  align-items: center;
+  > p {
+    padding: 0.5rem;
+    font-size: 12px;
   }
   .selected {
     background: #1565c0;
     color: white;
   }
+`;
+export const AddButton = styled.button`
+  border: 1px solid #1565c0;
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  color: #1565c0;
+  font-size: 12px;
 `;

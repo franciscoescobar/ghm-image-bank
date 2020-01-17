@@ -26,8 +26,7 @@ export const categories = [
 ];
 export const filters = [
     {selected: false, text:"Most Recent"}, 
-    {selected: true, text:"Most Popular"}, 
-    {selected: false, text:"Price"}
+    {selected: true, text:"Most Popular"}
 ];
 export const images = [
     {src: "https://images.pexels.com/photos/3429761/pexels-photo-3429761.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940", alt: "anyImage"},

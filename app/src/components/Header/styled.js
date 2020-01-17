@@ -52,17 +52,19 @@ export const WebLogin = styled.div`
     @media only screen and (max-width: 675px) {
         display: none;
     }
+    .login {
+        color: #1565c0;
+    }
     > button {
         font-size: 16px;
         cursor: pointer;
         background: white;
-        color: #1565c0;
+        color: #303030;
         border-radius: 5px;
         padding: 5px;
         margin: 8px;
     }
-    > button:hover, 
-    > button:active {
+    .signup {
         background: #1565c0;
         color: white;
     }
