@@ -12,7 +12,7 @@ export const Container = styled.div`
         width: 600px;
         margin: 4% auto; /* Change between screen sizes */
         @media only screen and (max-width: 650px) {
-            width: 350px;
+            width:80%;
         }
     }
 `;
@@ -31,8 +31,9 @@ export const Wrapper = styled.div`
     }
     @media only screen and (max-width: 550px) {
         margin: 25% auto; 
-        width: 350px; 
+        width: 80%; 
     }
+    
 `;
 export const Header = styled.div`
     display: flex;

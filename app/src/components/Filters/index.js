@@ -16,7 +16,6 @@ const Filters = ({filters}) => {
     return(
     <Wrapper>
         <p>Sorted by:</p>
-        <p></p> 
         {updatedFilters.map((filter, i) => {
             return <Filter onfilterClicked={handleFitlerClick} key={i} text={filter.text} selected={filter.selected}/>
         })}
