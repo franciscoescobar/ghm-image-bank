@@ -21,13 +21,13 @@ export const Wrapper = styled.div`
 export const Data = styled.div`
    display: flex;
    flex-direction: column;
-   
+   text-align: center;
    > input {
       background: #cbcbcb;
       border: none;
       border-radius: 5px;
       margin: 8px;
-      height: 26px;
+      height: 29px;
       text-align: center;
    }
    > select {

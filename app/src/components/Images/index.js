@@ -47,7 +47,7 @@ const Images = ({images}) => {
                     }
                 </Masonry>
             </InfiniteScroll>
-        <ImageModal imageUrl={"https://images.pexels.com/photos/3429761/pexels-photo-3429761.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"} title="Imagen" show={showModal} onClose={handleClose}/>
+        <ImageModal action={"view"} imageUrl={"https://images.pexels.com/photos/3429761/pexels-photo-3429761.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"} title="Imagen" show={showModal} onClose={handleClose}/>
     </Container>
 )};
 
