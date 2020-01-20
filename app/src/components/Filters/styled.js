@@ -10,6 +10,9 @@ export const Wrapper = styled.div`
   > p {
     padding: 0.5rem;
     font-size: 12px;
+    @media only screen and (max-width: 550px) {
+      font-size: 10px;
+    }
   }
   .selected {
     background: #1565c0;
@@ -23,4 +26,5 @@ export const AddButton = styled.button`
   border-radius: 50%;
   color: #1565c0;
   font-size: 12px;
+  margin-left: auto;
 `;
