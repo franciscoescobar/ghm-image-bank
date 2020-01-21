@@ -26,10 +26,7 @@ const api = {
     return userInfo;
   },
   getImages: async () => {
-    const imagesReponse = await fetch(
-      baseUrl + "images",
-      fetchParams("GET")
-    );
+    const imagesReponse = await fetch(baseUrl + "images", fetchParams("GET"));
     const images = await imagesReponse.json();
 
     return images;
