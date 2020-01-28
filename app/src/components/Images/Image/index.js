@@ -1,11 +1,13 @@
 import React from "react";
 import { Image } from "./styled";
-const ColumnImage = ({ images, handleImageClick }) => (
+const ColumnImage = ({ image, handleImageClick }) => (
   <Image
-    onClick={handleImageClick}
+    onClick={() => {
+      handleImageClick(image);
+    }}
     loading="lazy"
-    src={images.src}
-    alt={images.alt}
+    src={image.src}
+    alt={image.alt}
   />
 );
 

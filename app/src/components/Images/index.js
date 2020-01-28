@@ -4,7 +4,7 @@ import ImageModal from "../ImageModal";
 import Masonry from "react-masonry-css";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Container } from "./styled";
-const Images = ({ images }) => {
+const Images = ({ images, handleSubmit }) => {
   const breakpointColumnsObj = {
     default: 3,
     800: 2,
@@ -13,7 +13,9 @@ const Images = ({ images }) => {
   const [showModal, setShowModal] = useState(false);
   const [partialImages, setPartialImages] = useState(images.slice(0, 5));
   const [hasMoreImages, setHasMoreImages] = useState(true);
-  const onImageClick = () => {
+  const [clickedImage, setClickedImage] = useState({});
+  const onImageClick = image => {
+    setClickedImage(image);
     setShowModal(true);
   };
   const handleClose = () => {
@@ -43,19 +45,18 @@ const Images = ({ images }) => {
         >
           {partialImages.map((image, i) => {
             return (
-              <Image handleImageClick={onImageClick} key={i} images={image} />
+              <Image handleImageClick={onImageClick} key={i} image={image} />
             );
           })}
         </Masonry>
       </InfiniteScroll>
       <ImageModal
         action={"view"}
-        imageUrl={
-          "https://images.pexels.com/photos/3429761/pexels-photo-3429761.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-        }
         title="Imagen"
         show={showModal}
         onClose={handleClose}
+        onSubmit={handleSubmit}
+        image={clickedImage}
       />
     </Container>
   );

@@ -19,7 +19,7 @@ const Categories = ({ categories }) => {
       <CategoriesHeader>
         <Title>Categories</Title>
         <AddButton onClick={toggleModal}>
-          <i class="fas fa-plus"></i>
+          <i className="fas fa-plus"></i>
         </AddButton>
       </CategoriesHeader>
       <Wrapper>
