@@ -4,7 +4,7 @@ import ImageModal from "../ImageModal";
 import Masonry from "react-masonry-css";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Container } from "./styled";
-const Images = ({ images, handleSubmit }) => {
+const Images = ({ images }) => {
   const breakpointColumnsObj = {
     default: 3,
     800: 2,
@@ -55,7 +55,6 @@ const Images = ({ images, handleSubmit }) => {
         title="Imagen"
         show={showModal}
         onClose={handleClose}
-        onSubmit={handleSubmit}
         image={clickedImage}
       />
     </Container>

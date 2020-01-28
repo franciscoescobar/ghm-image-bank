@@ -2,22 +2,26 @@ import React, { useState, useEffect } from "react";
 import Modal from "../../containers/Modal";
 import { Wrapper, Data } from "./styled";
 
-const ImageModal = ({ show, onClose, title, image, action, onSubmit }) => {
+const ImageModal = ({ show, onClose, title, image, action }) => {
   const [newImage, setNewImage] = useState(image || "");
+  const [file, setFile] = useState("");
   useEffect(() => {
     setNewImage(image);
   }, [image]);
   const onImageLoad = event => {
-    console.log(event.target.value);
+    setFile(URL.createObjectURL(event.target.files[0]));
   };
-  const handleSubmit = () => {};
   return (
     <>
       {show ? (
         <Modal large onClose={onClose} title={title}>
           <Wrapper>
-            <img src={newImage ? newImage.src : ""} alt="selected-image" />
-            <Data onSubmit={handleSubmit}>
+            <img src={newImage ? newImage.src : file} alt="selected-image" />
+            <Data
+              onSubmit={event => {
+                event.preventDefault();
+              }}
+            >
               {newImage === "" ? (
                 ""
               ) : (
@@ -51,7 +55,7 @@ const ImageModal = ({ show, onClose, title, image, action, onSubmit }) => {
               ) : (
                 <input name="file" type="file" onChange={onImageLoad} />
               )}
-              <button>
+              <button type="submit">
                 {action === "view"
                   ? "Download"
                   : action === "edit"
