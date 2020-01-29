@@ -1,19 +1,19 @@
 import api from "../utils/api";
 import {
-  fetchImagesFailure,
-  fetchImagesRequest,
-  fetchImagesSuccess
+  fetchPostsFailure,
+  fetchPostsRequest,
+  fetchPostsSuccess
 } from "../actions";
 
 export const getProductsRequest = () => {
   return async function(dispatch) {
     try {
-      dispatch(fetchImagesRequest());
-      const images = await api.getImages();
+      dispatch(fetchPostsRequest());
+      const posts = await api.getPosts();
 
-      dispatch(fetchImagesSuccess(images));
+      dispatch(fetchPostsSuccess(posts));
     } catch (error) {
-      dispatch(fetchImagesFailure(error.message));
+      dispatch(fetchPostsFailure(error.message));
     }
   };
 };

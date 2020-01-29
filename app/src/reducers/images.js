@@ -1,30 +1,31 @@
 const INITIAL_STATE = {
-  images: [],
+  posts: [],
   loading: false,
   error: null,
   filters: 0
 };
 
-const imagesReducer = (state = INITIAL_STATE, action) => {
+const postsReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case "FETCH_IMAGES_REQUEST": {
+    case "FETCH_POSTS_REQUEST": {
       return {
         ...state,
         loading: true
       };
     }
 
-    case "FETCH_IMAGES_SUCCESS": {
-      const { images } = action.payload;
+    case "FETCH_POSTS_SUCCESS": {
+      const { posts } = action.payload;
+      console.log(posts);
 
       return {
         ...state,
-        images,
+        posts,
         loading: false
       };
     }
 
-    case "FETCH_IMAGES_FAILURE": {
+    case "FETCH_POSTS_FAILURE": {
       const { error } = action.payload;
 
       return {
@@ -35,7 +36,7 @@ const imagesReducer = (state = INITIAL_STATE, action) => {
     }
 
     case "SORT_PRICE": {
-      const newImages = state.images.sort((a, b) => {
+      const newPosts = state.posts.sort((a, b) => {
         if (a.cost < b.cost) {
           return 1;
         }
@@ -47,12 +48,12 @@ const imagesReducer = (state = INITIAL_STATE, action) => {
 
       return {
         ...state,
-        images: newImages,
+        posts: newPosts,
         filters: 2
       };
     }
     case "SORT_POPULAR": {
-      const newImages = state.images.sort((a, b) => {
+      const newPosts = state.posts.sort((a, b) => {
         if (a.cost > b.cost) {
           return 1;
         }
@@ -63,12 +64,12 @@ const imagesReducer = (state = INITIAL_STATE, action) => {
       });
       return {
         ...state,
-        images: newImages,
+        posts: newPosts,
         filters: 1
       };
     }
     case "SORT_RECENT": {
-      const newImages = state.images.sort((a, b) => {
+      const newPosts = state.posts.sort((a, b) => {
         if (a.name > b.name) {
           return 1;
         }
@@ -79,7 +80,7 @@ const imagesReducer = (state = INITIAL_STATE, action) => {
       });
       return {
         ...state,
-        images: newImages,
+        posts: newPosts,
         filters: 0
       };
     }
@@ -88,4 +89,4 @@ const imagesReducer = (state = INITIAL_STATE, action) => {
     }
   }
 };
-export default imagesReducer;
+export default postsReducer;

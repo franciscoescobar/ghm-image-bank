@@ -13,22 +13,22 @@ export const sortRecent = () => {
     type: "SORT_RECENT"
   };
 };
-export const fetchImagesRequest = () => {
+export const fetchPostsRequest = () => {
   return {
-    type: "FETCH_IMAGES_REQUEST"
+    type: "FETCH_POSTS_REQUEST"
   };
 };
 
-export const fetchImagesSuccess = images => {
+export const fetchPostsSuccess = posts => {
   return {
-    type: "FETCH_IMAGES_SUCCESS",
-    payload: { images }
+    type: "FETCH_POSTS_SUCCESS",
+    payload: { posts }
   };
 };
 
-export const fetchImagesFailure = error => {
+export const fetchPostsFailure = error => {
   return {
-    type: "FETCH_IMAGES_FAILURE",
+    type: "FETCH_POSTS_FAILURE",
     payload: { error }
   };
 };
