@@ -1,27 +1,34 @@
 import React, { useState, useEffect } from "react";
 import Modal from "../../containers/Modal";
 import { Wrapper, Data } from "./styled";
-
+import { useDispatch } from 'react-redux';
+import { postProductRequest } from '../../thunks/images';
 const ImageModal = ({ show, onClose, title, image, action }) => {
   const [newImage, setNewImage] = useState(image || "");
   const [file, setFile] = useState("");
+  const dispatch = useDispatch();
+  const formData = new FormData();
   useEffect(() => {
     setNewImage(image);
   }, [image]);
   const onImageLoad = event => {
     setFile(URL.createObjectURL(event.target.files[0]));
   };
+  const onImageSubmit = event => {
+    event.preventDefault();
+    formData.append('name', newImage.name || "");
+    formData.append('tags', newImage.tags || [""]);
+    formData.append('image', newImage.file || "");
+    postProductRequest(formData)(dispatch);
+    onClose();
+  }
   return (
     <>
       {show ? (
         <Modal large onClose={onClose} title={title}>
           <Wrapper>
             <img src={newImage ? newImage.src : file} alt="selected-image" />
-            <Data
-              onSubmit={event => {
-                event.preventDefault();
-              }}
-            >
+            <Data onSubmit={onImageSubmit} >
               {newImage === "" ? (
                 ""
               ) : (

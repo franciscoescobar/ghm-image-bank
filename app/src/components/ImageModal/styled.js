@@ -9,7 +9,7 @@ export const Wrapper = styled.div`
   > img {
     object-fit: contain;
     margin: 8px 12px 32px 14px;
-    max-height: 600px;
+    max-height: 800px;
     max-width: 400px;
     border-radius: 5px;
     @media only screen and (max-width: 650px) {

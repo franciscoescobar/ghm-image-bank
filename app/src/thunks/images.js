@@ -2,7 +2,10 @@ import api from "../utils/api";
 import {
   fetchPostsFailure,
   fetchPostsRequest,
-  fetchPostsSuccess
+  fetchPostsSuccess,
+  postPostsFailure,
+  postPostsRequest,
+  postPostsSuccess
 } from "../actions";
 
 export const getProductsRequest = () => {
@@ -14,6 +17,18 @@ export const getProductsRequest = () => {
       dispatch(fetchPostsSuccess(posts));
     } catch (error) {
       dispatch(fetchPostsFailure(error.message));
+    }
+  };
+};
+export const postProductRequest = (formData) => {
+  return async function(dispatch) {
+    try {
+      dispatch(postPostsRequest());
+      const post = await api.postPost(formData);
+
+      dispatch(postPostsSuccess(post));
+    } catch (error) {
+      dispatch(postPostsFailure(error.message));
     }
   };
 };

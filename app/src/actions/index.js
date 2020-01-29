@@ -32,6 +32,25 @@ export const fetchPostsFailure = error => {
     payload: { error }
   };
 };
+export const postPostsRequest = () => {
+  return {
+    type: "POST_POSTS_REQUEST"
+  };
+};
+
+export const postPostsSuccess = post => {
+  return {
+    type: "POST_POSTS_SUCCESS",
+    payload: { post }
+  };
+};
+
+export const postPostsFailure = error => {
+  return {
+    type: "POST_POSTS_FAILURE",
+    payload: { error }
+  };
+};
 export const fetchUserRequest = () => {
   return {
     type: "FETCH_USER_REQUEST"

@@ -15,7 +15,6 @@ const Images = () => {
   const [hasMoreImages, setHasMoreImages] = useState(true);
   const [clickedImage, setClickedImage] = useState({});
   const images = useSelector(state => state.imagesReducer.posts);
-  console.log(images);
   
   const onImageClick = image => {
     setClickedImage(image);

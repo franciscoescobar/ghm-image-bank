@@ -24,10 +24,16 @@ const api = {
     return userInfo;
   },
   getPosts: async () => {
-    const imagesReponse = await fetch(baseUrl + "posts", fetchParams("GET"));
-    const images = await imagesReponse.json();
+    const postsResponse = await fetch(baseUrl + "posts", fetchParams("GET"));
+    const images = await postsResponse.json();
     const posts = images.posts;
     return posts;
+  },
+  postPost: async (formData) => {
+    const postResponse = await fetch(baseUrl + "post", fetchParams("POST", formData));
+    const images = await postResponse.json();
+    const post = images.post;
+    return post;
   }
 };
 
