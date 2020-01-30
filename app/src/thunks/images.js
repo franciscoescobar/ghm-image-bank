@@ -25,7 +25,6 @@ export const postProductRequest = (formData) => {
     try {
       dispatch(postPostsRequest());
       const post = await api.postPost(formData);
-
       dispatch(postPostsSuccess(post));
     } catch (error) {
       dispatch(postPostsFailure(error.message));

@@ -16,7 +16,6 @@ const postsReducer = (state = INITIAL_STATE, action) => {
 
     case "FETCH_POSTS_SUCCESS": {
       const { posts } = action.payload;
-      console.log(posts);
       return {
         ...state,
         posts,

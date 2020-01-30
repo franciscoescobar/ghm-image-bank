@@ -3,32 +3,39 @@ import Modal from "../../containers/Modal";
 import { Wrapper, Data } from "./styled";
 import { useDispatch } from 'react-redux';
 import { postProductRequest } from '../../thunks/images';
+
 const ImageModal = ({ show, onClose, title, image, action }) => {
+
   const [newImage, setNewImage] = useState(image || "");
   const [file, setFile] = useState("");
+  const [filePreview, setFilePreview] = useState("");
   const dispatch = useDispatch();
-  const formData = new FormData();
+
   useEffect(() => {
     setNewImage(image);
   }, [image]);
+
   const onImageLoad = event => {
-    setFile(URL.createObjectURL(event.target.files[0]));
+    setFilePreview(URL.createObjectURL(event.target.files[0]));
+    setFile(event.target.files[0]);
   };
+
   const onImageSubmit = event => {
     event.preventDefault();
-    formData.append('name', newImage.name || "");
-    formData.append('tags', newImage.tags || [""]);
-    formData.append('image', newImage.file || "");
+    let formData = new FormData();
+    formData.append('image', file, file.name);
+    formData.append('name', file.name);
     postProductRequest(formData)(dispatch);
     onClose();
   }
+
   return (
     <>
       {show ? (
         <Modal large onClose={onClose} title={title}>
           <Wrapper>
-            <img src={newImage ? newImage.src : file} alt="selected-image" />
-            <Data onSubmit={onImageSubmit} >
+            <img src={newImage ? newImage.src : filePreview} alt="selected-image" />
+            <Data onSubmit={onImageSubmit}>
               {newImage === "" ? (
                 ""
               ) : (
@@ -60,7 +67,7 @@ const ImageModal = ({ show, onClose, title, image, action }) => {
                   <option>1920x1080</option>
                 </select>
               ) : (
-                <input name="file" type="file" onChange={onImageLoad} />
+                <input id="image" name="image" type="file" onChange={onImageLoad} />
               )}
               <button type="submit">
                 {action === "view"

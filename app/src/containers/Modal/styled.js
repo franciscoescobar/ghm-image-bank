@@ -38,6 +38,8 @@ export const Wrapper = styled.div`
   @media only screen and (max-width: 550px) {
     margin: 25% auto;
     width: 80%;
+    overflow: scroll;
+    max-height: 95%;
   }
 `;
 export const Header = styled.div`

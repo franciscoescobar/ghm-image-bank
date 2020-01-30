@@ -30,7 +30,10 @@ const api = {
     return posts;
   },
   postPost: async (formData) => {
-    const postResponse = await fetch(baseUrl + "post", fetchParams("POST", formData));
+    const postResponse = await fetch(baseUrl + "post", { 
+      method: "POST",
+      body: formData
+    });
     const images = await postResponse.json();
     const post = images.post;
     return post;

@@ -8,7 +8,6 @@ import {
   CategoriesHeader
 } from "./styled";
 import CategoryModal from "../CategoryModal";
-import { categories } from "../../data";
 const Categories = ({ categories }) => {
   const [show, setShow] = useState(false);
   const toggleModal = () => {

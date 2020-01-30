@@ -53,7 +53,7 @@ export const WebLogin = styled.div`
     color: #1565c0;
   }
   > button {
-    font-size: 16px;
+    font-size: 14px;
     cursor: pointer;
     background: white;
     color: #303030;
@@ -62,8 +62,8 @@ export const WebLogin = styled.div`
     margin: 8px;
   }
   .signup {
-    background: #1565c0;
-    color: white;
+    color: #1565c0;
+    border: 1px solid #1565c0;
   }
 `;
 export const MobileLogin = styled.div`
