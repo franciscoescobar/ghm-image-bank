@@ -9,7 +9,7 @@ export const Wrapper = styled.div`
   > img {
     object-fit: contain;
     margin: 8px 12px 32px 14px;
-    max-height: 800px;
+    max-height: 1000px;
     max-width: 400px;
     border-radius: 5px;
     @media only screen and (max-width: 650px) {
@@ -27,7 +27,8 @@ export const Data = styled.form`
   flex-wrap: wrap;
   align-content: center;
   > input,
-  > select {
+  > select,
+  > div {
     width: 100%;
     color: #303030;
     background: #cbcbcb;
@@ -41,6 +42,9 @@ export const Data = styled.form`
     -webkit-appearance: none;
     appearance: none;
   }
+  .custom-file-input {
+    text-align: initial;
+  } 
   > button {
     width: 100%;
     align-self: flex-end;

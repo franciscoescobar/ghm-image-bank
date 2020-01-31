@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import MultiSelect from "@khanacademy/react-multi-select";
 import Modal from "../../containers/Modal";
 import { Wrapper, Data } from "./styled";
 import { useDispatch } from 'react-redux';
@@ -8,6 +9,8 @@ const ImageModal = ({ show, onClose, title, image, action }) => {
 
   const [newImage, setNewImage] = useState(image || "");
   const [file, setFile] = useState("");
+  const [options, setOptions] = useState([{label:"Algo", value: 1} ,{label:"Algo", value: 2}, {label:"Algo", value: 3}]);
+  const [selectedOptions, setSelectedOptions] = useState([]);
   const [filePreview, setFilePreview] = useState("");
   const dispatch = useDispatch();
 
@@ -23,8 +26,10 @@ const ImageModal = ({ show, onClose, title, image, action }) => {
   const onImageSubmit = event => {
     event.preventDefault();
     let formData = new FormData();
+    console.log(selectedOptions);
     formData.append('image', file, file.name);
-    formData.append('name', file.name);
+    formData.append('name', newImage.name);
+    formData.append('tags', selectedOptions);
     postProductRequest(formData)(dispatch);
     onClose();
   }
@@ -34,29 +39,39 @@ const ImageModal = ({ show, onClose, title, image, action }) => {
       {show ? (
         <Modal large onClose={onClose} title={title}>
           <Wrapper>
-            <img src={newImage ? newImage.src : filePreview} alt="selected-image" />
+            {newImage || filePreview ?
+              <img src={newImage ? newImage.src : filePreview} alt="selected-image" />
+            :
+            "" 
+            }
             <Data onSubmit={onImageSubmit}>
+              <input
+                placeholder="sanjuan"
+                name="image-name"
+                type="text"
+                disabled={action === "view"}
+                value={newImage.name}
+              />
+              <MultiSelect
+                overrideStrings={{
+                  selectSomeItems: "Selecciona las categorias...",
+                  allItemsAreSelected: "Todas las categorias seleccionadas",
+                  selectAll: "Seleccionar todas",
+                  search: "Buscar",
+                }}
+                options={options}
+                selected={selectedOptions}
+                onSelectedChanged={selected => setSelectedOptions(selected)}
+              />
               {newImage === "" ? (
                 ""
               ) : (
                 <>
                   <input
-                    name="image-name"
-                    type="text"
-                    disabled={action === "view"}
-                    value={newImage.name}
-                  />
-                  <input
                     name="image-size"
                     type="text"
                     disabled={action === "view"}
                     value={newImage.size}
-                  />
-                  <input
-                    name="image-tags"
-                    type="text"
-                    disabled={action === "view"}
-                    value={newImage.tags}
                   />
                 </>
               )}
@@ -67,7 +82,7 @@ const ImageModal = ({ show, onClose, title, image, action }) => {
                   <option>1920x1080</option>
                 </select>
               ) : (
-                <input id="image" name="image" type="file" onChange={onImageLoad} />
+                <input id="image" name="image" type="file" className="custom-file-input" onChange={onImageLoad} />
               )}
               <button type="submit">
                 {action === "view"

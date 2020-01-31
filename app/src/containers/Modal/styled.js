@@ -9,10 +9,13 @@ export const Container = styled.div`
   background-color: rgb(0, 0, 0); /* Fallback color */
   background-color: rgba(0, 0, 0, 0.6); /* Black w/ opacity */
   .large {
-    width: 600px;
+    width: 60%;
     margin: 4% auto; /* Change between screen sizes */
-    @media only screen and (max-width: 650px) {
+    @media only screen and (max-width: 1140px) {
       width: 80%;
+    }
+    @media only screen and (max-width: 800px) {
+      width: 90%;
     }
   }
   .extralarge {
@@ -27,7 +30,7 @@ export const Wrapper = styled.div`
   background-color: #fefefe;
   padding: 0 20px;
   border-radius: 5px;
-  width: 450px; /* Could be more or less, depending on screen size */
+  width: 700px; /* Could be more or less, depending on screen size */
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   display: flex;
   flex-direction: column;
