@@ -13,6 +13,44 @@ export const sortRecent = () => {
     type: "SORT_RECENT"
   };
 };
+export const fetchCategoriesRequest = () => {
+  return {
+    type: "FETCH_CATEGORIES_REQUEST"
+  };
+};
+
+export const fetchCategoriesSuccess = categories => {
+  return {
+    type: "FETCH_CATEGORIES_SUCCESS",
+    payload: { categories }
+  };
+};
+
+export const fetchCategoriesFailure = error => {
+  return {
+    type: "FETCH_CATEGORIES_FAILURE",
+    payload: { error }
+  };
+};
+export const postCategoryRequest = () => {
+  return {
+    type: "POST_CATEGORY_REQUEST"
+  };
+};
+
+export const postCategorySuccess = category => {
+  return {
+    type: "POST_CATEGORY_SUCCESS",
+    payload: { category }
+  };
+};
+
+export const postCategoryFailure = error => {
+  return {
+    type: "POST_CATEGORY_FAILURE",
+    payload: { error }
+  };
+};
 export const fetchPostsRequest = () => {
   return {
     type: "FETCH_POSTS_REQUEST"

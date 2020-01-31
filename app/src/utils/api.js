@@ -37,6 +37,24 @@ const api = {
     const images = await postResponse.json();
     const post = images.post;
     return post;
+  },
+  getCategories: async() => {
+    const categoriesResponse = await fetch(baseUrl + "category", fetchParams("GET"));
+    const data = await categoriesResponse.json();
+    const categories = data.categories;
+    return categories;
+  },
+  postCategory: async(formData) => {
+    const categoryResponse = await fetch(baseUrl + "category", { 
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({name: formData})
+    });
+    const data = await categoryResponse.json();
+    const category = data.category;
+    return category;
   }
 };
 

@@ -8,7 +8,10 @@ import {
   CategoriesHeader
 } from "./styled";
 import CategoryModal from "../CategoryModal";
-const Categories = ({ categories }) => {
+import { useSelector } from 'react-redux';
+
+const Categories = () => {
+  const categories = useSelector(state => state.categoriesReducer.categories);
   const [show, setShow] = useState(false);
   const toggleModal = () => {
     setShow(!show);
@@ -22,15 +25,15 @@ const Categories = ({ categories }) => {
         </AddButton>
       </CategoriesHeader>
       <Wrapper>
-        {categories.map((category, i) => {
+        {categories ? categories.map((category, i) => {
           return (
             <Category
               key={i}
-              text={category.text}
+              text={category.name}
               selected={category.selected}
             />
           );
-        })}
+        }) : ""}
       </Wrapper>
       <CategoryModal
         show={show}

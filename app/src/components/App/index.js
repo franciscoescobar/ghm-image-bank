@@ -7,11 +7,13 @@ import Images from "../Images";
 import { filters, categories } from "../../data/index";
 import { useDispatch } from 'react-redux';
 import { getProductsRequest } from '../../thunks/images';
+import { getCategoriesRequest } from '../../thunks/categories';
 
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     getProductsRequest()(dispatch);
+    getCategoriesRequest()(dispatch);
   }, []);
   return (
     <div>

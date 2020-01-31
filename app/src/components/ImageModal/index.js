@@ -2,34 +2,41 @@ import React, { useState, useEffect } from "react";
 import MultiSelect from "@khanacademy/react-multi-select";
 import Modal from "../../containers/Modal";
 import { Wrapper, Data } from "./styled";
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { postProductRequest } from '../../thunks/images';
 
 const ImageModal = ({ show, onClose, title, image, action }) => {
+  
+  const categories = useSelector(state => state.categoriesReducer.categories);
+  const options = categories ? categories.map(category => {category.label = category.name;category.value = category._id; return category;}) : "";
 
-  const [newImage, setNewImage] = useState(image || "");
   const [file, setFile] = useState("");
-  const [options, setOptions] = useState([{label:"Algo", value: 1} ,{label:"Algo", value: 2}, {label:"Algo", value: 3}]);
+  const [name, setName] = useState("");
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [filePreview, setFilePreview] = useState("");
   const dispatch = useDispatch();
-
   useEffect(() => {
-    setNewImage(image);
-  }, [image]);
+    if(show && image) {
+      setSelectedOptions(image.tags);
+      setName(image.name);
+      image.size = "3MB";
+    }
+  }, [show])
 
   const onImageLoad = event => {
     setFilePreview(URL.createObjectURL(event.target.files[0]));
     setFile(event.target.files[0]);
   };
-
+  const onInputChange = (event) => {
+    setName(event.target.value);
+  }
   const onImageSubmit = event => {
     event.preventDefault();
+    const jsonTags = JSON.stringify(selectedOptions);
     let formData = new FormData();
-    console.log(selectedOptions);
     formData.append('image', file, file.name);
-    formData.append('name', newImage.name);
-    formData.append('tags', selectedOptions);
+    formData.append('name', name);
+    formData.append('tags', jsonTags);
     postProductRequest(formData)(dispatch);
     onClose();
   }
@@ -39,8 +46,8 @@ const ImageModal = ({ show, onClose, title, image, action }) => {
       {show ? (
         <Modal large onClose={onClose} title={title}>
           <Wrapper>
-            {newImage || filePreview ?
-              <img src={newImage ? newImage.src : filePreview} alt="selected-image" />
+            {image || filePreview ?
+              <img src={image ? image.src : filePreview} alt="selected-image" />
             :
             "" 
             }
@@ -50,7 +57,8 @@ const ImageModal = ({ show, onClose, title, image, action }) => {
                 name="image-name"
                 type="text"
                 disabled={action === "view"}
-                value={newImage.name}
+                onChange={onInputChange}
+                value={name}
               />
               <MultiSelect
                 overrideStrings={{
@@ -63,7 +71,7 @@ const ImageModal = ({ show, onClose, title, image, action }) => {
                 selected={selectedOptions}
                 onSelectedChanged={selected => setSelectedOptions(selected)}
               />
-              {newImage === "" ? (
+              {!image ? (
                 ""
               ) : (
                 <>
@@ -71,7 +79,7 @@ const ImageModal = ({ show, onClose, title, image, action }) => {
                     name="image-size"
                     type="text"
                     disabled={action === "view"}
-                    value={newImage.size}
+                    value={image.size}
                   />
                 </>
               )}
