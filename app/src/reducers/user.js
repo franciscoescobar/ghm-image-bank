@@ -1,5 +1,7 @@
 const INITIAL_STATE = {
-  user: {},
+  user: {
+    login: false
+  },
   modal: {
     show: false,
     login: true

@@ -16,6 +16,7 @@ import { openSignup, openLogin } from "../../actions";
 const Header = () => {
   const dispatch = useDispatch();
   const modal = useSelector(state => state.userReducer.modal);
+  const user = useSelector(state => state.userReducer.user);
   const [showMenu, setShowMenu] = useState(false);
 
   const onLoginClick = () => {
@@ -36,6 +37,7 @@ const Header = () => {
         <img src={arg} alt="ARG" />
         <img src={uk} alt="UK" />
       </LanguageWrapper>
+      { user.login ? "" :
       <LoginWrapper>
         <WebLogin>
           <button onClick={onLoginClick} className="login" name="login">
@@ -55,6 +57,7 @@ const Header = () => {
           </button>
         </MobileLogin>
       </LoginWrapper>
+      }
       <SideMenu
         toggle={toggleMenu}
         show={showMenu}

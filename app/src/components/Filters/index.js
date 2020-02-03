@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import Filter from "./Filter";
 import { Wrapper, AddButton } from "./styled";
 import ImageModal from "../ImageModal";
+import { useSelector } from 'react-redux';
+
 const Filters = ({ filters }) => {
   const [updatedFilters, setUpdatedFilters] = useState(filters);
   const [showModal, setShowModal] = useState(false);
+  const user = useSelector(state => state.userReducer.user);
   const handleFitlerClick = text => {
     setUpdatedFilters(
       filters.map(filter => {
@@ -35,9 +38,13 @@ const Filters = ({ filters }) => {
           />
         );
       })}
-      <AddButton onClick={onImageClick}>
-        <i className="fas fa-plus"></i>
-      </AddButton>
+        {
+          user.login ? 
+          <AddButton onClick={onImageClick}>
+            <i className="fas fa-plus"></i>
+          </AddButton> : ""
+        }
+      
       <ImageModal
         title="Imagen"
         show={showModal}

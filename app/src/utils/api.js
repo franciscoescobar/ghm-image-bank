@@ -29,16 +29,21 @@ const api = {
     return user;
   },
   signUser: async (formData) => {
-    const userResponse = await fetch(baseUrl + "signup", { 
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({email: formData.email, password: formData.password})
-    });
-    const data = await userResponse.json();
-    const user = data.user;
-    return user;
+    try {
+      const userResponse = await fetch(baseUrl + "signup", { 
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({email: formData.email, password: formData.password})
+      });
+      const data = await userResponse.json();
+      const user = data.user;
+      return user;
+    }
+    catch (error) {
+      console.log(error);
+    }
   },
   getPosts: async () => {
     const postsResponse = await fetch(baseUrl + "posts", fetchParams("GET"));

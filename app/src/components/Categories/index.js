@@ -12,6 +12,7 @@ import { useSelector } from 'react-redux';
 
 const Categories = () => {
   const categories = useSelector(state => state.categoriesReducer.categories);
+  const user = useSelector(state => state.userReducer.user);
   const [show, setShow] = useState(false);
   const toggleModal = () => {
     setShow(!show);
@@ -20,9 +21,13 @@ const Categories = () => {
     <Container>
       <CategoriesHeader>
         <Title>Categories</Title>
-        <AddButton onClick={toggleModal}>
+        {
+          user.login ? 
+          <AddButton onClick={toggleModal}>
           <i className="fas fa-plus"></i>
-        </AddButton>
+          </AddButton> : ""
+        }
+        
       </CategoriesHeader>
       <Wrapper>
         {categories ? categories.map((category, i) => {
