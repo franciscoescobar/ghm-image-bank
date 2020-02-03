@@ -11,20 +11,18 @@ import arg from "../../assets/argentina-flag-icon-64.png";
 import uk from "../../assets/united-kingdom-flag-icon-64.png";
 import LoginModal from "../LoginModal";
 import SideMenu from "../SideMenu";
+import { useSelector, useDispatch } from 'react-redux';
+import { openSignup, openLogin } from "../../actions";
 const Header = () => {
-  const [isLogin, setIsLogin] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+  const dispatch = useDispatch();
+  const modal = useSelector(state => state.userReducer.modal);
   const [showMenu, setShowMenu] = useState(false);
+
   const onLoginClick = () => {
-    setIsLogin(true);
-    setShowModal(true);
+    dispatch(openLogin());
   };
   const onSignUpClick = () => {
-    setIsLogin(false);
-    setShowModal(true);
-  };
-  const handleCloseModal = () => {
-    setShowModal(false);
+    dispatch(openSignup());
   };
   const toggleMenu = () => {
     setShowMenu(!showMenu);
@@ -64,13 +62,7 @@ const Header = () => {
         openSignIn={onLoginClick}
         openSignUp={onSignUpClick}
       ></SideMenu>
-      <LoginModal
-        title={isLogin ? "Sign In" : "Sign Up"}
-        onSignUp={onSignUpClick}
-        onClose={handleCloseModal}
-        show={showModal}
-        login={isLogin}
-      />
+      <LoginModal title={modal.login ? "Sign In" : "Sign Up"}/>
     </Wrapper>
   );
 };

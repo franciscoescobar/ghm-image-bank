@@ -17,11 +17,28 @@ const apiHeaders = {
 };
 
 const api = {
-  getUser: async () => {
-    const userResponse = await fetch(baseUrl + "user/me", fetchParams("GET"));
-    const userInfo = await userResponse.json();
-
-    return userInfo;
+  getUser: async (formData) => {
+    const userResponse = await fetch(baseUrl + "login", { 
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({email: formData.email, password: formData.password})
+    });
+    const user = await userResponse.json();
+    return user;
+  },
+  signUser: async (formData) => {
+    const userResponse = await fetch(baseUrl + "signup", { 
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({email: formData.email, password: formData.password})
+    });
+    const data = await userResponse.json();
+    const user = data.user;
+    return user;
   },
   getPosts: async () => {
     const postsResponse = await fetch(baseUrl + "posts", fetchParams("GET"));
@@ -30,13 +47,17 @@ const api = {
     return posts;
   },
   postPost: async (formData) => {
-    const postResponse = await fetch(baseUrl + "post", { 
-      method: "POST",
-      body: formData
-    });
-    const images = await postResponse.json();
-    const post = images.post;
-    return post;
+    try {
+      const postResponse = await fetch(baseUrl + "post", { 
+        method: "POST",
+        body: formData
+      });
+      const images = await postResponse.json();
+      const post = images.post;
+      return post;
+    } catch (error) {
+      console.log(error);
+    }
   },
   getCategories: async() => {
     const categoriesResponse = await fetch(baseUrl + "category", fetchParams("GET"));

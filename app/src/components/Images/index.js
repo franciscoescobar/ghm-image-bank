@@ -30,7 +30,7 @@ const Images = () => {
   return (
     <Container>
       <InfiniteScroll
-        dataLength={images.length} //This is important field to render the next data
+        dataLength={images ? images.length : 0} //This is important field to render the next data
         next={fetchData}
         hasMore={hasMoreImages}
         loader={<h4>Loading...</h4>}
@@ -45,11 +45,11 @@ const Images = () => {
           className="my-masonry-grid"
           columnClassName="my-masonry-grid_column"
         >
-          {images.map((image, i) => {
+          {images ? images.map((image, i) => {
             return (
               <Image handleImageClick={onImageClick} key={i} image={image} />
             );
-          })}
+          }) : ""}
         </Masonry>
       </InfiniteScroll>
       <ImageModal

@@ -108,3 +108,37 @@ export const fetchUserFailure = error => {
     payload: { error }
   };
 };
+export const signUserRequest = () => {
+  return {
+    type: "SIGN_USER_REQUEST"
+  };
+};
+
+export const signUserSuccess = user => {
+  return {
+    type: "SIGN_USER_SUCCESS",
+    payload: { user }
+  };
+};
+
+export const signUserFailure = error => {
+  return {
+    type: "SIGN_USER_FAILURE",
+    payload: { error }
+  };
+};
+export const openLogin = () => {
+  return {
+    type: "OPEN_LOGIN",
+  }
+}
+export const openSignup = () => {
+  return {
+    type: "OPEN_SIGNUP",
+  }
+}
+export const closeModal = () => {
+  return {
+    type: "CLOSE_MODAL",
+  }
+}

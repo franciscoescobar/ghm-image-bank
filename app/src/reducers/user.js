@@ -1,5 +1,9 @@
 const INITIAL_STATE = {
   user: {},
+  modal: {
+    show: false,
+    login: true
+  },
   userLoading: false,
   error: null
 };
@@ -19,6 +23,10 @@ const userReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         user,
+        modal: {
+          ...state.modal,
+          show: false,
+        },
         userLoading: false
       };
     }
@@ -29,7 +37,73 @@ const userReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         error,
+        modal: {
+          ...state.modal,
+          show: false,
+        },
         userLoading: false
+      };
+    }
+
+    case "SIGN_USER_REQUEST": {
+      return {
+        ...state,
+        userLoading: true
+      };
+    }
+
+    case "SIGN_USER_SUCCESS": {
+      const { user } = action.payload;
+
+      return {
+        ...state,
+        user,
+        modal: {
+          ...state.modal,
+          show: false,
+        },
+        userLoading: false
+      };
+    }
+
+    case "SIGN_USER_FAILURE": {
+      const { error } = action.payload;
+
+      return {
+        ...state,
+        error,
+        modal: {
+          ...state.modal,
+          show: false,
+        },
+        userLoading: false
+      };
+    }
+    case "OPEN_LOGIN" : {
+      return {
+        ...state,
+        modal: {
+          show: true,
+          login: true
+        },
+      };
+    }
+    case "OPEN_SIGNUP" : {
+      return {
+        ...state,
+        modal: {
+          show: true,
+          login: false
+        },
+      };
+    }
+    case "CLOSE_MODAL" : {
+      return {
+        ...state,
+        modal: {
+          ...state.modal,
+          show: false,
+        },
       };
     }
     default: {

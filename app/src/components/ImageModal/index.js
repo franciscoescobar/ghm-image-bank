@@ -34,6 +34,7 @@ const ImageModal = ({ show, onClose, title, image, action }) => {
     event.preventDefault();
     const jsonTags = JSON.stringify(selectedOptions);
     let formData = new FormData();
+    if(file)
     formData.append('image', file, file.name);
     formData.append('name', name);
     formData.append('tags', jsonTags);
