@@ -17,6 +17,7 @@ export const getUserRequest = (formData) => {
       dispatch(fetchUserSuccess(user));
     } catch (error) {
       dispatch(fetchUserFailure(error.message));
+      console.log(error);
     }
   };
 };
@@ -27,7 +28,6 @@ export const signUser = (formData) => {
     try {
       dispatch(signUserRequest());
       const user = await api.signUser(formData);
-      console.log(user);
       dispatch(signUserSuccess(user));
     } catch (error) {
       dispatch(signUserFailure(error.message));

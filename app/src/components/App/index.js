@@ -14,7 +14,7 @@ function App() {
   useEffect(() => {
     getProductsRequest()(dispatch);
     getCategoriesRequest()(dispatch);
-  }, []);
+  }, [dispatch]);
   return (
     <div>
       <Header />

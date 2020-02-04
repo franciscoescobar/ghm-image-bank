@@ -7,7 +7,7 @@ const ColumnImage = ({ image, handleImageClick }) => (
     }}
     loading="lazy"
     src={image ? image.src : ""}
-    alt={image ? image.alt : ""}
+    alt={image ? image.name : ""}
   />
 );
 

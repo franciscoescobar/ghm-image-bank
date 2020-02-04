@@ -21,7 +21,7 @@ const ImageModal = ({ show, onClose, title, image, action }) => {
       setName(image.name);
       image.size = "3MB";
     }
-  }, [show])
+  }, [show,image])
 
   const onImageLoad = event => {
     setFilePreview(URL.createObjectURL(event.target.files[0]));
@@ -48,7 +48,7 @@ const ImageModal = ({ show, onClose, title, image, action }) => {
         <Modal large onClose={onClose} title={title}>
           <Wrapper>
             {image || filePreview ?
-              <img src={image ? image.src : filePreview} alt="selected-image" />
+              <img src={image ? image.src : filePreview} alt="selected" />
             :
             "" 
             }
