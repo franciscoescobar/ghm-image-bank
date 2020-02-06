@@ -22,7 +22,7 @@ const Categories = () => {
       <CategoriesHeader>
         <Title>Categories</Title>
         {
-          user.login ? 
+          user.role === "admin" ? 
           <AddButton onClick={toggleModal}>
           <i className="fas fa-plus"></i>
           </AddButton> : ""

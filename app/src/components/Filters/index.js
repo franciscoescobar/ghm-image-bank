@@ -39,7 +39,7 @@ const Filters = ({ filters }) => {
         );
       })}
         {
-          user.login ? 
+          user.role === "admin" ? 
           <AddButton onClick={onImageClick}>
             <i className="fas fa-plus"></i>
           </AddButton> : ""
