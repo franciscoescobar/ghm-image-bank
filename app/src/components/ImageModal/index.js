@@ -8,8 +8,8 @@ import { postProductRequest } from '../../thunks/images';
 const ImageModal = ({ show, onClose, title, image, action }) => {
   
   const categories = useSelector(state => state.categoriesReducer.categories);
+  const user = useSelector(state => state.userReducer.user);
   const options = categories ? categories.map(category => {category.label = category.name;category.value = category._id; return category;}) : "";
-
   const [file, setFile] = useState("");
   const [name, setName] = useState("");
   const [selectedOptions, setSelectedOptions] = useState([]);
@@ -38,6 +38,7 @@ const ImageModal = ({ show, onClose, title, image, action }) => {
     formData.append('image', file, file.name);
     formData.append('name', name);
     formData.append('tags', jsonTags);
+    formData.append('userId', user.userId);
     postProductRequest(formData)(dispatch);
     onClose();
   }

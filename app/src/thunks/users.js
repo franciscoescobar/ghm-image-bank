@@ -13,7 +13,6 @@ export const getUserRequest = (formData) => {
     try {
       dispatch(fetchUserRequest());
       const user = await api.getUser(formData);
-      console.log(user);
       dispatch(fetchUserSuccess(user));
     } catch (error) {
       dispatch(fetchUserFailure(error.message));
