@@ -11,6 +11,7 @@ const Images = () => {
     800: 2,
     500: 1
   };
+
   const [showModal, setShowModal] = useState(false);
   const [hasMoreImages, setHasMoreImages] = useState(true);
   const [clickedImage, setClickedImage] = useState({});
@@ -26,7 +27,7 @@ const Images = () => {
   const fetchData = () => {
     setHasMoreImages(false);
   };
-
+  
   return (
     <Container>
       <InfiniteScroll

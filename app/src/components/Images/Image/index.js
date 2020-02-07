@@ -6,7 +6,7 @@ const ColumnImage = ({ image, handleImageClick }) => (
       handleImageClick(image);
     }}
     loading="lazy"
-    src={image ? image.src : ""}
+    src={image ? image.signedLowSrc : ""}
     alt={image ? image.name : ""}
   />
 );
