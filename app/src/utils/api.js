@@ -56,6 +56,18 @@ const api = {
     const posts = images.posts;
     return posts;
   },
+  getFilteredPosts: async (formData) => {
+    const postsResponse = await fetch(baseUrl + "posts", { 
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(formData)
+    });
+    const images = await postsResponse.json();
+    const posts = images.posts;
+    return posts
+  },
   postPost: async (formData) => {
     try {
       const postResponse = await fetch(baseUrl + "post", { 
@@ -81,7 +93,7 @@ const api = {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({name: formData})
+      body: JSON.stringify(formData)
     });
     const data = await categoryResponse.json();
     const category = data.category;

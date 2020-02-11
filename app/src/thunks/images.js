@@ -20,6 +20,20 @@ export const getProductsRequest = () => {
     }
   };
 };
+
+export const getProductsFilteredRequest = (formData) => {
+  return async function(dispatch) {
+    try {
+      dispatch(fetchPostsRequest());
+      const posts = await api.getFilteredPosts(formData);
+
+      dispatch(fetchPostsSuccess(posts));
+    } catch (error) {
+      dispatch(fetchPostsFailure(error.message));
+    }
+  };
+};
+
 export const postProductRequest = (formData) => {
   return async function(dispatch) {
     try {

@@ -21,15 +21,16 @@ export const getCategoriesRequest = () => {
   };
 };
 export const postCategoriesRequest = (formData) => {
-  return async function(dispatch) {
+    return async function(dispatch) {
     try {
       dispatch(postCategoryRequest());
-      console.log(formData);
       const category = await api.postCategory(formData);
-      console.log(category);
       dispatch(postCategorySuccess(category));
     } catch (error) {
       dispatch(postCategoryFailure(error.message));
     }
   };
 };
+export const updateCategories = () => {
+  
+}

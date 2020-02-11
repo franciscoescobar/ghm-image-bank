@@ -6,14 +6,16 @@ import { useSelector, useDispatch } from 'react-redux';
 import { postCategoriesRequest } from '../../thunks/categories';
 import { getCategoriesRequest } from '../../thunks/categories';
 const CategoryModal = ({ show, title, onClose }) => {
-
+  
   const categories = useSelector(state => state.categoriesReducer.categories);
   const dispatch = useDispatch();
-
-  const [category, setCategory] = useState("");
-
+  
+  const [category, setCategory] = useState({
+    name: "",
+    selected: false
+  });
   const onInputChange = (event) => {
-    setCategory(event.target.value);
+    setCategory({...category, name: event.target.value});
   }
   const onFormSubmit = async (event) => {
     event.preventDefault();
@@ -25,18 +27,18 @@ const CategoryModal = ({ show, title, onClose }) => {
     {show ? (
       <Modal extralarge title={title} onClose={onClose}>
         <Wrapper>
-          {categories ?categories.map((category, i) => {
+          {categories ? categories.map((c, i) => {
             return (
               <Category
+                category={c}
+                modal={true}
                 key={i}
-                text={category.name}
-                selected={category.selected}
               />
             );
           }) : ""}
         </Wrapper>
         <FormWrapper onSubmit={onFormSubmit}>
-          <input type="text" placeholder="Ciudades, Naturaleza..." onChange={onInputChange} value={category} />
+          <input name="category" type="text" placeholder="Ciudades, Naturaleza..." onChange={onInputChange} value={category.name} />
           <button type="submit">Submit</button>
         </FormWrapper>
       </Modal>

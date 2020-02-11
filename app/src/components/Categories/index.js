@@ -34,8 +34,7 @@ const Categories = () => {
           return (
             <Category
               key={i}
-              text={category.name}
-              selected={category.selected}
+              category={category}
             />
           );
         }) : ""}

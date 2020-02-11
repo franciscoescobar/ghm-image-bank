@@ -1,5 +1,5 @@
 const INITIAL_STATE = {
-    cateogories: [],
+    categories: [],
     loading: false,
     error: null,
   };
@@ -42,7 +42,6 @@ const INITIAL_STATE = {
       case "POST_CATEGORY_SUCCESS": {
         const { category } = action.payload;
         const newCategories =  [category ,...state.categories];
-        console.log(category);
         return {
             ...state,
             posts: newCategories,
@@ -58,6 +57,14 @@ const INITIAL_STATE = {
           error,
           loading: false
         };
+      }
+
+      case "UPDATE_CATEGORY" : {
+        const { category } = action.payload;
+        return {
+          ...state,
+          categories: [...state.categories, category]
+        }
       }
 
       default: {

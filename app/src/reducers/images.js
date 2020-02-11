@@ -61,55 +61,6 @@ const postsReducer = (state = INITIAL_STATE, action) => {
       };
     }
 
-    case "SORT_PRICE": {
-      const newPosts = state.posts.sort((a, b) => {
-        if (a.cost < b.cost) {
-          return 1;
-        }
-        if (a.cost > b.cost) {
-          return -1;
-        }
-        return 0;
-      });
-
-      return {
-        ...state,
-        posts: newPosts,
-        filters: 2
-      };
-    }
-    case "SORT_POPULAR": {
-      const newPosts = state.posts.sort((a, b) => {
-        if (a.cost > b.cost) {
-          return 1;
-        }
-        if (a.cost < b.cost) {
-          return -1;
-        }
-        return 0;
-      });
-      return {
-        ...state,
-        posts: newPosts,
-        filters: 1
-      };
-    }
-    case "SORT_RECENT": {
-      const newPosts = state.posts.sort((a, b) => {
-        if (a.name > b.name) {
-          return 1;
-        }
-        if (a.name < b.name) {
-          return -1;
-        }
-        return 0;
-      });
-      return {
-        ...state,
-        posts: newPosts,
-        filters: 0
-      };
-    }
     default: {
       return state;
     }

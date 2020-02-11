@@ -1,18 +1,3 @@
-export const sortPopular = () => {
-  return {
-    type: "SORT_POPULAR"
-  };
-};
-export const sortPrice = () => {
-  return {
-    type: "SORT_PRICE"
-  };
-};
-export const sortRecent = () => {
-  return {
-    type: "SORT_RECENT"
-  };
-};
 export const fetchCategoriesRequest = () => {
   return {
     type: "FETCH_CATEGORIES_REQUEST"
@@ -140,5 +125,11 @@ export const openSignup = () => {
 export const closeModal = () => {
   return {
     type: "CLOSE_MODAL",
+  }
+}
+export const updateCategory = category => {
+  return {
+    type: "UPDATE_CATEGORY",
+    payload: { category }
   }
 }
