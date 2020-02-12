@@ -5,7 +5,13 @@ import {
     fetchCategoriesFailure,
     postCategoryRequest,
     postCategorySuccess,
-    postCategoryFailure
+    postCategoryFailure,
+    deleteCategoryRequest,
+    deleteCategorySuccess,
+    deleteCategoryFailure,
+    editCategoryRequest,
+    editCategorySuccess,
+    editCategoryFailure
 } from "../actions";
 
 export const getCategoriesRequest = () => {
@@ -21,7 +27,7 @@ export const getCategoriesRequest = () => {
   };
 };
 export const postCategoriesRequest = (formData) => {
-    return async function(dispatch) {
+  return async function(dispatch) {
     try {
       dispatch(postCategoryRequest());
       const category = await api.postCategory(formData);
@@ -31,6 +37,28 @@ export const postCategoriesRequest = (formData) => {
     }
   };
 };
-export const updateCategories = () => {
-  
+export const deleteCategory = () => {
+  return async function(dispatch) {
+    try {
+      dispatch(deleteCategoryRequest());
+      const category = await api.deleteCategory();
+      dispatch(deleteCategorySuccess(category));
+    } catch (error) {
+      dispatch(deleteCategoryFailure(error.message));
+    }
+  };
+}
+export const editCategory = category => {
+  console.log(category);
+
+  return async function(dispatch) {
+    try {
+      dispatch(editCategoryRequest());
+      const editedCategory = await api.editCategory(category);
+      console.log(editedCategory);
+      dispatch(editCategorySuccess(editedCategory));
+    } catch (error) {
+      dispatch(editCategoryFailure(error.message));
+    }
+  };
 }

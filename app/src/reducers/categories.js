@@ -59,12 +59,57 @@ const INITIAL_STATE = {
         };
       }
 
-      case "UPDATE_CATEGORY" : {
-        const { category } = action.payload;
+      case "EDIT_CATEGORY_REQUEST": {
         return {
           ...state,
-          categories: [...state.categories, category]
-        }
+          loading: true
+        };
+      }
+  
+      case "EDIT_CATEGORY_SUCCESS": {
+        const { category } = action.payload;
+        const newCategories =  [category ,...state.categories];
+        return {
+            ...state,
+            posts: newCategories,
+            loading: false
+          };
+      }
+  
+      case "EDIT_CATEGORY_FAILURE": {
+        const { error } = action.payload;
+  
+        return {
+          ...state,
+          error,
+          loading: false
+        };
+      }
+      case "DELETE_CATEGORY_REQUEST": {
+        return {
+          ...state,
+          loading: true
+        };
+      }
+  
+      case "DELETE_CATEGORY_SUCCESS": {
+        const { category } = action.payload;
+        const newCategories =  [category ,...state.categories];
+        return {
+            ...state,
+            posts: newCategories,
+            loading: false
+          };
+      }
+  
+      case "DELETE_CATEGORY_FAILURE": {
+        const { error } = action.payload;
+  
+        return {
+          ...state,
+          error,
+          loading: false
+        };
       }
 
       default: {

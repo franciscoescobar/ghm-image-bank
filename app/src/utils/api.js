@@ -98,7 +98,29 @@ const api = {
     const data = await categoryResponse.json();
     const category = data.category;
     return category;
-  }
+  },
+  editCategory: async(categoryId) => {
+    const categoriesResponse = await fetch(baseUrl + `category/:${categoryId}`, { 
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+    const data = await categoriesResponse.json();
+    const categories = data.categories;
+    return categories;
+  },
+  deleteCategory: async(categoryId) => {
+    const categoriesResponse = await fetch(baseUrl + `category/:${categoryId}`, { 
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+    const data = await categoriesResponse.json();
+    const categories = data.categories;
+    return categories;
+  },
 };
 
 export default api;

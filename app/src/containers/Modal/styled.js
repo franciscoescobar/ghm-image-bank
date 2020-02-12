@@ -15,7 +15,10 @@ export const Container = styled.div`
       width: 80%;
     }
     @media only screen and (max-width: 800px) {
-      width: 90%;
+      margin: 25% auto;
+      width: 80%;
+      overflow: scroll;
+      max-height: 95%;
     }
   }
   .extralarge {
@@ -38,7 +41,7 @@ export const Wrapper = styled.div`
   @media only screen and (max-width: 800px) {
     margin: 18% auto;
   }
-  @media only screen and (max-width: 550px) {
+  @media only screen and (max-width: 750px) {
     margin: 25% auto;
     width: 80%;
     overflow: scroll;

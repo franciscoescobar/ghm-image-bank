@@ -127,9 +127,41 @@ export const closeModal = () => {
     type: "CLOSE_MODAL",
   }
 }
-export const updateCategory = category => {
+export const editCategoryRequest = () => {
   return {
-    type: "UPDATE_CATEGORY",
+    type: "EDIT_CATEGORY_REQUEST"
+  };
+};
+
+export const editCategorySuccess = category => {
+  return {
+    type: "EDIT_CATEGORY_SUCCESS",
     payload: { category }
-  }
-}
+  };
+};
+
+export const editCategoryFailure = error => {
+  return {
+    type: "EDIT_CATEGORY_FAILURE",
+    payload: { error }
+  };
+};
+export const deleteCategoryRequest = () => {
+  return {
+    type: "DELETE_CATEGORY_REQUEST"
+  };
+};
+
+export const deleteCategorySuccess = category => {
+  return {
+    type: "DELETE_CATEGORY_SUCCESS",
+    payload: { category }
+  };
+};
+
+export const deleteCategoryFailure = error => {
+  return {
+    type: "DELETE_CATEGORY_FAILURE",
+    payload: { error }
+  };
+};
