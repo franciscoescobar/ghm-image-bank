@@ -13,40 +13,40 @@ const fetchParams = (method, data = "") => {
 
 const apiHeaders = {
   "Content-Type": "application/json",
-  Accept: "application/json",
+  Accept: "application/json"
 };
 
 const api = {
-  getUser: async (formData) => {
-    const userResponse = await fetch(baseUrl + "login", { 
+  getUser: async formData => {
+    const userResponse = await fetch(baseUrl + "login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({email: formData.email, password: formData.password})
+      body: JSON.stringify({
+        email: formData.email,
+        password: formData.password
+      })
     });
     const user = await userResponse.json();
     return user;
   },
-  signUser: async (formData) => {
+  signUser: async formData => {
     try {
-      const userResponse = await fetch(baseUrl + "signup", { 
+      const userResponse = await fetch(baseUrl + "signup", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify(
-          {
-            email: formData.email, 
-            password: formData.password
-          }
-        )
+        body: JSON.stringify({
+          email: formData.email,
+          password: formData.password
+        })
       });
       const data = await userResponse.json();
       const user = data.user;
       return user;
-    }
-    catch (error) {
+    } catch (error) {
       console.log(error);
     }
   },
@@ -56,8 +56,8 @@ const api = {
     const posts = images.posts;
     return posts;
   },
-  getFilteredPosts: async (formData) => {
-    const postsResponse = await fetch(baseUrl + "posts", { 
+  getFilteredPosts: async formData => {
+    const postsResponse = await fetch(baseUrl + "posts", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json"
@@ -66,11 +66,11 @@ const api = {
     });
     const images = await postsResponse.json();
     const posts = images.posts;
-    return posts
+    return posts;
   },
-  postPost: async (formData) => {
+  postPost: async formData => {
     try {
-      const postResponse = await fetch(baseUrl + "post", { 
+      const postResponse = await fetch(baseUrl + "post", {
         method: "POST",
         body: formData
       });
@@ -81,14 +81,17 @@ const api = {
       console.log(error);
     }
   },
-  getCategories: async() => {
-    const categoriesResponse = await fetch(baseUrl + "category", fetchParams("GET"));
+  getCategories: async () => {
+    const categoriesResponse = await fetch(
+      baseUrl + "category",
+      fetchParams("GET")
+    );
     const data = await categoriesResponse.json();
     const categories = data.categories;
     return categories;
   },
-  postCategory: async(formData) => {
-    const categoryResponse = await fetch(baseUrl + "category", { 
+  postCategory: async formData => {
+    const categoryResponse = await fetch(baseUrl + "category", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -99,28 +102,34 @@ const api = {
     const category = data.category;
     return category;
   },
-  editCategory: async(categoryId) => {
-    const categoriesResponse = await fetch(baseUrl + `category/:${categoryId}`, { 
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json"
+  editCategory: async categoryId => {
+    const categoriesResponse = await fetch(
+      baseUrl + `category/:${categoryId}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json"
+        }
       }
-    });
+    );
     const data = await categoriesResponse.json();
     const categories = data.categories;
     return categories;
   },
-  deleteCategory: async(categoryId) => {
-    const categoriesResponse = await fetch(baseUrl + `category/:${categoryId}`, { 
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json"
+  deleteCategory: async categoryId => {
+    const categoriesResponse = await fetch(
+      baseUrl + `category/:${categoryId}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json"
+        }
       }
-    });
+    );
     const data = await categoriesResponse.json();
     const categories = data.categories;
     return categories;
-  },
+  }
 };
 
 export default api;

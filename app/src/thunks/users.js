@@ -8,7 +8,7 @@ import {
   signUserFailure
 } from "../actions";
 
-export const getUserRequest = (formData) => {
+export const getUserRequest = formData => {
   return async function(dispatch) {
     try {
       dispatch(fetchUserRequest());
@@ -21,13 +21,12 @@ export const getUserRequest = (formData) => {
   };
 };
 
-
-export const signUser = (formData) => {
+export const signUser = formData => {
   return async function(dispatch) {
     try {
       dispatch(signUserRequest());
       const user = await api.signUser(formData);
-      dispatch(signUserSuccess(user));
+      dispatch(signUserSuccess());
     } catch (error) {
       dispatch(signUserFailure(error.message));
     }
