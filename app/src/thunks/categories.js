@@ -37,12 +37,12 @@ export const postCategoriesRequest = (formData) => {
     }
   };
 };
-export const deleteCategory = () => {
+export const deleteCategory = category => {
   return async function(dispatch) {
     try {
       dispatch(deleteCategoryRequest());
-      const category = await api.deleteCategory();
-      dispatch(deleteCategorySuccess(category));
+      const deletedCategory = await api.deleteCategory(category);
+      dispatch(deleteCategorySuccess(deletedCategory));
     } catch (error) {
       dispatch(deleteCategoryFailure(error.message));
     }
@@ -54,9 +54,8 @@ export const editCategory = category => {
   return async function(dispatch) {
     try {
       dispatch(editCategoryRequest());
-      const editedCategory = await api.editCategory(category);
-      console.log(editedCategory);
-      dispatch(editCategorySuccess(editedCategory));
+      await api.editCategory(category);
+      dispatch(editCategorySuccess(category));
     } catch (error) {
       dispatch(editCategoryFailure(error.message));
     }

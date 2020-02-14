@@ -55,6 +55,25 @@ export const fetchPostsFailure = error => {
     payload: { error }
   };
 };
+export const fetchPostRequest = () => {
+  return {
+    type: "FETCH_POST_REQUEST"
+  };
+};
+
+export const fetchPostSuccess = post => {
+  return {
+    type: "FETCH_POST_SUCCESS",
+    payload: { post }
+  };
+};
+
+export const fetchPostFailure = error => {
+  return {
+    type: "FETCH_POST_FAILURE",
+    payload: { error }
+  };
+};
 export const postPostsRequest = () => {
   return {
     type: "POST_POSTS_REQUEST"

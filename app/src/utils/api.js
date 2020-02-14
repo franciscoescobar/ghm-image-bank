@@ -56,6 +56,12 @@ const api = {
     const posts = images.posts;
     return posts;
   },
+  getPost: async (postId) => {
+    const postResponse = await fetch(baseUrl + `post/${postId}`, fetchParams("GET"));
+    const images = await postResponse.json();
+    const post = images.post;
+    return post;
+  },
   getFilteredPosts: async formData => {
     const postsResponse = await fetch(baseUrl + "posts", {
       method: "PUT",
@@ -102,9 +108,9 @@ const api = {
     const category = data.category;
     return category;
   },
-  editCategory: async categoryId => {
+  editCategory: async category => {
     const categoriesResponse = await fetch(
-      baseUrl + `category/:${categoryId}`,
+      baseUrl + `category/${category.name}/${category._id}`,
       {
         method: "PATCH",
         headers: {
@@ -116,9 +122,9 @@ const api = {
     const categories = data.categories;
     return categories;
   },
-  deleteCategory: async categoryId => {
+  deleteCategory: async category => {
     const categoriesResponse = await fetch(
-      baseUrl + `category/:${categoryId}`,
+      baseUrl + `category/${category._id}`,
       {
         method: "DELETE",
         headers: {
@@ -126,6 +132,7 @@ const api = {
         }
       }
     );
+    console.log(categoriesResponse);
     const data = await categoriesResponse.json();
     const categories = data.categories;
     return categories;

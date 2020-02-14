@@ -25,7 +25,7 @@ export const signUser = formData => {
   return async function(dispatch) {
     try {
       dispatch(signUserRequest());
-      const user = await api.signUser(formData);
+      await api.signUser(formData);
       dispatch(signUserSuccess());
     } catch (error) {
       dispatch(signUserFailure(error.message));

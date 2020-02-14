@@ -68,12 +68,17 @@ const INITIAL_STATE = {
   
       case "EDIT_CATEGORY_SUCCESS": {
         const { category } = action.payload;
-        const newCategories =  [category ,...state.categories];
+        const categoryIndex = state.categories.findIndex(c => c._id === category._id);
+        const newCategories = [
+          ...state.categories.slice(0, categoryIndex),
+          category,
+          ...state.categories.slice(categoryIndex + 1 , state.categories.length)
+        ];
         return {
-            ...state,
-            posts: newCategories,
-            loading: false
-          };
+          ...state,
+          categories: newCategories,
+          loading: false
+        };
       }
   
       case "EDIT_CATEGORY_FAILURE": {

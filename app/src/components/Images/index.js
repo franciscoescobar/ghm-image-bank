@@ -4,20 +4,22 @@ import ImageModal from "../ImageModal";
 import Masonry from "react-masonry-css";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Container } from "./styled";
-import { useSelector } from 'react-redux';
+import { getProductRequest } from '../../thunks/images';
+import { useSelector, useDispatch } from 'react-redux';
 const Images = () => {
   const breakpointColumnsObj = {
     default: 3,
     800: 2,
     500: 1
   };
-
+  const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
   const [hasMoreImages, setHasMoreImages] = useState(true);
   const [clickedImage, setClickedImage] = useState({});
   const images = useSelector(state => state.imagesReducer.posts);
   
-  const onImageClick = image => {
+  const onImageClick = async image => {
+    await getProductRequest(image._id)(dispatch);
     setClickedImage(image);
     setShowModal(true);
   };
