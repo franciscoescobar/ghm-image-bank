@@ -11,17 +11,18 @@ import {
   postPostsSuccess,
 } from "../actions";
 
-export const getProductsRequest = () => {
+export const getProductsRequest = (page) => {
   return async function(dispatch) {
     try {
       dispatch(fetchPostsRequest());
-      const posts = await api.getPosts();
+      const posts = await api.getPosts(page);
       dispatch(fetchPostsSuccess(posts));
     } catch (error) {
       dispatch(fetchPostsFailure(error.message));
     }
   };
 };
+
 export const getProductRequest = (postId) => {
   return async function(dispatch) {
     try {

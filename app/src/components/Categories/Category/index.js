@@ -35,7 +35,6 @@ const Category = ({ category, modal }) => {
     if (modal) {
       const result = window.confirm("Are you sure you want to edit?");
       category.name = categoryName;
-      console.log(category);
       if (result) {
         editCategory(category)(dispatch);
         getCategoriesRequest()(dispatch);

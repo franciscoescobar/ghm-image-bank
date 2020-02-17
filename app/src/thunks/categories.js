@@ -49,7 +49,6 @@ export const deleteCategory = category => {
   };
 }
 export const editCategory = category => {
-  console.log(category);
 
   return async function(dispatch) {
     try {

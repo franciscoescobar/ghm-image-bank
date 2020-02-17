@@ -4,7 +4,7 @@ import ImageModal from "../ImageModal";
 import Masonry from "react-masonry-css";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Container } from "./styled";
-import { getProductRequest } from '../../thunks/images';
+import { getProductRequest, getProductsRequest } from '../../thunks/images';
 import { useSelector, useDispatch } from 'react-redux';
 const Images = () => {
   const breakpointColumnsObj = {
@@ -15,8 +15,9 @@ const Images = () => {
   const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
   const [hasMoreImages, setHasMoreImages] = useState(true);
+  const [page, setPage] = useState(1);
   const [clickedImage, setClickedImage] = useState({});
-  const images = useSelector(state => state.imagesReducer.posts);
+  const images = useSelector(state => state.imagesReducer);
   
   const onImageClick = async image => {
     await getProductRequest(image._id)(dispatch);
@@ -27,13 +28,16 @@ const Images = () => {
     setShowModal(false);
   };
   const fetchData = () => {
-    setHasMoreImages(false);
+    setPage(page + 1);
+    getProductsRequest(page)(dispatch);
+    if(images.totalItems && page >= Math.ceil((images.totalItems / 5))) {
+      setHasMoreImages(false);
+    }
   };
-  
   return (
     <Container>
       <InfiniteScroll
-        dataLength={images ? images.length : 0} //This is important field to render the next data
+        dataLength={images.totalItems ? images.totalItems : 0} //This is important field to render the next data
         next={fetchData}
         hasMore={hasMoreImages}
         loader={<h4>Loading...</h4>}
@@ -48,7 +52,7 @@ const Images = () => {
           className="my-masonry-grid"
           columnClassName="my-masonry-grid_column"
         >
-          {images ? images.map((image, i) => {
+          {images.posts ? images.posts.map((image, i) => {
             return (
               <Image handleImageClick={onImageClick} key={i} image={image} />
             );

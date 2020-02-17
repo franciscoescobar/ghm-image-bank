@@ -1,3 +1,5 @@
+import Category from "../components/Categories/Category";
+
 const baseUrl = "http://localhost:8080/";
 
 const fetchParams = (method, data = "") => {
@@ -50,10 +52,9 @@ const api = {
       console.log(error);
     }
   },
-  getPosts: async () => {
-    const postsResponse = await fetch(baseUrl + "posts", fetchParams("GET"));
-    const images = await postsResponse.json();
-    const posts = images.posts;
+  getPosts: async (page) => {
+    const postsResponse = await fetch(baseUrl + `posts/?page=${page}`, fetchParams("GET"));
+    const posts = await postsResponse.json();
     return posts;
   },
   getPost: async (postId) => {
@@ -109,7 +110,7 @@ const api = {
     return category;
   },
   editCategory: async category => {
-    const categoriesResponse = await fetch(
+    const categoryResponse = await fetch(
       baseUrl + `category/${category.name}/${category._id}`,
       {
         method: "PATCH",
@@ -118,7 +119,8 @@ const api = {
         }
       }
     );
-    const data = await categoriesResponse.json();
+    console.log(categoryResponse);
+    const data = await categoryResponse.json();
     const categories = data.categories;
     return categories;
   },

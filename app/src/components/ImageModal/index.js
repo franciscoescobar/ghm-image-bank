@@ -14,7 +14,7 @@ const ImageModal = ({ show, onClose, title, image, action }) => {
   
   const [file, setFile] = useState("");
   const [name, setName] = useState("");
-  const [size, setSize] = useState("3MB");
+  const [size, setSize] = useState("? MB");
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [filePreview, setFilePreview] = useState("");
   const imageIndex = images.findIndex(i => i._id === image._id);
@@ -24,6 +24,7 @@ const ImageModal = ({ show, onClose, title, image, action }) => {
     if(show && image) {
       setSelectedOptions(image.tags);
       setName(image.name);
+      setSize(`${image.size} MB`);
     }
 }, [show,image])
   const onImageLoad = event => {
@@ -78,10 +79,6 @@ const ImageModal = ({ show, onClose, title, image, action }) => {
                 disabled
                 value={size}
               />
-              <select>
-                <option>1024x720</option>
-                <option>1920x1080</option>
-              </select>
               <button type="submit">
                 Download
               </button>
@@ -120,16 +117,13 @@ const ImageModal = ({ show, onClose, title, image, action }) => {
                   <input
                     name="image-size"
                     type="text"
-                    value={image.size}
+                    value={size}
                   />
                 </>
               )}
 
               {action === "edit" ? (
-                <select>
-                  <option>1024x720</option>
-                  <option>1920x1080</option>
-                </select>
+                ""
               ) : (
                 <input id="image" name="image" type="file" className="custom-file-input" onChange={onImageLoad} />
               )}

@@ -2,7 +2,8 @@ const INITIAL_STATE = {
   posts: [],
   loading: false,
   error: null,
-  filters: 0
+  filters: 0,
+  totalItems: 0
 };
 
 const postsReducer = (state = INITIAL_STATE, action) => {
@@ -16,10 +17,18 @@ const postsReducer = (state = INITIAL_STATE, action) => {
 
     case "FETCH_POSTS_SUCCESS": {
       const { posts } = action.payload;
+      let newPosts;
+      if(state.posts.length > 0 && state.posts[0]._id === posts.posts[0]._id){
+        newPosts = posts.posts;
+      }
+      else {
+        newPosts = [...state.posts, ...posts.posts]
+      }
       return {
         ...state,
-        posts,
-        loading: false
+        posts: newPosts,
+        loading: false,
+        totalItems: posts.totalItems
       };
     }
 
