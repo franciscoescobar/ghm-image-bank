@@ -63,16 +63,15 @@ const api = {
     const post = images.post;
     return post;
   },
-  getFilteredPosts: async formData => {
-    const postsResponse = await fetch(baseUrl + "posts", {
+  getFilteredPosts: async (formData, page) => {
+    const postsResponse = await fetch(baseUrl + `posts/?page=${page}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(formData)
     });
-    const images = await postsResponse.json();
-    const posts = images.posts;
+    const posts = await postsResponse.json();
     return posts;
   },
   postPost: async formData => {
@@ -119,7 +118,6 @@ const api = {
         }
       }
     );
-    console.log(categoryResponse);
     const data = await categoryResponse.json();
     const categories = data.categories;
     return categories;
@@ -134,7 +132,6 @@ const api = {
         }
       }
     );
-    console.log(categoriesResponse);
     const data = await categoriesResponse.json();
     const categories = data.categories;
     return categories;

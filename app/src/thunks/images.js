@@ -34,12 +34,12 @@ export const getProductRequest = (postId) => {
     }
   };
 }
-export const getProductsFilteredRequest = (formData) => {
+export const getProductsFilteredRequest = (formData, page) => {
   return async function(dispatch) {
     try {
       dispatch(fetchPostsRequest());
-      const posts = await api.getFilteredPosts(formData);
-
+      const posts = await api.getFilteredPosts(formData, page);
+      console.log(posts);
       dispatch(fetchPostsSuccess(posts));
     } catch (error) {
       dispatch(fetchPostsFailure(error.message));

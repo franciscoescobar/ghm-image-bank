@@ -3,11 +3,22 @@ const INITIAL_STATE = {
   loading: false,
   error: null,
   filters: 0,
-  totalItems: 0
+  totalItems: 0,
+  page: 1
 };
 
 const postsReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
+
+    case "NEXT_PAGE" : {
+      const { page } = action.payload;
+
+      return {
+        ...state,
+        page: page
+      }
+    }
+
     case "FETCH_POSTS_REQUEST": {
       return {
         ...state,
@@ -18,7 +29,7 @@ const postsReducer = (state = INITIAL_STATE, action) => {
     case "FETCH_POSTS_SUCCESS": {
       const { posts } = action.payload;
       let newPosts;
-      if(state.posts.length > 0 && state.posts[0]._id === posts.posts[0]._id){
+      if(Number(posts.page) === 1 || posts.page === undefined){
         newPosts = posts.posts;
       }
       else {
@@ -28,7 +39,8 @@ const postsReducer = (state = INITIAL_STATE, action) => {
         ...state,
         posts: newPosts,
         loading: false,
-        totalItems: posts.totalItems
+        totalItems: posts.totalItems,
+        page: posts.page
       };
     }
 

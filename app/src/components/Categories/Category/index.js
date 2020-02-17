@@ -15,7 +15,7 @@ const Category = ({ category, modal }) => {
       setCategorySelected(!categorySelected);
       category.selected = !category.selected;
       const filteredCategories = categories.filter(c => c.selected === true);
-      getProductsFilteredRequest(filteredCategories)(dispatch);
+      getProductsFilteredRequest(filteredCategories, 1)(dispatch);
     }
   };
 

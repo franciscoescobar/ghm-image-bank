@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "./Image";
 import ImageModal from "../ImageModal";
 import Masonry from "react-masonry-css";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Container } from "./styled";
-import { getProductRequest, getProductsRequest } from '../../thunks/images';
+import { getProductRequest, getProductsRequest, getProductsFilteredRequest } from '../../thunks/images';
 import { useSelector, useDispatch } from 'react-redux';
 const Images = () => {
   const breakpointColumnsObj = {
@@ -15,10 +15,10 @@ const Images = () => {
   const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
   const [hasMoreImages, setHasMoreImages] = useState(true);
-  const [page, setPage] = useState(1);
   const [clickedImage, setClickedImage] = useState({});
   const images = useSelector(state => state.imagesReducer);
-  
+  const categories = useSelector(state => state.categoriesReducer.categories);
+
   const onImageClick = async image => {
     await getProductRequest(image._id)(dispatch);
     setClickedImage(image);
@@ -28,12 +28,24 @@ const Images = () => {
     setShowModal(false);
   };
   const fetchData = () => {
-    setPage(page + 1);
-    getProductsRequest(page)(dispatch);
-    if(images.totalItems && page >= Math.ceil((images.totalItems / 5))) {
-      setHasMoreImages(false);
+    const filteredCategories = categories.filter(c => c.selected === true);
+    if(filteredCategories.length > 0 ){
+      getProductsFilteredRequest(filteredCategories, Number(images.page) + 1)(dispatch);
+    }
+    else{
+      getProductsRequest(Number(images.page) + 1)(dispatch);
     }
   };
+
+  useEffect(() => {
+    if(Number(images.page) <= Math.ceil(images.totalItems / 5)){
+      setHasMoreImages(true);
+    }
+    if(Number(images.page) >= Math.ceil(images.totalItems / 5)){
+      setHasMoreImages(false);
+    }
+  }, [Number(images.page)])
+
   return (
     <Container>
       <InfiniteScroll
