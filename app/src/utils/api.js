@@ -1,5 +1,3 @@
-import Category from "../components/Categories/Category";
-
 const baseUrl = "http://localhost:8080/";
 
 const fetchParams = (method, data = "") => {

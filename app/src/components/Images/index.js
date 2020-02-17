@@ -30,28 +30,29 @@ const Images = () => {
   const fetchData = () => {
     const filteredCategories = categories.filter(c => c.selected === true);
     if(filteredCategories.length > 0 ){
-      getProductsFilteredRequest(filteredCategories, Number(images.page) + 1)(dispatch);
+      getProductsFilteredRequest(filteredCategories, images.page + 1)(dispatch);
     }
     else{
-      getProductsRequest(Number(images.page) + 1)(dispatch);
+      getProductsRequest(images.page + 1)(dispatch);
     }
   };
 
   useEffect(() => {
-    if(Number(images.page) <= Math.ceil(images.totalItems / 5)){
+    if(images.page <= Math.ceil(images.totalItems / 5)){
       setHasMoreImages(true);
     }
-    if(Number(images.page) >= Math.ceil(images.totalItems / 5)){
+    if(images.page >= Math.ceil(images.totalItems / 5)){
       setHasMoreImages(false);
     }
-  }, [Number(images.page)])
+  }, [images.page, images.totalItems])
 
   return (
     <Container>
       <InfiniteScroll
-        dataLength={images.totalItems ? images.totalItems : 0} //This is important field to render the next data
+        dataLength={images.posts.length} //This is important field to render the next data
         next={fetchData}
         hasMore={hasMoreImages}
+        scrollThreshold="200px"
         loader={<h4>Loading...</h4>}
         endMessage={
           <p style={{ textAlign: "center" }}>
