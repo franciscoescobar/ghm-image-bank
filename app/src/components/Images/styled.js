@@ -23,3 +23,8 @@ export const Container = styled.div`
     margin-bottom: 30px;
   }
 `;
+export const LoaderWrapper = styled.div`
+  display:flex;
+  flex-wrap: wrap;
+
+`;

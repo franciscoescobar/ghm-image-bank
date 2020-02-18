@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Category from "./Category";
+import Category from "../Category";
 import {
   Container,
   Wrapper,
@@ -8,9 +8,12 @@ import {
   CategoriesHeader
 } from "./styled";
 import CategoryModal from "../CategoryModal";
+import CategoriesLoader from "../CategoriesLoader";
 import { useSelector } from 'react-redux';
+import { LoaderWrapper } from "../Images/styled";
 
 const Categories = () => {
+  const loading = useSelector(state => state.categoriesReducer.loading);
   const categories = useSelector(state => state.categoriesReducer.categories);
   const user = useSelector(state => state.userReducer.user);
   const [show, setShow] = useState(false);
@@ -30,14 +33,41 @@ const Categories = () => {
         
       </CategoriesHeader>
       <Wrapper>
-        {categories ? categories.map((category, i) => {
+      {loading ? 
+        <LoaderWrapper>
+          <CategoriesLoader />
+          <CategoriesLoader />
+          <CategoriesLoader />
+          <CategoriesLoader />
+          <CategoriesLoader />
+          <CategoriesLoader />
+          <CategoriesLoader />
+          <CategoriesLoader />
+          <CategoriesLoader />
+          <CategoriesLoader />
+          <CategoriesLoader />
+          <CategoriesLoader />
+          <CategoriesLoader />
+          <CategoriesLoader />
+          <CategoriesLoader />
+          <CategoriesLoader />
+          <CategoriesLoader />
+          <CategoriesLoader />
+          <CategoriesLoader />
+          <CategoriesLoader />
+          <CategoriesLoader />
+          <CategoriesLoader />
+        </LoaderWrapper>
+        :
+        categories ? categories.map((category, i) => {
           return (
             <Category
               key={i}
               category={category}
             />
           );
-        }) : ""}
+        }) : ""
+      }
       </Wrapper>
       <CategoryModal
         show={show}

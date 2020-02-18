@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import { Wrapper } from "./styled";
-import { deleteCategory, editCategory, getCategoriesRequest } from "../../../thunks/categories";
-import { getProductsFilteredRequest } from "../../../thunks/images";
+import { deleteCategory, editCategory, getCategoriesRequest } from "../../thunks/categories";
+import { getProductsFilteredRequest } from "../../thunks/images";
 import { useSelector, useDispatch } from "react-redux";
 
 const Category = ({ category, modal }) => {

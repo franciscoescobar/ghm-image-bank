@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Modal from "../../containers/Modal";
 import { Wrapper, FormWrapper } from "./styled";
-import Category from "../Categories/Category";
+import Category from "../Category";
 import { useSelector, useDispatch } from 'react-redux';
 import { postCategoriesRequest } from '../../thunks/categories';
 import { getCategoriesRequest } from '../../thunks/categories';

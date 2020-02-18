@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
-import Image from "./Image";
+import Image from "../Image";
 import ImageModal from "../ImageModal";
+
 import Masonry from "react-masonry-css";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { Container } from "./styled";
+import ImageLoader from '../ImageLoader';
+
+import { Container, LoaderWrapper } from "./styled";
 import { getProductRequest, getProductsRequest, getProductsFilteredRequest } from '../../thunks/images';
 import { useSelector, useDispatch } from 'react-redux';
+
 const Images = () => {
   const breakpointColumnsObj = {
     default: 3,
@@ -49,8 +53,18 @@ const Images = () => {
 
   return (
     <Container>
+    {images.loading ?
+          <LoaderWrapper>
+            <ImageLoader />
+            <ImageLoader />
+            <ImageLoader />
+            <ImageLoader />
+            <ImageLoader />
+            <ImageLoader />
+          </LoaderWrapper>
+        :
       <InfiniteScroll
-        dataLength={images.posts.length || 4} //This is important field to render the next data
+        dataLength={images.posts.length || 10} //This is important field to render the next data
         next={fetchData}
         hasMore={hasMoreImages}
         scrollThreshold="200px"
@@ -73,6 +87,7 @@ const Images = () => {
           }) : ""}
         </Masonry>
       </InfiniteScroll>
+    }
       <ImageModal
         action={user.login ? "edit" : "view"}
         title="Imagen"
