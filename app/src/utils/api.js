@@ -85,6 +85,19 @@ const api = {
       console.log(error);
     }
   },
+  editPost: async (formData, id) => {
+    try {
+      const postResponse = await fetch(baseUrl + `post/${id}`, {
+        method: "PATCH",
+        body: formData
+      });
+      const images = await postResponse.json();
+      const post = images.doc;
+      return post;
+    } catch (error) {
+      console.log(error);
+    }
+  },
   getCategories: async () => {
     const categoriesResponse = await fetch(
       baseUrl + "category",

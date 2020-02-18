@@ -95,7 +95,7 @@ const postsReducer = (state = INITIAL_STATE, action) => {
 
     case "POST_POSTS_SUCCESS": {
       const { post } = action.payload;
-      const newPosts =  [post ,...state.posts];
+      const newPosts =  [post , ...state.posts];
 
       return {
         ...state,
@@ -105,6 +105,39 @@ const postsReducer = (state = INITIAL_STATE, action) => {
     }
 
     case "POST_POSTS_FAILURE": {
+      const { error } = action.payload;
+
+      return {
+        ...state,
+        error,
+        loading: false
+      };
+    }
+
+    case "EDIT_POST_REQUEST": {
+      return {
+        ...state,
+        loading: true
+      };
+    }
+
+    case "EDIT_POST_SUCCESS": {
+      const { post } = action.payload;
+      const postIndex = state.posts.findIndex(p => p._id === post._id);
+      const newPosts = [
+        ...state.posts.slice(0, postIndex),
+        post,
+        ...state.posts.slice(postIndex + 1 , state.posts.length)
+      ];
+
+      return {
+        ...state,
+        posts: newPosts,
+        loading: false
+      };
+    }
+
+    case "EDIT_POST_FAILURE": {
       const { error } = action.payload;
 
       return {

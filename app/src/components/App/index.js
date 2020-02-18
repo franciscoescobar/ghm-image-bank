@@ -12,7 +12,7 @@ import { getCategoriesRequest } from '../../thunks/categories';
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
-    getProductsRequest()(dispatch);
+    getProductsRequest(1)(dispatch);
     getCategoriesRequest()(dispatch);
   }, [dispatch]);
   return (

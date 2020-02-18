@@ -17,6 +17,7 @@ const Images = () => {
   const [hasMoreImages, setHasMoreImages] = useState(true);
   const [clickedImage, setClickedImage] = useState({});
   const images = useSelector(state => state.imagesReducer);
+  const user = useSelector(state => state.userReducer.user);
   const categories = useSelector(state => state.categoriesReducer.categories);
 
   const onImageClick = async image => {
@@ -49,7 +50,7 @@ const Images = () => {
   return (
     <Container>
       <InfiniteScroll
-        dataLength={images.posts.length} //This is important field to render the next data
+        dataLength={images.posts.length || 4} //This is important field to render the next data
         next={fetchData}
         hasMore={hasMoreImages}
         scrollThreshold="200px"
@@ -73,7 +74,7 @@ const Images = () => {
         </Masonry>
       </InfiniteScroll>
       <ImageModal
-        action={"view"}
+        action={user.login ? "edit" : "view"}
         title="Imagen"
         show={showModal}
         onClose={handleClose}

@@ -3,7 +3,7 @@ import MultiSelect from "@khanacademy/react-multi-select";
 import Modal from "../../containers/Modal";
 import { Wrapper, Data } from "./styled";
 import { useSelector, useDispatch } from 'react-redux';
-import { postProductRequest } from '../../thunks/images';
+import { postProductRequest, editProductRequest } from '../../thunks/images';
 
 const ImageModal = ({ show, onClose, title, image, action }) => {
   
@@ -12,10 +12,10 @@ const ImageModal = ({ show, onClose, title, image, action }) => {
   const user = useSelector(state => state.userReducer.user);
   const options = categories ? categories.map(category => {category.label = category.name;category.value = category._id; return category;}) : "";
   
-  const [file, setFile] = useState("");
-  const [name, setName] = useState("");
-  const [size, setSize] = useState("? MB");
-  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [file, setFile] = useState(image.file || "");
+  const [name, setName] = useState(image.name || "");
+  const [size, setSize] = useState(image.size || "");
+  const [selectedOptions, setSelectedOptions] = useState(image.tags || []);
   const [filePreview, setFilePreview] = useState("");
   const imageIndex = images.findIndex(i => i._id === image._id);
 
@@ -34,7 +34,7 @@ const ImageModal = ({ show, onClose, title, image, action }) => {
   const onInputChange = (event) => {
     setName(event.target.value);
   }
-  const onImageSubmit = event => {
+  const onImageSubmit = async event => {
     event.preventDefault();
     const jsonTags = JSON.stringify(selectedOptions);
     let formData = new FormData();
@@ -43,8 +43,17 @@ const ImageModal = ({ show, onClose, title, image, action }) => {
     formData.append('name', name);
     formData.append('tags', jsonTags);
     formData.append('userId', user.userId);
-    postProductRequest(formData)(dispatch);
-    onClose();
+    if(action === "view") {
+
+    }
+    else if (action === "edit") {
+      await editProductRequest(formData, image._id)(dispatch);
+      onClose();
+    }
+    else {
+      postProductRequest(formData)(dispatch);
+      onClose();
+    }
   }
 
   return (
@@ -87,7 +96,7 @@ const ImageModal = ({ show, onClose, title, image, action }) => {
           :
           <Wrapper>
             {image || filePreview ?
-              <img src={image ? image.signedWatermarkSrc : filePreview} alt="selected" />
+              <img src={filePreview ? filePreview : images[imageIndex].signedSrc} alt="selected" />
             :
             "" 
             }
@@ -118,15 +127,11 @@ const ImageModal = ({ show, onClose, title, image, action }) => {
                     name="image-size"
                     type="text"
                     value={size}
+                    disabled
                   />
                 </>
               )}
-
-              {action === "edit" ? (
-                ""
-              ) : (
-                <input id="image" name="image" type="file" className="custom-file-input" onChange={onImageLoad} />
-              )}
+              <input id="image" name="image" type="file" className="custom-file-input" onChange={onImageLoad} />
               <button type="submit">
                 {action === "edit"
                   ? "Edit"

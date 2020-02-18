@@ -9,6 +9,9 @@ import {
   postPostsFailure,
   postPostsRequest,
   postPostsSuccess,
+  editPostFailure,
+  editPostRequest,
+  editPostSuccess
 } from "../actions";
 
 export const getProductsRequest = (page) => {
@@ -39,7 +42,6 @@ export const getProductsFilteredRequest = (formData, page) => {
     try {
       dispatch(fetchPostsRequest());
       const posts = await api.getFilteredPosts(formData, page);
-      console.log(posts);
       dispatch(fetchPostsSuccess(posts));
     } catch (error) {
       dispatch(fetchPostsFailure(error.message));
@@ -58,3 +60,15 @@ export const postProductRequest = (formData) => {
     }
   };
 };
+
+export const editProductRequest = (formData, id) => {
+  return async function(dispatch) {
+    try {
+      dispatch(editPostRequest());
+      const post = await api.editPost(formData, id);
+      dispatch(editPostSuccess(post));
+    } catch (error) {
+      dispatch(editPostFailure(error.message));
+    }
+  };
+}
