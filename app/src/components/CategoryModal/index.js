@@ -20,7 +20,7 @@ const CategoryModal = ({ show, title, onClose }) => {
   const onFormSubmit = async (event) => {
     event.preventDefault();
     if(category.name.length > 3){
-      postCategoriesRequest(category)(dispatch);
+      await postCategoriesRequest(category)(dispatch);
       getCategoriesRequest()(dispatch);
     }
   }
