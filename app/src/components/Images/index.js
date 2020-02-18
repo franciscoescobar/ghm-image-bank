@@ -61,6 +61,8 @@ const Images = () => {
             <ImageLoader />
             <ImageLoader />
             <ImageLoader />
+            <ImageLoader />
+            <ImageLoader />
           </LoaderWrapper>
         :
       <InfiniteScroll

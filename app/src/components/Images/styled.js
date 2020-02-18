@@ -26,5 +26,4 @@ export const Container = styled.div`
 export const LoaderWrapper = styled.div`
   display:flex;
   flex-wrap: wrap;
-
 `;

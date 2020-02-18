@@ -6,11 +6,11 @@ const CategoryLoader = () => (
     speed={2}
     width={100}
     height={30}
-    viewBox="0 0 100 25"
+    viewBox="0 0 70 25"
     backgroundColor="#f3f3f3"
     foregroundColor="#ecebeb"
   >
-     <rect x="40" y="5" rx="0" ry="0" width="75" height="15" /> 
+     <rect x="0" y="5" rx="0" ry="0" width="75" height="15" /> 
   </ContentLoader>
 )
 
