@@ -203,3 +203,22 @@ export const editPostFailure = error => {
     payload: { error }
   };
 };
+export const deletePostRequest = () => {
+  return {
+    type: "DELETE_POST_REQUEST"
+  };
+};
+
+export const deletePostSuccess = (id) => {
+  return {
+    type: "DELETE_POST_SUCCESS",
+    payload: { id }
+  };
+};
+
+export const deletePostFailure = error => {
+  return {
+    type: "DELETE_POST_FAILURE",
+    payload: { error }
+  };
+};

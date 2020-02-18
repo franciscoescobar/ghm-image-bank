@@ -99,7 +99,11 @@ const INITIAL_STATE = {
   
       case "DELETE_CATEGORY_SUCCESS": {
         const { category } = action.payload;
-        const newCategories =  [category ,...state.categories];
+        const categoryIndex = state.categories.findIndex(c => c._id === category._id);
+        const newCategories = [
+          ...state.categories.slice(0, categoryIndex),
+          ...state.categories.slice(categoryIndex + 1 , state.categories.length)
+        ];
         return {
             ...state,
             posts: newCategories,

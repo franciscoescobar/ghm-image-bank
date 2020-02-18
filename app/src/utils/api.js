@@ -98,6 +98,21 @@ const api = {
       console.log(error);
     }
   },
+  deletePost: async id => {
+    const postsResponse = await fetch(
+      baseUrl + `post/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }
+    );
+    console.log(postsResponse);
+    const data = await postsResponse.json();
+    const posts = data.posts;
+    return posts;
+  },
   getCategories: async () => {
     const categoriesResponse = await fetch(
       baseUrl + "category",

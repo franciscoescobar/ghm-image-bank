@@ -146,6 +146,37 @@ const postsReducer = (state = INITIAL_STATE, action) => {
         loading: false
       };
     }
+    case "DELETE_POST_REQUEST": {
+      return {
+        ...state,
+        loading: true
+      };
+    }
+
+    case "DELETE_POST_SUCCESS": {
+      const { id } = action.payload;
+      const postIndex = state.posts.findIndex(p => p._id === id);
+      const newPosts = [
+        ...state.posts.slice(0, postIndex),
+        ...state.posts.slice(postIndex + 1 , state.posts.length)
+      ];
+
+      return {
+        ...state,
+        posts: newPosts,
+        loading: false
+      };
+    }
+
+    case "DELETE_POST_FAILURE": {
+      const { error } = action.payload;
+
+      return {
+        ...state,
+        error,
+        loading: false
+      };
+    }
 
     default: {
       return state;

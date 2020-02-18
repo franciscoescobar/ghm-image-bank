@@ -46,13 +46,17 @@ export const Data = styled.form`
     text-align: initial;
   } 
   > button {
-    width: 100%;
+    width: 30%;
     align-self: flex-end;
     border-radius: 5px;
-    height: 32px;
+    height: 42px;
     color: white;
-    margin: 8px;
+    margin: 8px auto;
     background: #43dd4d;
     margin-bottom: 12px;
+    font-weight: 600;
+  }
+  .delete {
+    background: indianred;
   }
 `;

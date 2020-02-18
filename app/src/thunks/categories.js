@@ -41,8 +41,8 @@ export const deleteCategory = category => {
   return async function(dispatch) {
     try {
       dispatch(deleteCategoryRequest());
-      const deletedCategory = await api.deleteCategory(category);
-      dispatch(deleteCategorySuccess(deletedCategory));
+      await api.deleteCategory(category);
+      dispatch(deleteCategorySuccess(category));
     } catch (error) {
       dispatch(deleteCategoryFailure(error.message));
     }

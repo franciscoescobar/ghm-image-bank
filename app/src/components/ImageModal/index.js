@@ -3,7 +3,7 @@ import MultiSelect from "@khanacademy/react-multi-select";
 import Modal from "../../containers/Modal";
 import { Wrapper, Data } from "./styled";
 import { useSelector, useDispatch } from 'react-redux';
-import { postProductRequest, editProductRequest } from '../../thunks/images';
+import { postProductRequest, editProductRequest, deleteProductRequest } from '../../thunks/images';
 
 const ImageModal = ({ show, onClose, title, image, action }) => {
   
@@ -15,6 +15,7 @@ const ImageModal = ({ show, onClose, title, image, action }) => {
   const [file, setFile] = useState(image.file || "");
   const [name, setName] = useState(image.name || "");
   const [size, setSize] = useState(image.size || "");
+  const [editOrDelete, setEditOrDelete] = useState("edit")
   const [selectedOptions, setSelectedOptions] = useState(image.tags || []);
   const [filePreview, setFilePreview] = useState("");
   const imageIndex = images.findIndex(i => i._id === image._id);
@@ -47,7 +48,12 @@ const ImageModal = ({ show, onClose, title, image, action }) => {
 
     }
     else if (action === "edit") {
-      await editProductRequest(formData, image._id)(dispatch);
+      if(editOrDelete === "edit") {
+        await editProductRequest(formData, image._id)(dispatch);
+      }
+      else {
+        deleteProductRequest(image._id)(dispatch);
+      }
       onClose();
     }
     else {
@@ -132,11 +138,17 @@ const ImageModal = ({ show, onClose, title, image, action }) => {
                 </>
               )}
               <input id="image" name="image" type="file" className="custom-file-input" onChange={onImageLoad} />
-              <button type="submit">
+              <button onClick={() => setEditOrDelete("edit")} name="submit" type="submit">
                 {action === "edit"
                   ? "Edit"
                   : "Upload"}
               </button>
+              {action === "edit"
+                  ? 
+                <button onClick={() => setEditOrDelete("delete")} name="delete" className="delete" type="submit">
+                  Delete
+                </button>
+                  : ""}
             </Data>
           </Wrapper>
         }

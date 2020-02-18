@@ -11,7 +11,10 @@ import {
   postPostsSuccess,
   editPostFailure,
   editPostRequest,
-  editPostSuccess
+  editPostSuccess,
+  deletePostRequest,
+  deletePostSuccess,
+  deletePostFailure
 } from "../actions";
 
 export const getProductsRequest = (page) => {
@@ -69,6 +72,18 @@ export const editProductRequest = (formData, id) => {
       dispatch(editPostSuccess(post));
     } catch (error) {
       dispatch(editPostFailure(error.message));
+    }
+  };
+}
+
+export const deleteProductRequest = (id) => {
+  return async function(dispatch) {
+    try {
+      dispatch(deletePostRequest());
+      await api.deletePost(id);
+      dispatch(deletePostSuccess(id));
+    } catch (error) {
+      dispatch(deletePostFailure(error.message));
     }
   };
 }
