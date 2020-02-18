@@ -3,7 +3,7 @@ import MultiSelect from "@khanacademy/react-multi-select";
 import Modal from "../../containers/Modal";
 import { Wrapper, Data } from "./styled";
 import { useSelector, useDispatch } from 'react-redux';
-import { postProductRequest, editProductRequest, deleteProductRequest } from '../../thunks/images';
+import { getProductsRequest, postProductRequest, editProductRequest, deleteProductRequest } from '../../thunks/images';
 
 const ImageModal = ({ show, onClose, title, image, action }) => {
   
@@ -15,6 +15,7 @@ const ImageModal = ({ show, onClose, title, image, action }) => {
   const [file, setFile] = useState(image.file || "");
   const [name, setName] = useState(image.name || "");
   const [size, setSize] = useState(image.size || "");
+  const [updatedAction, setUpdatedAction] = useState(action);
   const [editOrDelete, setEditOrDelete] = useState("edit")
   const [selectedOptions, setSelectedOptions] = useState(image.tags || []);
   const [filePreview, setFilePreview] = useState("");
@@ -44,10 +45,10 @@ const ImageModal = ({ show, onClose, title, image, action }) => {
     formData.append('name', name);
     formData.append('tags', jsonTags);
     formData.append('userId', user.userId);
-    if(action === "view") {
+    if(updatedAction === "view") {
 
     }
-    else if (action === "edit") {
+    else if (updatedAction === "edit") {
       if(editOrDelete === "edit") {
         await editProductRequest(formData, image._id)(dispatch);
       }
@@ -57,7 +58,9 @@ const ImageModal = ({ show, onClose, title, image, action }) => {
       onClose();
     }
     else {
-      postProductRequest(formData)(dispatch);
+      setUpdatedAction("view");
+      await postProductRequest(formData)(dispatch);
+      getProductsRequest(1)(dispatch);
       onClose();
     }
   }
@@ -66,7 +69,7 @@ const ImageModal = ({ show, onClose, title, image, action }) => {
     <>
       {show ? (
         <Modal large onClose={onClose} title={title}>
-        { action === "view" ?
+        { updatedAction === "view" ?
           <Wrapper>
             <img src={image ? images[imageIndex].signedWatermarkSrc : "" } alt="selected" />
             <Data onSubmit={onImageSubmit}>
@@ -139,11 +142,11 @@ const ImageModal = ({ show, onClose, title, image, action }) => {
               )}
               <input id="image" name="image" type="file" className="custom-file-input" onChange={onImageLoad} />
               <button onClick={() => setEditOrDelete("edit")} name="submit" type="submit">
-                {action === "edit"
+                {updatedAction === "edit"
                   ? "Edit"
                   : "Upload"}
               </button>
-              {action === "edit"
+              {updatedAction === "edit"
                   ? 
                 <button onClick={() => setEditOrDelete("delete")} name="delete" className="delete" type="submit">
                   Delete

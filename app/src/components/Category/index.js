@@ -49,6 +49,7 @@ const Category = ({ category, modal }) => {
   return (
     <Wrapper className={categorySelected ? "selected" : ""}>
       <input
+        label={categoryName}
         onClick={onCategoryClick}
         onBlur={onBlur}
         value={categoryName}

@@ -17,6 +17,7 @@ const Images = () => {
     500: 1
   };
   const dispatch = useDispatch();
+  const [imagesChanged, setImagesChanged] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [hasMoreImages, setHasMoreImages] = useState(true);
   const [clickedImage, setClickedImage] = useState({});
@@ -25,35 +26,39 @@ const Images = () => {
   const categories = useSelector(state => state.categoriesReducer.categories);
 
   const onImageClick = async image => {
+    setImagesChanged(false);
     await getProductRequest(image._id)(dispatch);
     setClickedImage(image);
+    setImagesChanged(true);
     setShowModal(true);
   };
   const handleClose = () => {
     setShowModal(false);
   };
-  const fetchData = () => {
+  const fetchData = async () => {
+    setImagesChanged(false);
     const filteredCategories = categories.filter(c => c.selected === true);
     if(filteredCategories.length > 0 ){
-      getProductsFilteredRequest(filteredCategories, images.page + 1)(dispatch);
+      await getProductsFilteredRequest(filteredCategories, images.page + 1)(dispatch);
     }
     else{
-      getProductsRequest(images.page + 1)(dispatch);
+      await getProductsRequest(images.page + 1)(dispatch);
     }
+    setImagesChanged(true);
   };
 
   useEffect(() => {
-    if(images.page <= Math.ceil(images.totalItems / 5)){
+    if(images.page <= Math.ceil(images.totalItems / 9)){
       setHasMoreImages(true);
     }
-    if(images.page >= Math.ceil(images.totalItems / 5)){
+    if(images.page >= Math.ceil(images.totalItems / 9)){
       setHasMoreImages(false);
     }
   }, [images.page, images.totalItems])
 
   return (
     <Container>
-    {images.loading ?
+    { images.loading && imagesChanged  ?
           <LoaderWrapper>
             <ImageLoader />
             <ImageLoader />
@@ -66,7 +71,7 @@ const Images = () => {
           </LoaderWrapper>
         :
       <InfiniteScroll
-        dataLength={images.posts.length || 10} //This is important field to render the next data
+        dataLength={images.posts.length || 9} //This is important field to render the next data
         next={fetchData}
         hasMore={hasMoreImages}
         scrollThreshold="200px"
