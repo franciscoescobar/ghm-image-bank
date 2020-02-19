@@ -10,6 +10,10 @@ export const Wrapper = styled.div`
   @media only screen and (max-width: 420px) {
     font-size: 12px;
   }
+  @media only screen and (max-width: 375px) {
+    font-size: 10px;
+    padding: 0px;
+  }
   > i {
     padding: 6px;
     font-size: 10px;

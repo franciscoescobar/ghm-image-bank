@@ -14,7 +14,7 @@ export const Wrapper = styled.div`
     border-radius: 5px;
     @media only screen and (max-width: 650px) {
       margin: 0;
-      max-height: 400px;
+      max-height: 300px;
       width: 100%;
     }
   }
@@ -45,11 +45,17 @@ export const Data = styled.form`
   .custom-file-input {
     text-align: initial;
   } 
-  > button {
+  > a {
+    text-decoration: inherit;
+    color: inherit;
+  }
+  > button,
+  > a {
+    font-size: 14px;
     width: 30%;
     align-self: flex-end;
     border-radius: 5px;
-    height: 42px;
+    padding: 12px;
     color: white;
     margin: 8px auto;
     background: #43dd4d;

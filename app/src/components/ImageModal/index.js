@@ -3,23 +3,22 @@ import MultiSelect from "@khanacademy/react-multi-select";
 import Modal from "../../containers/Modal";
 import { Wrapper, Data } from "./styled";
 import { useSelector, useDispatch } from 'react-redux';
-import { getProductsRequest, postProductRequest, editProductRequest, deleteProductRequest } from '../../thunks/images';
+import { postProductRequest, editProductRequest, deleteProductRequest } from '../../thunks/images';
 
 const ImageModal = ({ show, onClose, title, image, action }) => {
   
   const categories = useSelector(state => state.categoriesReducer.categories);
   const images = useSelector(state => state.imagesReducer.posts);
+  const imageIndex = images.findIndex(i => i && i._id === image._id);
   const user = useSelector(state => state.userReducer.user);
   const options = categories ? categories.map(category => {category.label = category.name;category.value = category._id; return category;}) : "";
   
   const [file, setFile] = useState(image.file || "");
   const [name, setName] = useState(image.name || "");
   const [size, setSize] = useState(image.size || "");
-  const [updatedAction, setUpdatedAction] = useState(action);
   const [editOrDelete, setEditOrDelete] = useState("edit")
   const [selectedOptions, setSelectedOptions] = useState(image.tags || []);
   const [filePreview, setFilePreview] = useState("");
-  const imageIndex = images.findIndex(i => i._id === image._id);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -45,34 +44,40 @@ const ImageModal = ({ show, onClose, title, image, action }) => {
     formData.append('name', name);
     formData.append('tags', jsonTags);
     formData.append('userId', user.userId);
-    if(updatedAction === "view") {
-
-    }
-    else if (updatedAction === "edit") {
-      if(editOrDelete === "edit") {
-        await editProductRequest(formData, image._id)(dispatch);
-      }
-      else {
-        deleteProductRequest(image._id)(dispatch);
-      }
+    if(action === "view") {
+      console.log("OPEN EMAIL MODAL");
       onClose();
     }
+    else if (action === "edit") {
+      if(editOrDelete === "edit") {
+        const result = window.confirm("Are you sure you wanna edit this post?");
+        if(result){
+          await editProductRequest(formData, image._id)(dispatch);
+          onClose();
+        }
+      }
+      else {
+        const result = window.confirm("Are you sure you wanna delete this post?");
+        if(result){
+          deleteProductRequest(image._id)(dispatch);
+          onClose();
+        }
+      }
+    }
     else {
-      setUpdatedAction("view");
-      await postProductRequest(formData)(dispatch);
-      getProductsRequest(1)(dispatch);
+      postProductRequest(formData)(dispatch);
       onClose();
     }
   }
-
+  
   return (
     <>
       {show ? (
         <Modal large onClose={onClose} title={title}>
-        { updatedAction === "view" ?
+        { action === "view" ?
           <Wrapper>
             <img src={image ? images[imageIndex].signedWatermarkSrc : "" } alt="selected" />
-            <Data onSubmit={onImageSubmit}>
+            <Data onSubmit={onImageSubmit} action={images[imageIndex].signedWatermarkSrc}>
               <input
                 placeholder="sanjuan"
                 name="image-name"
@@ -97,9 +102,9 @@ const ImageModal = ({ show, onClose, title, image, action }) => {
                 disabled
                 value={size}
               />
-              <button type="submit">
+              <a href={images[imageIndex].signedWatermarkSrc} download={name} target="_blank">
                 Download
-              </button>
+              </a>
             </Data>
           </Wrapper>
           :
@@ -142,11 +147,11 @@ const ImageModal = ({ show, onClose, title, image, action }) => {
               )}
               <input id="image" name="image" type="file" className="custom-file-input" onChange={onImageLoad} />
               <button onClick={() => setEditOrDelete("edit")} name="submit" type="submit">
-                {updatedAction === "edit"
+                {action === "edit"
                   ? "Edit"
                   : "Upload"}
               </button>
-              {updatedAction === "edit"
+              {action === "edit"
                   ? 
                 <button onClick={() => setEditOrDelete("delete")} name="delete" className="delete" type="submit">
                   Delete

@@ -1,4 +1,4 @@
-const baseUrl = "http://localhost:8080/";
+const baseUrl = "http://ghm-api-dev.us-east-2.elasticbeanstalk.com/";
 
 const fetchParams = (method, data = "") => {
   const body = data ? { body: JSON.stringify(data) } : {};
