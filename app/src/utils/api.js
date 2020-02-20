@@ -1,5 +1,6 @@
-const baseUrl = "http://ghm-api-dev.us-east-2.elasticbeanstalk.com/";
+import { useSelector } from 'react-redux';
 
+const baseUrl = "http://localhost:8080/";
 const fetchParams = (method, data = "") => {
   const body = data ? { body: JSON.stringify(data) } : {};
 
@@ -43,9 +44,9 @@ const api = {
           password: formData.password
         })
       });
-      const data = await userResponse.json();
-      const user = data.user;
-      return user;
+      if(userResponse.status !== 200 && userResponse.status !== 201){
+        throw new Error("Creating new user failed");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -72,10 +73,13 @@ const api = {
     const posts = await postsResponse.json();
     return posts;
   },
-  postPost: async formData => {
+  postPost: async (formData, token) => {
     try {
       const postResponse = await fetch(baseUrl + "post", {
         method: "POST",
+        headers: {
+          Authorization: 'Bearer ' + token
+        },
         body: formData
       });
       const images = await postResponse.json();
@@ -85,10 +89,13 @@ const api = {
       console.log(error);
     }
   },
-  editPost: async (formData, id) => {
+  editPost: async (formData, id, token) => {
     try {
       const postResponse = await fetch(baseUrl + `post/${id}`, {
         method: "PATCH",
+        headers: {
+          Authorization: 'Bearer ' + token
+        },
         body: formData
       });
       const images = await postResponse.json();
@@ -98,13 +105,14 @@ const api = {
       console.log(error);
     }
   },
-  deletePost: async id => {
+  deletePost: async (id, token) => {
     const postsResponse = await fetch(
       baseUrl + `post/${id}`,
       {
         method: "DELETE",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          Authorization: 'Bearer ' + token
         }
       }
     );
@@ -122,11 +130,12 @@ const api = {
     const categories = data.categories;
     return categories;
   },
-  postCategory: async formData => {
+  postCategory: async (formData, token) => {
     const categoryResponse = await fetch(baseUrl + "category", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        Authorization: 'Bearer ' + token
       },
       body: JSON.stringify(formData)
     });
@@ -134,13 +143,14 @@ const api = {
     const category = data.category;
     return category;
   },
-  editCategory: async category => {
+  editCategory: async (category, token) => {
     const categoryResponse = await fetch(
       baseUrl + `category/${category.name}/${category._id}`,
       {
         method: "PATCH",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          Authorization: 'Bearer ' + token
         }
       }
     );
@@ -148,12 +158,13 @@ const api = {
     const categories = data.categories;
     return categories;
   },
-  deleteCategory: async category => {
+  deleteCategory: async (category, token) => {
     const categoriesResponse = await fetch(
       baseUrl + `category/${category._id}`,
       {
         method: "DELETE",
         headers: {
+          Authorization: 'Bearer ' + token,
           "Content-Type": "application/json"
         }
       }

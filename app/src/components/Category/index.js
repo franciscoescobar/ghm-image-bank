@@ -8,6 +8,7 @@ const Category = ({ category, modal }) => {
 
   const dispatch = useDispatch();
   const categories = useSelector(state => state.categoriesReducer.categories);
+  const user = useSelector(state => state.userReducer.user);
   const [categoryName, setCategoryName] = useState(category.name);
   const [categorySelected, setCategorySelected] = useState(category.selected);
   const onCategoryClick = () => {
@@ -22,7 +23,7 @@ const Category = ({ category, modal }) => {
   const onDeleteClick = () => {
     const result = window.confirm("Are you sure you want to delete?");
     if (result) {
-      deleteCategory(category)(dispatch);
+      deleteCategory(category,user.token)(dispatch);
       getCategoriesRequest()(dispatch);
     }
   };

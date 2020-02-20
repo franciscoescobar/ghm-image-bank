@@ -55,11 +55,9 @@ const userReducer = (state = INITIAL_STATE, action) => {
     }
 
     case "SIGN_USER_SUCCESS": {
-      const { user } = action.payload;
 
       return {
         ...state,
-        user,
         modal: {
           ...state.modal,
           show: false,

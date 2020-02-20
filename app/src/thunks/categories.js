@@ -37,11 +37,11 @@ export const postCategoriesRequest = (formData) => {
     }
   };
 };
-export const deleteCategory = category => {
+export const deleteCategory = (category, token) => {
   return async function(dispatch) {
     try {
       dispatch(deleteCategoryRequest());
-      await api.deleteCategory(category);
+      await api.deleteCategory(category, token);
       dispatch(deleteCategorySuccess(category));
     } catch (error) {
       dispatch(deleteCategoryFailure(error.message));

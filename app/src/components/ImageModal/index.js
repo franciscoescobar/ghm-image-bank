@@ -102,7 +102,7 @@ const ImageModal = ({ show, onClose, title, image, action }) => {
                 disabled
                 value={size}
               />
-              <a href={images[imageIndex].signedWatermarkSrc} download={name} target="_blank">
+              <a href={images[imageIndex].signedWatermarkSrc} download={name} rel="noopener noreferrer" target="_blank">
                 Download
               </a>
             </Data>
