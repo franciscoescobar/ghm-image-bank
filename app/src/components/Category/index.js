@@ -3,6 +3,7 @@ import { Wrapper } from "./styled";
 import { deleteCategory, editCategory, getCategoriesRequest } from "../../thunks/categories";
 import { getProductsFilteredRequest } from "../../thunks/images";
 import { useSelector, useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 const Category = ({ category, modal }) => {
 
@@ -10,7 +11,9 @@ const Category = ({ category, modal }) => {
   const categories = useSelector(state => state.categoriesReducer.categories);
   const user = useSelector(state => state.userReducer.user);
   const [categoryName, setCategoryName] = useState(category.name);
+  const [originalName, setOriginalName] = useState(category.name);
   const [categorySelected, setCategorySelected] = useState(category.selected);
+  const [notRepeated, setNotRepeated] = useState(true);
   const onCategoryClick = () => {
     if (!modal) {
       setCategorySelected(!categorySelected);
@@ -34,11 +37,23 @@ const Category = ({ category, modal }) => {
 
   const onBlur = async () => {
     if (modal) {
-      const result = window.confirm("Are you sure you want to edit?");
       category.name = categoryName;
-      if (result) {
-        await editCategory(category, user.token)(dispatch);
-        getCategoriesRequest()(dispatch);
+      if(categoryName.length <= 3) {
+        toast("The name is too short")
+        setCategoryName(originalName);
+        category.name = originalName;
+      }
+      else if(!notRepeated) {
+        toast("That tag name already exists");
+        setCategoryName(originalName);
+        category.name = originalName;
+      }
+      else {
+        const result = window.confirm("Are you sure you want to edit?");
+        if (result) {
+          await editCategory(category, user.token)(dispatch);
+          getCategoriesRequest()(dispatch);
+        }
       }
     }
   };
@@ -46,6 +61,15 @@ const Category = ({ category, modal }) => {
   useEffect(() => {
     setCategoryName(category.name);
   }, [category])
+
+  useEffect(() => {
+    if(categories.filter(c => c.name.toLowerCase() === category.name.toLowerCase()).length > 0) {
+      setNotRepeated(false);
+    }
+    else { 
+      setNotRepeated(true);
+    }
+  }, [category,categories])
 
   return (
     <Wrapper className={categorySelected ? "selected" : ""}>

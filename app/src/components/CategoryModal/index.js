@@ -5,6 +5,9 @@ import Category from "../Category";
 import { useSelector, useDispatch } from 'react-redux';
 import { postCategoriesRequest } from '../../thunks/categories';
 import { getCategoriesRequest } from '../../thunks/categories';
+
+import { toast } from 'react-toastify';
+
 const CategoryModal = ({ show, title, onClose }) => {
   
   const categories = useSelector(state => state.categoriesReducer.categories);
@@ -26,11 +29,19 @@ const CategoryModal = ({ show, title, onClose }) => {
       await postCategoriesRequest(category, user.token)(dispatch);
       getCategoriesRequest()(dispatch);
     }
+    else if (notRepeated) {
+      toast("The name is too short");
+      category.name = "";
+    }
+    else {
+      toast("The name exists");
+      category.name = "";
+    }
   }
 
   useEffect(() => {
-    if(categories.filter(c => c.name === category.name).length > 0) {
-      setNotRepeated();
+    if(categories.filter(c => c.name.toLowerCase() === category.name.toLowerCase()).length > 0) {
+      setNotRepeated(false);
     }
     else { 
       setNotRepeated(true);

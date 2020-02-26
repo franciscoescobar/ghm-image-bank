@@ -4,6 +4,8 @@ import Modal from "../../containers/Modal";
 import { Wrapper, Data } from "./styled";
 import { useSelector, useDispatch } from 'react-redux';
 import { postProductRequest, editProductRequest, deleteProductRequest } from '../../thunks/images';
+import { toast } from 'react-toastify';
+
 
 const ImageModal = ({ show, onClose, title, image, action }) => {
   
@@ -50,10 +52,18 @@ const ImageModal = ({ show, onClose, title, image, action }) => {
     }
     else if (action === "edit") {
       if(editOrDelete === "edit") {
-        const result = window.confirm("Are you sure you wanna edit this post?");
-        if(result){
-          await editProductRequest(formData, image._id, user.token)(dispatch);
-          onClose();
+        if(name.length <= 3) {
+          toast("The name has to be at least 4 characters long");
+        }
+        else if (jsonTags.length === 2) {
+          toast("It has to have at least one tag");
+        }
+        else {
+          const result = window.confirm("Are you sure you wanna edit this post?");
+          if(result){
+            await editProductRequest(formData, image._id, user.token)(dispatch);
+            onClose();
+          }
         }
       }
       else {
@@ -62,11 +72,23 @@ const ImageModal = ({ show, onClose, title, image, action }) => {
           deleteProductRequest(image._id, user.token)(dispatch);
           onClose();
         }
+      
       }
     }
     else {
-      postProductRequest(formData, user.token)(dispatch);
-      onClose();
+      if(name.length <= 3) {
+        toast("The name has to be at least 4 characters long");
+      }
+      else if (jsonTags.length === 2) {
+        toast("It has to have at least one tag");
+      }
+      else if (!file) {
+        toast("You didnt upload a file");
+      }
+      else {
+        postProductRequest(formData, user.token)(dispatch);
+        onClose();
+      }
     }
   }
   
