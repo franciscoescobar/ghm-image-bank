@@ -26,11 +26,11 @@ export const getCategoriesRequest = () => {
     }
   };
 };
-export const postCategoriesRequest = (formData) => {
+export const postCategoriesRequest = (formData, token) => {
   return async function(dispatch) {
     try {
       dispatch(postCategoryRequest());
-      const category = await api.postCategory(formData);
+      const category = await api.postCategory(formData, token);
       dispatch(postCategorySuccess(category));
     } catch (error) {
       dispatch(postCategoryFailure(error.message));
@@ -48,12 +48,12 @@ export const deleteCategory = (category, token) => {
     }
   };
 }
-export const editCategory = category => {
+export const editCategory = (category, token) => {
 
   return async function(dispatch) {
     try {
       dispatch(editCategoryRequest());
-      await api.editCategory(category);
+      await api.editCategory(category, token);
       dispatch(editCategorySuccess(category));
     } catch (error) {
       dispatch(editCategoryFailure(error.message));

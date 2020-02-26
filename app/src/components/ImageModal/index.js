@@ -52,20 +52,20 @@ const ImageModal = ({ show, onClose, title, image, action }) => {
       if(editOrDelete === "edit") {
         const result = window.confirm("Are you sure you wanna edit this post?");
         if(result){
-          await editProductRequest(formData, image._id)(dispatch);
+          await editProductRequest(formData, image._id, user.token)(dispatch);
           onClose();
         }
       }
       else {
         const result = window.confirm("Are you sure you wanna delete this post?");
         if(result){
-          deleteProductRequest(image._id)(dispatch);
+          deleteProductRequest(image._id, user.token)(dispatch);
           onClose();
         }
       }
     }
     else {
-      postProductRequest(formData)(dispatch);
+      postProductRequest(formData, user.token)(dispatch);
       onClose();
     }
   }

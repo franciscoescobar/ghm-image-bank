@@ -20,10 +20,10 @@ const Category = ({ category, modal }) => {
     }
   };
 
-  const onDeleteClick = () => {
+  const onDeleteClick = async () => {
     const result = window.confirm("Are you sure you want to delete?");
     if (result) {
-      deleteCategory(category,user.token)(dispatch);
+      await deleteCategory(category, user.token)(dispatch);
       getCategoriesRequest()(dispatch);
     }
   };
@@ -32,12 +32,12 @@ const Category = ({ category, modal }) => {
     setCategoryName(event.target.value);
   };
 
-  const onBlur = () => {
+  const onBlur = async () => {
     if (modal) {
       const result = window.confirm("Are you sure you want to edit?");
       category.name = categoryName;
       if (result) {
-        editCategory(category)(dispatch);
+        await editCategory(category, user.token)(dispatch);
         getCategoriesRequest()(dispatch);
       }
     }

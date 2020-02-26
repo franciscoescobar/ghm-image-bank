@@ -52,11 +52,11 @@ export const getProductsFilteredRequest = (formData, page) => {
   };
 };
 
-export const postProductRequest = (formData) => {
+export const postProductRequest = (formData, token) => {
   return async function(dispatch) {
     try {
       dispatch(postPostsRequest());
-      const post = await api.postPost(formData);
+      const post = await api.postPost(formData, token);
       dispatch(postPostsSuccess(post));
     } catch (error) {
       dispatch(postPostsFailure(error.message));
@@ -64,11 +64,11 @@ export const postProductRequest = (formData) => {
   };
 };
 
-export const editProductRequest = (formData, id) => {
+export const editProductRequest = (formData, id, token) => {
   return async function(dispatch) {
     try {
       dispatch(editPostRequest());
-      const post = await api.editPost(formData, id);
+      const post = await api.editPost(formData, id, token);
       dispatch(editPostSuccess(post));
     } catch (error) {
       dispatch(editPostFailure(error.message));
@@ -76,11 +76,11 @@ export const editProductRequest = (formData, id) => {
   };
 }
 
-export const deleteProductRequest = (id) => {
+export const deleteProductRequest = (id, token) => {
   return async function(dispatch) {
     try {
       dispatch(deletePostRequest());
-      await api.deletePost(id);
+      await api.deletePost(id, token);
       dispatch(deletePostSuccess(id));
     } catch (error) {
       dispatch(deletePostFailure(error.message));

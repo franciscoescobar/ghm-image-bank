@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "../../containers/Modal";
 import { Wrapper, FormWrapper } from "./styled";
 import Category from "../Category";
@@ -8,8 +8,11 @@ import { getCategoriesRequest } from '../../thunks/categories';
 const CategoryModal = ({ show, title, onClose }) => {
   
   const categories = useSelector(state => state.categoriesReducer.categories);
+  const user = useSelector(state => state.userReducer.user);
+  const [notRepeated, setNotRepeated] = useState(true);
   const dispatch = useDispatch();
   
+
   const [category, setCategory] = useState({
     name: "",
     selected: false
@@ -19,11 +22,21 @@ const CategoryModal = ({ show, title, onClose }) => {
   }
   const onFormSubmit = async (event) => {
     event.preventDefault();
-    if(category.name.length > 3){
-      await postCategoriesRequest(category)(dispatch);
+    if(category.name.length > 3 && notRepeated){
+      await postCategoriesRequest(category, user.token)(dispatch);
       getCategoriesRequest()(dispatch);
     }
   }
+
+  useEffect(() => {
+    if(categories.filter(c => c.name === category.name).length > 0) {
+      setNotRepeated();
+    }
+    else { 
+      setNotRepeated(true);
+    }
+  }, [category,categories])
+
   return (
   <>
     {show ? (

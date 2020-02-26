@@ -1,5 +1,3 @@
-import { useSelector } from 'react-redux';
-
 const baseUrl = "http://localhost:8080/";
 const fetchParams = (method, data = "") => {
   const body = data ? { body: JSON.stringify(data) } : {};
