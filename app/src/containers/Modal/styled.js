@@ -20,6 +20,9 @@ export const Container = styled.div`
       overflow: scroll;
       max-height: 95%;
     }
+    @media only screen and (max-width: 800px) {
+      margin: 4% auto;
+    }
   }
   .extralarge {
     width: 800px;
