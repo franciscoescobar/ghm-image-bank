@@ -222,3 +222,23 @@ export const deletePostFailure = error => {
     payload: { error }
   };
 };
+
+export const switchLanguage = language => {
+  return {
+    type: "SWITCH_LANGUAGE",
+    payload: { language }
+  }
+}
+
+export const logOut = () => {
+  return {
+    type: "LOG_OUT"
+  }
+}
+
+export const isLoggedIn = user => {
+  return {
+    type: "IS_LOGGED_IN",
+    payload: { user }
+  }
+}

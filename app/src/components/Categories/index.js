@@ -16,6 +16,8 @@ const Categories = () => {
   const loading = useSelector(state => state.categoriesReducer.loading);
   const categories = useSelector(state => state.categoriesReducer.categories);
   const user = useSelector(state => state.userReducer.user);
+  const language = useSelector(state => state.languageReducer.language);
+
   const [show, setShow] = useState(false);
   const toggleModal = () => {
     setShow(!show);
@@ -23,7 +25,7 @@ const Categories = () => {
   return (
     <Container>
       <CategoriesHeader>
-        <Title>Categories</Title>
+        <Title>{language === "en-US" ? "Categories" : "Categorias"}</Title>
         {
           user.role === "admin" ? 
           <AddButton onClick={toggleModal}>

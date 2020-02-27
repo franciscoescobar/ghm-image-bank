@@ -13,10 +13,13 @@ export const getUserRequest = formData => {
     try {
       dispatch(fetchUserRequest());
       const user = await api.getUser(formData);
+      if(user.message) {
+        throw(user);
+      }
       dispatch(fetchUserSuccess(user));
     } catch (error) {
-      dispatch(fetchUserFailure(error.message));
       console.log(error);
+      dispatch(fetchUserFailure(error.message));
     }
   };
 };
@@ -25,8 +28,11 @@ export const signUser = formData => {
   return async function(dispatch) {
     try {
       dispatch(signUserRequest());
-      await api.signUser(formData);
-      dispatch(signUserSuccess());
+      const user = await api.signUser(formData);
+      if(user.message) {
+        throw user;
+      }
+      dispatch(signUserSuccess(user));
     } catch (error) {
       dispatch(signUserFailure(error.message));
     }

@@ -37,6 +37,19 @@ const ImageModal = ({ show, onClose, title, image, action }) => {
   const onInputChange = (event) => {
     setName(event.target.value);
   }
+  const correctMimeType = () => {
+    if (
+      file.name.includes(".png", file.name.length - 4) || 
+      file.name.includes(".gif", file.name.length - 4) ||
+      file.name.includes(".jpeg", file.name.length - 5) ||
+      file.name.includes(".jpg", file.name.length - 4) ) {
+      return true;
+    } 
+    else {
+      return false;
+    }   
+
+  }
   const onImageSubmit = async event => {
     event.preventDefault();
     const jsonTags = JSON.stringify(selectedOptions);
@@ -57,6 +70,9 @@ const ImageModal = ({ show, onClose, title, image, action }) => {
         }
         else if (jsonTags.length === 2) {
           toast("It has to have at least one tag");
+        }
+        else if (file && !correctMimeType()) {
+          toast("file has to be a jpg, jpeg, png or gif and have the extension");
         }
         else {
           const result = window.confirm("Are you sure you wanna edit this post?");
@@ -84,6 +100,9 @@ const ImageModal = ({ show, onClose, title, image, action }) => {
       }
       else if (!file) {
         toast("You didnt upload a file");
+      }
+      else if (!correctMimeType()) {
+        toast("file has to be a jpg, jpeg, png or gif and have the extension");
       }
       else {
         postProductRequest(formData, user.token)(dispatch);

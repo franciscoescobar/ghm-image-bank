@@ -12,6 +12,14 @@ const INITIAL_STATE = {
 
 const userReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
+
+    case "IS_LOGGED_IN": {
+      return {
+        
+      }
+    }
+
+
     case "FETCH_USER_REQUEST": {
       return {
         ...state,
@@ -21,7 +29,13 @@ const userReducer = (state = INITIAL_STATE, action) => {
 
     case "FETCH_USER_SUCCESS": {
       const { user } = action.payload;
-
+      const remainingMilliseconds = 60 * 60 * 1000;
+      const expiryDate = new Date(
+        new Date().getTime() + remainingMilliseconds
+      );
+      localStorage.setItem('expiryDate', expiryDate.toISOString());
+      localStorage.setItem('token', user.token);
+      localStorage.setItem('userId', user.userId);
       return {
         ...state,
         user,

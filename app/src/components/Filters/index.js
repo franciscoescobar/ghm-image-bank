@@ -1,13 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Filter from "./Filter";
 import { Wrapper, AddButton } from "./styled";
 import ImageModal from "../ImageModal";
 import { useSelector } from 'react-redux';
 
-const Filters = ({ filters }) => {
-  const [updatedFilters, setUpdatedFilters] = useState(filters);
-  const [showModal, setShowModal] = useState(false);
+const Filters = () => {
   const user = useSelector(state => state.userReducer.user);
+  const language = useSelector(state => state.languageReducer.language);
+
+  const [showModal, setShowModal] = useState(false);
+  const [filters, setFilters] = useState([
+    { selected: true, text: language === "en-US" ? "Most Recent" : "Más recientes" },
+    { selected: false, text: language === "en-US" ? "Most Popular" : "Más populares" }
+  ]);
+  const [updatedFilters, setUpdatedFilters] = useState(filters);
+
+  useEffect(() => {
+    setUpdatedFilters(
+      filters.map((filter, i) => {
+        if (i == 0)
+        filter.text = language === "en-US" ? "Most Recent" : "Más recientes";
+        if (i == 1)
+        filter.text = language === "en-US" ? "Most Popular" : "Más populares";
+        return filter;
+      })
+    );
+  }, [language])
   const handleFitlerClick = text => {
     setUpdatedFilters(
       filters.map(filter => {
@@ -27,7 +45,7 @@ const Filters = ({ filters }) => {
   };
   return (
     <Wrapper>
-      <p>Sorted by:</p>
+      <p>{language === "en-US" ? "Sorted by:" : "Orden:"}</p>
       {updatedFilters.map((filter, i) => {
         return (
           <Filter

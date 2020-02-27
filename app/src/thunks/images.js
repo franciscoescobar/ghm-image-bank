@@ -57,6 +57,9 @@ export const postProductRequest = (formData, token) => {
     try {
       dispatch(postPostsRequest());
       const post = await api.postPost(formData, token);
+      if(post.message) {
+        throw post;
+      }
       dispatch(postPostsSuccess(post));
     } catch (error) {
       dispatch(postPostsFailure(error.message));
@@ -69,6 +72,9 @@ export const editProductRequest = (formData, id, token) => {
     try {
       dispatch(editPostRequest());
       const post = await api.editPost(formData, id, token);
+      if(post.message) {
+        throw post;
+      }
       dispatch(editPostSuccess(post));
     } catch (error) {
       dispatch(editPostFailure(error.message));

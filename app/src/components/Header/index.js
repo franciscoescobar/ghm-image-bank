@@ -12,11 +12,12 @@ import uk from "../../assets/united-kingdom-flag-icon-64.png";
 import LoginModal from "../LoginModal";
 import SideMenu from "../SideMenu";
 import { useSelector, useDispatch } from 'react-redux';
-import { openSignup, openLogin } from "../../actions";
+import { openSignup, openLogin, switchLanguage } from "../../actions";
 const Header = () => {
   const dispatch = useDispatch();
   const modal = useSelector(state => state.userReducer.modal);
   const user = useSelector(state => state.userReducer.user);
+  const language = useSelector(state => state.languageReducer.language);
   const [showMenu, setShowMenu] = useState(false);
 
   const onLoginClick = () => {
@@ -25,28 +26,40 @@ const Header = () => {
   const onSignUpClick = () => {
     dispatch(openSignup());
   };
+  const onSignOutClick = () => {
+
+  }
   const toggleMenu = () => {
     setShowMenu(!showMenu);
   };
+  const toggleLanguage = (l) => {
+    dispatch(switchLanguage(l));
+  }
   return (
     <Wrapper>
       <TextLogo>
-        <p>ghmcontenidos - gallery</p>
+        <p>{language === "en-US" ? "ghmcontenidos - gallery" : "ghmcontenidos - galleria"}</p>
       </TextLogo>
       <LanguageWrapper>
-        <img src={arg} alt="ARG" />
-        <img src={uk} alt="UK" />
+        <img onClick={() => {toggleLanguage("es-AR")}} src={arg} alt="ARG" />
+        <img onClick={() => {toggleLanguage("en-US")}} src={uk} alt="UK" />
       </LanguageWrapper>
-      { user.login ? "" :
       <LoginWrapper>
+      { user.login ? 
+        <WebLogin>
+          <button onClick={onSignOutClick} className="signup" name="signout">
+          {language === "en-US" ? "Sign out" : "Salir"}
+          </button>
+        </WebLogin> :
         <WebLogin>
           <button onClick={onLoginClick} className="login" name="login">
-            Login
+          {language === "en-US" ? "Login" : "Ingresar"}
           </button>
           <button onClick={onSignUpClick} className="signup" name="signup">
-            Sign Up
+          {language === "en-US" ? "Sign up" : "Registrar"}
           </button>
         </WebLogin>
+        }
         <MobileLogin>
           <button
             aria-label="login-side-menu"
@@ -57,7 +70,6 @@ const Header = () => {
           </button>
         </MobileLogin>
       </LoginWrapper>
-      }
       <SideMenu
         toggle={toggleMenu}
         show={showMenu}

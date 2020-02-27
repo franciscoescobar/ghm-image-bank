@@ -17,18 +17,25 @@ const apiHeaders = {
 
 const api = {
   getUser: async formData => {
-    const userResponse = await fetch(baseUrl + "login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        email: formData.email,
-        password: formData.password
-      })
-    });
-    const user = await userResponse.json();
-    return user;
+    try {
+      const userResponse = await fetch(baseUrl + "login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          email: formData.email,
+          password: formData.password
+        })
+      });
+      const user = await userResponse.json();
+      if(userResponse.status !== 200 && userResponse.status !== 201) {
+        throw user;
+      }
+      return user;
+    } catch (error) {
+      return error;
+    }
   },
   signUser: async formData => {
     try {
@@ -43,10 +50,12 @@ const api = {
         })
       });
       if(userResponse.status !== 200 && userResponse.status !== 201){
-        throw new Error("Creating new user failed");
+        const response = await userResponse.json();
+        throw new Error(response.data[0].msg);
       }
+
     } catch (error) {
-      console.log(error);
+      return error;
     }
   },
   getPosts: async (page) => {
@@ -82,9 +91,13 @@ const api = {
       });
       const images = await postResponse.json();
       const post = images.post;
+      if(postResponse.status !== 200 && postResponse.status !== 201){
+        throw images;
+      }
       return post;
     } catch (error) {
       console.log(error);
+      return error;
     }
   },
   editPost: async (formData, id, token) => {
@@ -97,10 +110,14 @@ const api = {
         body: formData
       });
       const images = await postResponse.json();
+      if(postResponse.status !== 200 && postResponse.status !== 201){
+        throw images;
+      }
       const post = images.doc;
       return post;
     } catch (error) {
       console.log(error);
+      return error;
     }
   },
   deletePost: async (id, token) => {
@@ -114,7 +131,6 @@ const api = {
         }
       }
     );
-    console.log(postsResponse);
     const data = await postsResponse.json();
     const posts = data.posts;
     return posts;

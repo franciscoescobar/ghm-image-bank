@@ -63,13 +63,13 @@ const Category = ({ category, modal }) => {
   }, [category])
 
   useEffect(() => {
-    if(categories.filter(c => c.name.toLowerCase() === category.name.toLowerCase()).length > 0) {
+    if(categories.filter(c => c.name.toLowerCase() === categoryName.toLowerCase()).length > 0) {
       setNotRepeated(false);
     }
     else { 
       setNotRepeated(true);
     }
-  }, [category,categories])
+  }, [categoryName,categories]);
 
   return (
     <Wrapper className={categorySelected ? "selected" : ""}>
