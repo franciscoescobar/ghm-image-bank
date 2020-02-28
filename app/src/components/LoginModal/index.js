@@ -13,6 +13,9 @@ const LoginModal = ({ title }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatedPassword, setRepeatedPassword] = useState("");
+  const upcoming = () => {
+    toast("This is still under development");
+  }
   const logoutHandler = () => {
     dispatch(logOut());
   };
@@ -37,7 +40,7 @@ const LoginModal = ({ title }) => {
       toast("The password has to be at least 7 characters long");
     }
     else if(password !== repeatedPassword) {
-      toast("Both passwords has to be equal");
+      toast("Both passwords have to be the same");
     }
     else {
       signUser(formData)(dispatch);
@@ -45,8 +48,10 @@ const LoginModal = ({ title }) => {
   }
 
   useEffect(() => {
+    
     const token = localStorage.getItem('token');
     const expiryDate = localStorage.getItem('expiryDate');
+    
     if (!token || !expiryDate) {
       return;
     }
@@ -70,10 +75,10 @@ const LoginModal = ({ title }) => {
     {modal.show ? (
       <Modal title={title} onClose={() => { dispatch(closeModal())}}>
         <Actions>
-          <button name="google" className="google">
+          <button onClick={upcoming} name="google" className="google">
             <i className="fab fa-google"></i>
           </button>
-          <button name="facebook" className="facebook">
+          <button onClick={upcoming} name="facebook" className="facebook">
             <i className="fab fa-facebook-f"></i>
           </button>
         </Actions>

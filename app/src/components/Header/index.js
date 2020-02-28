@@ -27,7 +27,10 @@ const Header = () => {
     dispatch(openSignup());
   };
   const onSignOutClick = () => {
-    dispatch(logOut());
+    const result = window.confirm("¿Seguro que quieres cerrer sesión?");
+    if(result){
+      dispatch(logOut());
+    }
   }
   const toggleMenu = () => {
     setShowMenu(!showMenu);
