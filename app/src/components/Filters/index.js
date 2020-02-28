@@ -18,9 +18,9 @@ const Filters = () => {
   useEffect(() => {
     setUpdatedFilters(
       filters.map((filter, i) => {
-        if (i == 0)
+        if (i === 0)
         filter.text = language === "en-US" ? "Most Recent" : "Más recientes";
-        if (i == 1)
+        if (i === 1)
         filter.text = language === "en-US" ? "Most Popular" : "Más populares";
         return filter;
       })

@@ -5,7 +5,10 @@ import {
   fetchUserSuccess,
   signUserRequest,
   signUserSuccess,
-  signUserFailure
+  signUserFailure,
+  getUserRoleRequest,
+  getUserRoleSuccess,
+  getUserRoleFailure
 } from "../actions";
 
 export const getUserRequest = formData => {
@@ -23,7 +26,21 @@ export const getUserRequest = formData => {
     }
   };
 };
-
+export const getUserById = userId => {
+  return async function(dispatch) {
+    try {
+      dispatch(getUserRoleRequest());
+      const user = await api.getUserRole(userId);
+      if(user.message) {
+        throw(user);
+      }
+      dispatch(getUserRoleSuccess(user));
+    } catch (error) {
+      console.log(error);
+      dispatch(getUserRoleFailure(error.message));
+    }
+  };
+}
 export const signUser = formData => {
   return async function(dispatch) {
     try {

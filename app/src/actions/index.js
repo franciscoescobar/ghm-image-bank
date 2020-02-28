@@ -222,6 +222,25 @@ export const deletePostFailure = error => {
     payload: { error }
   };
 };
+export const getUserRoleRequest = () => {
+  return {
+    type: "GET_USER_REQUEST"
+  };
+};
+
+export const getUserRoleSuccess = (user) => {
+  return {
+    type: "GET_USER_SUCCESS",
+    payload: { user }
+  };
+};
+
+export const getUserRoleFailure = error => {
+  return {
+    type: "GET_USER_FAILURE",
+    payload: { error }
+  };
+};
 
 export const switchLanguage = language => {
   return {

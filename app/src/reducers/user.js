@@ -14,11 +14,54 @@ const userReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
 
     case "IS_LOGGED_IN": {
+      const {user} = action.payload;
       return {
-        
+        ...state,
+        user: {...state.user, ...user}
       }
     }
 
+    case "LOG_OUT": {
+      localStorage.removeItem('token');
+      localStorage.removeItem('expiryDate');
+      localStorage.removeItem('userId');
+      return {
+        ...state,
+        user: {
+          login: false,
+          token: null
+        }
+      }
+    }
+
+    case "GET_USER_REQUEST": {
+      return {
+        ...state,
+        userLoading: true
+      };
+    }
+
+    case "GET_USER_SUCCESS": {
+      const { user } = action.payload;
+      return {
+        ...state,
+        user: {
+          ...state.user, 
+          role: user 
+        },
+        userLoading: false
+      };
+    }
+
+    case "GET_USER_FAILURE": {
+      const { error } = action.payload;
+
+      return {
+        ...state,
+        error,
+        userLoading: false
+      };
+    }
 
     case "FETCH_USER_REQUEST": {
       return {

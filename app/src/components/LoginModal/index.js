@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import { Actions, Form } from "./styled";
 import Modal from "../../containers/Modal";
-import { getUserRequest, signUser } from '../../thunks/users';
+import { getUserRequest, signUser, getUserById } from '../../thunks/users';
 import { useSelector, useDispatch } from 'react-redux';
 import { closeModal, openSignup, isLoggedIn, logOut } from "../../actions";
 import { toast } from "react-toastify";
@@ -14,12 +14,7 @@ const LoginModal = ({ title }) => {
   const [password, setPassword] = useState("");
   const [repeatedPassword, setRepeatedPassword] = useState("");
   const logoutHandler = () => {
-    // Modify state of login to false and token set to null
     dispatch(logOut());
-    // Remove token, expiryDate and userId
-    localStorage.removeItem('token');
-    localStorage.removeItem('expiryDate');
-    localStorage.removeItem('userId');
   };
   const handleLoginSubmit = (event) => {
     event.preventDefault();
@@ -61,13 +56,13 @@ const LoginModal = ({ title }) => {
     }
     // set login to true, token to token, role to role and userId to userId
     const userId = localStorage.getItem('userId');
+    getUserById(userId)(dispatch);
     const user = {
       login: true,
       token,
       userId
     }
     dispatch(isLoggedIn(user));
-    this.setState({ isAuth: true, token: token, userId: userId });
   }, [])
 
   return (

@@ -37,6 +37,23 @@ const api = {
       return error;
     }
   },
+  getUserRole: async userId => {
+    try {
+      const userResponse = await fetch(baseUrl + `user/${userId}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+      const user = await userResponse.json();
+      if(userResponse.status !== 200 && userResponse.status !== 201) {
+        throw user;
+      }
+      return user;
+    } catch (error) {
+      return error;
+    }
+  },
   signUser: async formData => {
     try {
       const userResponse = await fetch(baseUrl + "signup", {

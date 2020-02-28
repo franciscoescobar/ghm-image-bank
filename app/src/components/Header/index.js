@@ -12,7 +12,7 @@ import uk from "../../assets/united-kingdom-flag-icon-64.png";
 import LoginModal from "../LoginModal";
 import SideMenu from "../SideMenu";
 import { useSelector, useDispatch } from 'react-redux';
-import { openSignup, openLogin, switchLanguage } from "../../actions";
+import { openSignup, openLogin, switchLanguage, logOut } from "../../actions";
 const Header = () => {
   const dispatch = useDispatch();
   const modal = useSelector(state => state.userReducer.modal);
@@ -27,7 +27,7 @@ const Header = () => {
     dispatch(openSignup());
   };
   const onSignOutClick = () => {
-
+    dispatch(logOut());
   }
   const toggleMenu = () => {
     setShowMenu(!showMenu);
