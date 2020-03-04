@@ -19,13 +19,13 @@ const ImageModal = ({ show, onClose, title, image, action }) => {
   const [name, setName] = useState(image.name || "");
   const [size, setSize] = useState(image.size || "");
   const [editOrDelete, setEditOrDelete] = useState("edit")
-  const [selectedOptions, setSelectedOptions] = useState(image.tags || []);
+  const [selectedOptions, setSelectedOptions] = useState(image.categories || []);
   const [filePreview, setFilePreview] = useState("");
 
   const dispatch = useDispatch();
   useEffect(() => {
     if(show && image) {
-      setSelectedOptions(image.tags);
+      setSelectedOptions(image.categories);
       setName(image.name);
       setSize(`${image.size} MB`);
     }
@@ -54,14 +54,14 @@ const ImageModal = ({ show, onClose, title, image, action }) => {
   }
   const onImageSubmit = async event => {
     event.preventDefault();
-    const jsonTags = JSON.stringify(selectedOptions);
+    const jsonCategories = JSON.stringify(selectedOptions);
     let formData = new FormData();
     if(file.length > 0)
     for(let i = 0; i < file.length; i++) {
       formData.append('image', file[i]);
     }
     formData.append('name', name);
-    formData.append('tags', jsonTags);
+    formData.append('categories', jsonCategories);
     formData.append('userId', user.userId);
     if(action === "view") {
       console.log("OPEN EMAIL MODAL");
@@ -72,8 +72,8 @@ const ImageModal = ({ show, onClose, title, image, action }) => {
         if(name.length <= 3) {
           toast("The name has to be at least 4 characters long");
         }
-        else if (jsonTags.length === 2) {
-          toast("It has to have at least one tag");
+        else if (jsonCategories.length === 2) {
+          toast("It has to have at least one category");
         }
         else if (file && !correctMimeType()) {
           toast("file has to be a jpg, jpeg, png or gif and have the extension");
@@ -99,8 +99,8 @@ const ImageModal = ({ show, onClose, title, image, action }) => {
       if(name.length <= 3) {
         toast("The name has to be at least 4 characters long");
       }
-      else if (jsonTags.length === 2) {
-        toast("It has to have at least one tag");
+      else if (jsonCategories.length === 2) {
+        toast("It has to have at least one category");
       }
       else if (!file) {
         toast("You didnt upload a file");
