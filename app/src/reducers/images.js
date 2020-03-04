@@ -95,7 +95,7 @@ const postsReducer = (state = INITIAL_STATE, action) => {
 
     case "POST_POSTS_SUCCESS": {
       const { post } = action.payload;
-      const newPosts =  [post , ...state.posts];
+      const newPosts =  [...post , ...state.posts];
 
       return {
         ...state,

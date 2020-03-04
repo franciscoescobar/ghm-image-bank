@@ -15,7 +15,7 @@ const ImageModal = ({ show, onClose, title, image, action }) => {
   const user = useSelector(state => state.userReducer.user);
   const options = categories ? categories.map(category => {category.label = category.name;category.value = category._id; return category;}) : "";
   
-  const [file, setFile] = useState(image.file || "");
+  const [file, setFile] = useState(image.file || []);
   const [name, setName] = useState(image.name || "");
   const [size, setSize] = useState(image.size || "");
   const [editOrDelete, setEditOrDelete] = useState("edit")
@@ -31,31 +31,35 @@ const ImageModal = ({ show, onClose, title, image, action }) => {
     }
 }, [show,image])
   const onImageLoad = event => {
+    setFile(Array.from(event.target.files));
     setFilePreview(URL.createObjectURL(event.target.files[0]));
-    setFile(event.target.files[0]);
   };
   const onInputChange = (event) => {
     setName(event.target.value);
   }
   const correctMimeType = () => {
-    if (
-      file.name.includes(".png", file.name.length - 4) || 
-      file.name.includes(".gif", file.name.length - 4) ||
-      file.name.includes(".jpeg", file.name.length - 5) ||
-      file.name.includes(".jpg", file.name.length - 4) ) {
-      return true;
-    } 
-    else {
-      return false;
-    }   
+    for(let i = 0; i < file.length; i ++){
+      if (
+        file[i].name.includes(".jpg", file[i].name.length - 4) ||
+        file[i].name.includes(".png", file[i].name.length - 4) || 
+        file[i].name.includes(".gif", file[i].name.length - 4) ||
+        file[i].name.includes(".jpeg", file[i].name.length - 5) 
+        ) 
+      {
+        return true;
+      }  
+    }
+    return false;
 
   }
   const onImageSubmit = async event => {
     event.preventDefault();
     const jsonTags = JSON.stringify(selectedOptions);
     let formData = new FormData();
-    if(file)
-    formData.append('image', file, file.name);
+    if(file.length > 0)
+    for(let i = 0; i < file.length; i++) {
+      formData.append('image', file[i]);
+    }
     formData.append('name', name);
     formData.append('tags', jsonTags);
     formData.append('userId', user.userId);
@@ -155,7 +159,7 @@ const ImageModal = ({ show, onClose, title, image, action }) => {
             :
             "" 
             }
-            <Data onSubmit={onImageSubmit}>
+            <Data action="/post" onSubmit={onImageSubmit}>
               <input
                 placeholder="sanjuan"
                 name="image-name"
@@ -186,7 +190,7 @@ const ImageModal = ({ show, onClose, title, image, action }) => {
                   />
                 </>
               )}
-              <input id="image" name="image" type="file" className="custom-file-input" onChange={onImageLoad} />
+              <input multiple id="image" name="image" type="file" className="custom-file-input" onChange={onImageLoad} />
               <button onClick={() => setEditOrDelete("edit")} name="submit" type="submit">
                 {action === "edit"
                   ? "Edit"

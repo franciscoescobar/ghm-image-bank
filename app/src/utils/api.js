@@ -107,6 +107,7 @@ const api = {
         body: formData
       });
       const images = await postResponse.json();
+      console.log(images);
       const post = images.post;
       if(postResponse.status !== 200 && postResponse.status !== 201){
         throw images;

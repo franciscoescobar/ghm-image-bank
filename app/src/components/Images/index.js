@@ -12,7 +12,9 @@ import { useSelector, useDispatch } from 'react-redux';
 
 const Images = () => {
   const breakpointColumnsObj = {
-    default: 3,
+    default: 5,
+    1200: 4,
+    1000: 3,
     800: 2,
     500: 1
   };
@@ -48,10 +50,10 @@ const Images = () => {
   };
 
   useEffect(() => {
-    if(images.page <= Math.ceil(images.totalItems / 9)){
+    if(images.page <= Math.ceil(images.totalItems / 20)){
       setHasMoreImages(true);
     }
-    if(images.page >= Math.ceil(images.totalItems / 9)){
+    if(images.page >= Math.ceil(images.totalItems / 20)){
       setHasMoreImages(false);
     }
   }, [images.page, images.totalItems])
