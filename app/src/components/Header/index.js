@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Wrapper,
   TextLogo,
@@ -13,11 +13,13 @@ import LoginModal from "../LoginModal";
 import SideMenu from "../SideMenu";
 import { useSelector, useDispatch } from 'react-redux';
 import { openSignup, openLogin, switchLanguage, logOut } from "../../actions";
+import { SearchInput } from "../Hero/styled";
 const Header = () => {
   const dispatch = useDispatch();
   const modal = useSelector(state => state.userReducer.modal);
   const user = useSelector(state => state.userReducer.user);
   const language = useSelector(state => state.languageReducer.language);
+  const [withSearch, setWithSearch] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
 
   const onLoginClick = () => {
@@ -38,11 +40,28 @@ const Header = () => {
   const toggleLanguage = (l) => {
     dispatch(switchLanguage(l));
   }
+  useEffect(() => {
+    window.addEventListener('scroll', onHeaderScroll);
+  }, [])
+  const onHeaderScroll = (event) => {
+    console.log(window.scrollY);
+    if (window.scrollY > 305 ) {
+      console.log("something");
+      setWithSearch(true);
+    } else {
+      console.log("something else");
+      setWithSearch(false);
+    }
+  }
   return (
     <Wrapper>
       <TextLogo>
         <p>{language === "en-US" ? "ghmcontenidos - gallery" : "ghmcontenidos - galleria"}</p>
       </TextLogo>
+      {withSearch ?
+        <SearchInput className="in-header" placeholder="Search"/>
+       : ""
+      }
       <LanguageWrapper>
         <img onClick={() => {toggleLanguage("es-AR")}} src={arg} alt="ARG" />
         <img onClick={() => {toggleLanguage("en-US")}} src={uk} alt="UK" />

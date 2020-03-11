@@ -1,19 +1,8 @@
 import styled from "styled-components";
-export const SearchInput = styled.input`
-  height: 52px;
-  border-radius: 5px;
-  border: none;
-  background: white;
-  width: 60%;
-  @media only screen and (max-width: 740px) {
-    height: 48px;
-  }
-  @media only screen and (max-width: 420px) {
-    height: 36px;
-  }
-`;
+
 export const Wrapper = styled.div`
   display: flex;
+  padding-top: 54px;
   width: 100%;
   height: 500px;
   flex-wrap: wrap;
@@ -51,5 +40,19 @@ export const Wrapper = styled.div`
     @media only screen and (max-width: 420px) {
       height: 80px;
     }
+  }
+`;
+export const SearchInput = styled.input`
+  height: 52px;
+  padding-left: 8px; 
+  border-radius: 5px;
+  border: none;
+  background: white;
+  width: 60%;
+  @media only screen and (max-width: 740px) {
+    height: 48px;
+  }
+  @media only screen and (max-width: 420px) {
+    height: 36px;
   }
 `;

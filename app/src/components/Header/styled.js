@@ -1,5 +1,7 @@
 import styled from "styled-components";
 export const Wrapper = styled.div`
+  position: fixed;
+  background: white;
   padding: 0;
   margin: 0;
   height: 58px;
@@ -8,6 +10,12 @@ export const Wrapper = styled.div`
   align-items: center;
   justify-content: space-around;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  .in-header {
+    border: 1px solid gray;
+    height: 42px;
+    width: 30%;
+    max-width: 300px;  
+  }
 `;
 export const TextLogo = styled.div`
   font-size: 18px;
