@@ -113,7 +113,6 @@ const api = {
       }
       return posts;
     } catch (error) {
-      console.log(error);
       return error;
     }
   },

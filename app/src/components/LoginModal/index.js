@@ -68,7 +68,7 @@ const LoginModal = ({ title }) => {
       userId
     }
     dispatch(isLoggedIn(user));
-  }, [])
+  }, [dispatch])
 
   return (
   <>

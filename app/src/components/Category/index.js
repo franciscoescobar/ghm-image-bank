@@ -11,7 +11,7 @@ const Category = ({ category, modal }) => {
   const categories = useSelector(state => state.categoriesReducer.categories);
   const user = useSelector(state => state.userReducer.user);
   const [categoryName, setCategoryName] = useState(category.name);
-  const [originalName, setOriginalName] = useState(category.name);
+  const [originalName] = useState(category.name);
   const [categorySelected, setCategorySelected] = useState(category.selected);
   const [notRepeated, setNotRepeated] = useState(true);
   const onCategoryClick = () => {

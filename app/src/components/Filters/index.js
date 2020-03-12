@@ -9,7 +9,7 @@ const Filters = () => {
   const language = useSelector(state => state.languageReducer.language);
 
   const [showModal, setShowModal] = useState(false);
-  const [filters, setFilters] = useState([
+  const [filters] = useState([
     { selected: true, text: language === "en-US" ? "Most Recent" : "Más recientes" },
     { selected: false, text: language === "en-US" ? "Most Popular" : "Más populares" }
   ]);
@@ -25,7 +25,7 @@ const Filters = () => {
         return filter;
       })
     );
-  }, [language])
+  }, [language, filters])
   const handleFitlerClick = text => {
     setUpdatedFilters(
       filters.map(filter => {

@@ -14,12 +14,12 @@ const Hero = () => {
   }
   useEffect(() => {
     if(value.length >= 3){
-      getProductsSearchedRequest(value, posts.page)(dispatch)
+      getProductsSearchedRequest(value, 1)(dispatch)
     }
     else {
       getProductsRequest(1)(dispatch);
     }
-  }, [value])
+  }, [value, dispatch])
   return(
   <Wrapper>
     <div>
