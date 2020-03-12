@@ -2,6 +2,7 @@ const INITIAL_STATE = {
   posts: [],
   loading: false,
   error: null,
+  searchInput: "",
   filters: 0,
   totalItems: 0,
   page: 1
@@ -9,7 +10,13 @@ const INITIAL_STATE = {
 
 const postsReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-
+    case "UPDATE_SEARCH_INPUT": {
+      const { searchInput } = action.payload;
+      return {
+        ...state,
+        searchInput
+      }
+    }
     case "NEXT_PAGE" : {
       const { page } = action.payload;
 
@@ -50,6 +57,17 @@ const postsReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         error,
+        loading: false
+      };
+    }
+
+    case "FETCH_SEARCHED_POSTS_FAILURE": {
+      const { error } = action.payload;
+
+      return {
+        ...state,
+        error,
+        posts: [],
         loading: false
       };
     }

@@ -97,6 +97,26 @@ const api = {
     const posts = await postsResponse.json();
     return posts;
   },
+  getSearchedPosts: async (formData, page) => {
+    try {
+      
+      const postsResponse = await fetch(baseUrl + `posts/?page=${page}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({searchInput:formData})
+      });
+      const posts = await postsResponse.json();
+      if(postsResponse.status !== 200 && postsResponse.status !== 201){
+        throw posts;
+      }
+      return posts;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  },
   postPost: async (formData, token) => {
     try {
       const postResponse = await fetch(baseUrl + "post", {

@@ -261,3 +261,15 @@ export const isLoggedIn = user => {
     payload: { user }
   }
 }
+export const updateSearchInput = searchInput => {
+  return {
+    type: "UPDATE_SEARCH_INPUT",
+    payload: {searchInput}
+  }
+}
+export const fetchSearchedPostsFailure = error => {
+  return {
+    type: "FETCH_SEARCHED_POSTS_FAILURE",
+    payload: {error}
+  }
+}

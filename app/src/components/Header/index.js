@@ -12,13 +12,17 @@ import uk from "../../assets/united-kingdom-flag-icon-64.png";
 import LoginModal from "../LoginModal";
 import SideMenu from "../SideMenu";
 import { useSelector, useDispatch } from 'react-redux';
-import { openSignup, openLogin, switchLanguage, logOut } from "../../actions";
+import { openSignup, openLogin, switchLanguage, logOut, updateSearchInput } from "../../actions";
+import { getProductsSearchedRequest, getProductsRequest } from '../../thunks/images';
+import { useDebounce } from 'use-debounce';
 import { SearchInput } from "../Hero/styled";
 const Header = () => {
   const dispatch = useDispatch();
   const modal = useSelector(state => state.userReducer.modal);
   const user = useSelector(state => state.userReducer.user);
   const language = useSelector(state => state.languageReducer.language);
+  const posts = useSelector(state => state.imagesReducer);
+  const [value] = useDebounce(posts.searchInput, 800);
   const [withSearch, setWithSearch] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
 
@@ -44,22 +48,30 @@ const Header = () => {
     window.addEventListener('scroll', onHeaderScroll);
   }, [])
   const onHeaderScroll = (event) => {
-    console.log(window.scrollY);
     if (window.scrollY > 305 ) {
-      console.log("something");
       setWithSearch(true);
     } else {
-      console.log("something else");
       setWithSearch(false);
     }
   }
+  const onSearchValueChange = (event) => {
+    dispatch(updateSearchInput(event.target.value));
+  }
+  useEffect(() => {
+    if(value.length >= 3){
+      getProductsSearchedRequest(value, posts.page)(dispatch)
+    }
+    else {
+      getProductsRequest(1)(dispatch);
+    }
+  }, [value])
   return (
     <Wrapper>
       <TextLogo>
         <p>{language === "en-US" ? "ghmcontenidos - gallery" : "ghmcontenidos - galleria"}</p>
       </TextLogo>
       {withSearch ?
-        <SearchInput className="in-header" placeholder="Search"/>
+        <SearchInput onChange={onSearchValueChange} value={posts.searchInput} className="in-header" placeholder="Search"/>
        : ""
       }
       <LanguageWrapper>

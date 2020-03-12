@@ -14,7 +14,8 @@ import {
   editPostSuccess,
   deletePostRequest,
   deletePostSuccess,
-  deletePostFailure
+  deletePostFailure,
+  fetchSearchedPostsFailure
 } from "../actions";
 
 export const getProductsRequest = (page) => {
@@ -40,11 +41,28 @@ export const getProductRequest = (postId) => {
     }
   };
 }
+export const getProductsSearchedRequest = (formData, page) => {
+  return async function(dispatch) {
+    try {
+      dispatch(fetchPostsRequest());
+      const posts = await api.getSearchedPosts(formData, page);
+      if(posts.message){
+        throw posts;
+      }
+      else{
+        dispatch(fetchPostsSuccess(posts));
+      }
+    } catch (error) {
+      dispatch(fetchSearchedPostsFailure(error.message));
+    }
+  };
+};
 export const getProductsFilteredRequest = (formData, page) => {
   return async function(dispatch) {
     try {
       dispatch(fetchPostsRequest());
       const posts = await api.getFilteredPosts(formData, page);
+      console.log(posts);
       dispatch(fetchPostsSuccess(posts));
     } catch (error) {
       dispatch(fetchPostsFailure(error.message));

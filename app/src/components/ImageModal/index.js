@@ -10,7 +10,7 @@ import { toast } from 'react-toastify';
 const ImageModal = ({ show, onClose, title, image, action }) => {
   
   const categories = useSelector(state => state.categoriesReducer.categories);
-  const images = useSelector(state => state.imagesReducer.posts);
+  const images = useSelector(state => state.imagesReducer.posts) || [];
   const imageIndex = images.findIndex(i => i && i._id === image._id);
   const user = useSelector(state => state.userReducer.user);
   const options = categories ? categories.map(category => {category.label = category.name;category.value = category._id; return category;}) : "";

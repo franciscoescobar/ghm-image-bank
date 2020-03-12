@@ -20,7 +20,6 @@ function App() {
   toast.configure();
   
   useEffect(() => {
-    getProductsRequest(1)(dispatch);
     getCategoriesRequest()(dispatch);
   }, [dispatch]);
   useEffect(() => { 
