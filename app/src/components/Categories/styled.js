@@ -1,11 +1,8 @@
 import styled from "styled-components";
 export const Wrapper = styled.div`
-  border: 1px solid black;
-  border-radius: 5px;
   display: flex;
   width: 100%;
   margin: 1.45rem 10% 0 10%;
-  padding: 8px;
   justify-content: space-between;
   flex-wrap: wrap;
   @media only screen and (max-width: 740px) {
@@ -19,7 +16,8 @@ export const Wrapper = styled.div`
 export const Title = styled.h2`
   margin: 0;
   margin-top: 1.45rem;
-  font-size: 24px;
+  font-size: 16px;
+  font-weight: normal;
   @media only screen and (max-width: 740px) {
     font-size: 16px;
   }

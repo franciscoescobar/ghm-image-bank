@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Filter from "./Filter";
 import { Wrapper, AddButton } from "./styled";
 import ImageModal from "../ImageModal";
 import { useSelector } from 'react-redux';
@@ -45,24 +44,14 @@ const Filters = () => {
   };
   return (
     <Wrapper>
-      <p>{language === "en-US" ? "Sorted by:" : "Orden:"}</p>
-      {updatedFilters.map((filter, i) => {
-        return (
-          <Filter
-            onfilterClicked={handleFitlerClick}
-            key={i}
-            text={filter.text}
-            selected={filter.selected}
-          />
-        );
-      })}
-        {
-          user.role === "admin" ? 
-          <AddButton onClick={onImageClick}>
-            <i className="fas fa-plus"></i>
-          </AddButton> : ""
-        }
-      
+      <p>{language === "en-US" ? "Most recent" : "Lo último"}</p>
+
+      {
+        user.role === "admin" ? 
+        <AddButton onClick={onImageClick}>
+          <i className="fas fa-plus"></i>
+        </AddButton> : ""
+      }
       <ImageModal
         title="Imagen"
         show={showModal}

@@ -15,16 +15,12 @@ export const Wrapper = styled.div`
     padding: 0px;
   }
   > i {
-    padding: 6px;
     font-size: 10px;
-    margin-left: 6px; 
-    background: #cbcbcb;
-    border-radius: 50%;
     text-align: center;
     color: #ababab;
+    margin-right: 8px;
   }
   > input {
-
     -webkit-user-select: none; /* Chrome all / Safari all */
     -moz-user-select: none; /* Firefox all */
     -ms-user-select: none; /* IE 10+ */
@@ -35,9 +31,8 @@ export const Wrapper = styled.div`
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
-    text-align: center;
     cursor: pointer;
-    max-width: 125px;
+    max-width: 100px;
     color:inherit;
   }
 `;

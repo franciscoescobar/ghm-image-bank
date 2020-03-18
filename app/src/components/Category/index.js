@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import { Wrapper } from "./styled";
 import { deleteCategory, editCategory, getCategoriesRequest } from "../../thunks/categories";
-import { getProductsFilteredRequest } from "../../thunks/images";
+import { getProductsFilteredRequest, getProductsRequest } from "../../thunks/images";
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 
@@ -10,6 +10,7 @@ const Category = ({ category, modal }) => {
   const dispatch = useDispatch();
   const categories = useSelector(state => state.categoriesReducer.categories);
   const user = useSelector(state => state.userReducer.user);
+  const searchInput = useSelector(state => state.imagesReducer.searchInput);
   const [categoryName, setCategoryName] = useState(category.name);
   const [originalName] = useState(category.name);
   const [categorySelected, setCategorySelected] = useState(category.selected);
@@ -18,8 +19,22 @@ const Category = ({ category, modal }) => {
     if (!modal) {
       setCategorySelected(!categorySelected);
       category.selected = !category.selected;
-      const filteredCategories = categories.filter(c => c.selected === true);
-      getProductsFilteredRequest(filteredCategories, 1)(dispatch);
+      let filteredCategories = "";
+      categories.filter(c => c.selected === true).map((c,i) => {
+        if(i === 0) {
+          filteredCategories = c.name;
+        }
+        else { 
+          filteredCategories += ` ${c.name}`;
+        }
+      });
+      filteredCategories += ` ${searchInput}`;
+      if (filteredCategories === "" ) {
+        getProductsRequest(1)(dispatch);
+      }
+      else {
+        getProductsFilteredRequest(filteredCategories, 1)(dispatch);
+      }
     }
   };
 
@@ -72,7 +87,12 @@ const Category = ({ category, modal }) => {
   }, [categoryName,categories]);
 
   return (
-    <Wrapper className={categorySelected ? "selected" : ""}>
+    <Wrapper>
+      {!modal ? (
+        <i onClick={onCategoryClick} className={categorySelected ? "fas fa-circle" : "far fa-circle"}></i>
+      ) : (
+        ""
+      )}
       <input
         aria-label={categoryName}
         onClick={onCategoryClick}

@@ -41,11 +41,11 @@ export const getProductRequest = (postId) => {
     }
   };
 }
-export const getProductsSearchedRequest = (formData, page) => {
+export const getProductsFilteredRequest = (formData, page) => {
   return async function(dispatch) {
     try {
       dispatch(fetchPostsRequest());
-      const posts = await api.getSearchedPosts(formData, page);
+      const posts = await api.getFilteredPosts(formData, page);
       if(posts.message){
         throw posts;
       }
@@ -54,18 +54,6 @@ export const getProductsSearchedRequest = (formData, page) => {
       }
     } catch (error) {
       dispatch(fetchSearchedPostsFailure(error.message));
-    }
-  };
-};
-export const getProductsFilteredRequest = (formData, page) => {
-  return async function(dispatch) {
-    try {
-      dispatch(fetchPostsRequest());
-      const posts = await api.getFilteredPosts(formData, page);
-      console.log(posts);
-      dispatch(fetchPostsSuccess(posts));
-    } catch (error) {
-      dispatch(fetchPostsFailure(error.message));
     }
   };
 };

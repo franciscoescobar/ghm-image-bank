@@ -7,13 +7,11 @@ import {
   WebLogin,
   MobileLogin
 } from "./styled";
-import arg from "../../assets/argentina-flag-icon-64.png";
-import uk from "../../assets/united-kingdom-flag-icon-64.png";
 import LoginModal from "../LoginModal";
 import SideMenu from "../SideMenu";
 import { useSelector, useDispatch } from 'react-redux';
 import { openSignup, openLogin, switchLanguage, logOut, updateSearchInput } from "../../actions";
-import { getProductsSearchedRequest, getProductsRequest } from '../../thunks/images';
+import { getProductsFilteredRequest, getProductsRequest } from '../../thunks/images';
 import { useDebounce } from 'use-debounce';
 import { SearchInput } from "../Hero/styled";
 const Header = () => {
@@ -59,12 +57,13 @@ const Header = () => {
   }
   useEffect(() => {
     if(value.length >= 3){
-      getProductsSearchedRequest(value, 1)(dispatch)
+      getProductsFilteredRequest(value, 1)(dispatch)
     }
     else {
       getProductsRequest(1)(dispatch);
     }
   }, [value,dispatch])
+
   return (
     <Wrapper>
       <TextLogo>
@@ -75,22 +74,25 @@ const Header = () => {
        : ""
       }
       <LanguageWrapper>
-        <img onClick={() => {toggleLanguage("es-AR")}} src={arg} alt="ARG" />
-        <img onClick={() => {toggleLanguage("en-US")}} src={uk} alt="UK" />
+        <p className={language === "es-AR" ? "" : "not-selected"} onClick={() => {toggleLanguage("es-AR")}} > ES </p>
+        <p> | </p>
+        <p className={language === "en-US" ? "" : "not-selected"} onClick={() => {toggleLanguage("en-US")}} > EN </p>
       </LanguageWrapper>
       <LoginWrapper>
       { user.login ? 
         <WebLogin>
-          <button onClick={onSignOutClick} className="signup" name="signout">
-          {language === "en-US" ? "Sign out" : "Salir"}
+          <p className="lighter">Francisco</p>
+          <button onClick={onSignOutClick} name="signout">
+          {language === "en-US" ? "/Sign out" : "/Salir"}
           </button>
         </WebLogin> :
         <WebLogin>
-          <button onClick={onLoginClick} className="login" name="login">
-          {language === "en-US" ? "Login" : "Ingresar"}
+          <button onClick={onLoginClick} name="login">
+          {language === "en-US" ? "Login": "Ingresar "}
           </button>
-          <button onClick={onSignUpClick} className="signup" name="signup">
-          {language === "en-US" ? "Sign up" : "Registrar"}
+          <p>&nbsp;|&nbsp;</p>
+          <button onClick={onSignUpClick} name="signup">
+          {language === "en-US" ? " Sign up" : " Registrar"}
           </button>
         </WebLogin>
         }

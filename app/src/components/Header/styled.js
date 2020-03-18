@@ -28,50 +28,43 @@ export const TextLogo = styled.div`
     user-select: none;
   }
   @media only screen and (max-width: 675px) {
-    font-size: 12px;
+    font-size: 14px;
   }
 `;
 export const LanguageWrapper = styled.div`
-  height: 24px;
-
-  > img {
+  display:flex;
+  > p {
     cursor: pointer;
     margin-left: 8px;
-    width: 36px;
-    height: 24px;
     -webkit-user-select: none; /* Chrome all / Safari all */
     -moz-user-select: none; /* Firefox all */
     -ms-user-select: none; /* IE 10+ */
     user-select: none;
     @media only screen and (max-width: 675px) {
-      width: 24px;
-      height: 18px;
+      font-size: 12px;
     }
   }
-  @media only screen and (max-width: 675px) {
-    height: 18px;
+  .not-selected {
+    color: #cbcbcb;
   }
 `;
 export const LoginWrapper = styled.div``;
 export const WebLogin = styled.div`
+  display:flex;
   @media only screen and (max-width: 675px) {
     display: none;
   }
-  .login {
-    color: #1565c0;
-  }
-  > button {
+  > p {
     font-size: 14px;
     cursor: pointer;
-    background: white;
     color: #303030;
-    border-radius: 5px;
-    padding: 5px;
-    margin: 8px;
   }
-  .signup {
-    color: #1565c0;
-    border: 1px solid #1565c0;
+  .lighter {
+    color: #cbcbcb;
+    cursor: default;
+  }
+  > button {
+    padding:0;
   }
 `;
 export const MobileLogin = styled.div`

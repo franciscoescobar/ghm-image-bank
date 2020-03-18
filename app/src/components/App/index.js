@@ -6,7 +6,6 @@ import Filters from "../Filters";
 import Images from "../Images";
 import { filters, categories } from "../../data/index";
 import { useDispatch, useSelector } from 'react-redux';
-import { getProductsRequest } from '../../thunks/images';
 import { getCategoriesRequest } from '../../thunks/categories';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

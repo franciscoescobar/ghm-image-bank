@@ -87,17 +87,6 @@ const api = {
     return post;
   },
   getFilteredPosts: async (formData, page) => {
-    const postsResponse = await fetch(baseUrl + `posts/?page=${page}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(formData)
-    });
-    const posts = await postsResponse.json();
-    return posts;
-  },
-  getSearchedPosts: async (formData, page) => {
     try {
       
       const postsResponse = await fetch(baseUrl + `posts/?page=${page}`, {

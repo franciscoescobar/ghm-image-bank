@@ -25,7 +25,7 @@ const Categories = () => {
   return (
     <Container>
       <CategoriesHeader>
-        <Title>{language === "en-US" ? "Categories" : "Categorias"}</Title>
+        <Title>{language === "en-US" ? "Choose a category" : "Seleccione una categoria"}</Title>
         {
           user.role === "admin" ? 
           <AddButton onClick={toggleModal}>

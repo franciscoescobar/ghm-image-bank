@@ -29,22 +29,24 @@ export const Wrapper = styled.div`
       margin: 7% 7% 0 7%;
     }
   }
-  > div > div {
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    height: 120px;
-    @media only screen and (max-width: 740px) {
-      height: 100px;
-    }
-    @media only screen and (max-width: 420px) {
-      height: 80px;
-    }
+`;
+export const SearchWrapper = styled.div`
+  display:flex;
+  padding-left: 1rem;
+  justify-content: center;
+  align-items: center;
+  height: 120px;
+  @media only screen and (max-width: 740px) {
+    height: 100px;
+  }
+  @media only screen and (max-width: 420px) {
+    height: 80px;
   }
 `;
 export const SearchInput = styled.input`
   height: 52px;
-  padding-left: 8px; 
+  padding-left: 12px; 
+  margin-right: 12px; 
   border-radius: 5px;
   border: none;
   background: white;
