@@ -35,4 +35,9 @@ export const Wrapper = styled.div`
     max-width: 100px;
     color:inherit;
   }
+  > i {
+    :hover {
+      color: red;
+    }
+  }
 `;

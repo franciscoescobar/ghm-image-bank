@@ -1,4 +1,32 @@
 import styled from "styled-components";
+
+export const FormWrapper = styled.form`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: 1px solid #cbcbcb;
+  border-radius: 18px;
+  margin-top: 1.45rem;
+  margin-left: 1.45rem;
+  > button {
+    border: none;
+    width: 32px;
+    height: 32px;
+    color: white;
+    background: #43dd4d;
+    border-radius: 50%;
+    margin-left: 1.45rem;
+  }
+  > input {
+    border: none;
+    border-radius: 18px;
+    height: 29px;
+    width: 15rem;
+    text-align: center;
+    color: #303030;
+  }
+`;
 export const Wrapper = styled.div`
   display: flex;
   width: 100%;
