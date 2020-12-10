@@ -2,7 +2,7 @@ import styled from "styled-components";
 export const Container = styled.div`
   display: flex;
   flex-flow: column wrap;
-  margin: 16px 1.45rem 16px 1.45rem;
+  margin: 16px 1.45rem;
 
   .my-masonry-grid {
     display: -webkit-box; /* Not needed if autoprefixing */
@@ -36,4 +36,12 @@ export const AddButton = styled.button`
   color: #1565c0;
   font-size: 12px;
   margin-left: auto;
+`;
+export const CategoriesHeader = styled.div`
+  margin: 2rem 10%;
+  display: flex;
+  align-items: center;
+  @media only screen and (max-width: 740px) {
+    margin: 2rem 5%;
+  }
 `;

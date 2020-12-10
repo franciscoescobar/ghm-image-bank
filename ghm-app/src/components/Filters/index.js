@@ -3,7 +3,7 @@ import { Wrapper} from "./styled";
 import { useSelector } from 'react-redux';
 
 const Filters = () => {
-  const user = useSelector(state => state.userReducer.user);
+  // const user = useSelector(state => state.userReducer.user);
   const language = useSelector(state => state.languageReducer.language);
 
   const [filters] = useState([

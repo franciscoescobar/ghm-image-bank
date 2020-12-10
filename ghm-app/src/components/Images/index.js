@@ -6,10 +6,10 @@ import Masonry from "react-masonry-css";
 import InfiniteScroll from "react-infinite-scroll-component";
 import ImageLoader from '../ImageLoader';
 
-import { Container, LoaderWrapper, AddButton  } from "./styled";
+import { Container, LoaderWrapper, AddButton, CategoriesHeader  } from "./styled";
 import { getProductRequest, getProductsRequest, getProductsFilteredRequest } from '../../thunks/images';
 import { useSelector, useDispatch } from 'react-redux';
-import {CategoriesHeader, FormWrapper, Title} from '../Categories/styled';
+import { FormWrapper, Title} from '../Categories/styled';
 const Images = () => {
   const breakpointColumnsObj = {
     default: 5,
@@ -60,6 +60,7 @@ const Images = () => {
     }
   }, [images.page, images.totalItems])
   const onAddClick = () => {
+    setShowModal(true);
     setAddImage(true);
   }
   return (
@@ -74,10 +75,6 @@ const Images = () => {
             </AddButton>
           </FormWrapper>
           : ""}
-          {addImage ? 
-            <ImageModal
-            action="create" />
-             : ""}
         </CategoriesHeader>
     { images.loading && imagesChanged  ?
           <LoaderWrapper>
@@ -117,11 +114,11 @@ const Images = () => {
       </InfiniteScroll>
     }
       <ImageModal
-        action={user.login ? "edit" : "view"}
+        action={addImage ? "create" : user.login ? "edit" : "view"}
         title="Imagen"
         show={showModal}
         onClose={handleClose}
-        image={clickedImage}
+        image={addImage ? "" : clickedImage}
       />
     </Container>
   );
